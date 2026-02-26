@@ -3,10 +3,9 @@
 // =============================================
 
 // ---- Booking URL configuration ----
-// Replace with your Calendly (or other scheduler) link when ready.
-// e.g. 'https://calendly.com/greateratlhealth'
-// Leave empty to fall back to scrolling the user to the booking widget.
-const BOOKING_URL = '';
+// Points to the dedicated booking page. Update to a direct Calendly link
+// (e.g. 'https://calendly.com/greateratlhealth') once online scheduling is live.
+const BOOKING_URL = '/book';
 
 // ---- Doxy.me waiting room (free tier) ----
 // Sign up free at doxy.me, then replace YOUR_DOXY_USERNAME with your room name.
@@ -149,23 +148,22 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
     });
   });
 
-  // ---- Book Now button: open booking system ----
+  // ---- Book Now button: navigate to booking page ----
+  // The href is already set to /book on the element; this handler adds
+  // visit-type context when the user has selected one in the widget.
   const bookBtn = document.getElementById('bookNowBtn');
   if (bookBtn) {
     bookBtn.addEventListener('click', (e) => {
+      if (!BOOKING_URL) return; // let native href handle it
       e.preventDefault();
-      if (BOOKING_URL) {
-        window.open(BOOKING_URL, '_blank', 'noopener,noreferrer');
+      const selected = document.querySelector('input[name="visitType"]:checked');
+      const type = selected ? selected.value : '';
+      const dest = BOOKING_URL + (type ? '?type=' + encodeURIComponent(type) : '');
+      // External scheduler URLs open in a new tab; same-site /book navigates normally
+      if (BOOKING_URL.startsWith('http')) {
+        window.open(dest, '_blank', 'noopener,noreferrer');
       } else {
-        // Fallback: scroll to the booking widget (works on both desktop & mobile)
-        const bookSection = document.getElementById('book');
-        if (bookSection) {
-          const offset = nav ? nav.offsetHeight + 16 : 86;
-          window.scrollTo({
-            top: bookSection.getBoundingClientRect().top + window.scrollY - offset,
-            behavior: 'smooth'
-          });
-        }
+        window.location.href = dest;
       }
     });
   }

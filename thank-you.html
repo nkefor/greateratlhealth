@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0e8c77" />
+  <!-- Keep confirmation page out of search results -->
+  <meta name="robots" content="noindex, follow" />
+  <title>Appointment Confirmed | Greater ATL Health</title>
+  <meta name="description" content="Your appointment with Lyna Ashu, FNP-C at Greater ATL Health has been confirmed. Here's what to expect before your telehealth visit." />
+  <link rel="canonical" href="https://www.greateratlhealth.com/thank-you" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <style>
+    /* ---- Thank you page ---- */
+    .ty-page { padding: calc(var(--nav-h) + 52px) 0 96px; }
+    .ty-content { max-width: 760px; }
+
+    /* Hero confirmation block */
+    .ty-hero {
+      text-align: center; padding: 52px 40px;
+      background: var(--accent-light); border: 1.5px solid var(--accent-mid);
+      border-radius: 20px; margin-bottom: 52px;
+    }
+    .ty-checkmark {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      font-size: 2.2rem; font-weight: 800; margin-bottom: 22px;
+    }
+    .ty-hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800;
+      letter-spacing: -.04em; line-height: 1.2; margin-bottom: 12px; color: var(--text);
+    }
+    .ty-hero p {
+      color: var(--text-2); font-size: 1rem; line-height: 1.75;
+      max-width: 500px; margin: 0 auto 28px;
+    }
+    .ty-hero .join-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #fff;
+      padding: 14px 28px; border-radius: 10px;
+      font-weight: 700; font-size: 1rem;
+      transition: background .18s, transform .15s;
+    }
+    .ty-hero .join-btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+    /* Next steps */
+    .next-steps-heading {
+      font-size: 1.3rem; font-weight: 800; letter-spacing: -.02em;
+      margin-bottom: 24px; color: var(--text);
+    }
+    .next-steps { display: flex; flex-direction: column; gap: 16px; margin-bottom: 52px; }
+    .ns-step {
+      display: flex; gap: 20px; align-items: flex-start;
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 14px; padding: 22px 22px;
+    }
+    .ns-num {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      font-weight: 800; font-size: 1rem; flex-shrink: 0;
+    }
+    .ns-body h3 { font-size: 0.97rem; font-weight: 700; margin-bottom: 6px; }
+    .ns-body p { font-size: 0.88rem; color: var(--text-2); line-height: 1.75; margin: 0; }
+    .ns-body a { color: var(--accent); font-weight: 600; }
+    .ns-body a:hover { text-decoration: underline; }
+
+    /* Quick checklist */
+    .checklist-section {
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 16px; padding: 28px; margin-bottom: 52px;
+    }
+    .checklist-section h2 {
+      font-size: 1rem; font-weight: 700; margin-bottom: 16px;
+    }
+    .checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+    .cl-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.85rem; color: var(--text-2); line-height: 1.5;
+    }
+    .cl-check { color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+    /* Reschedule / contact */
+    .reschedule-card {
+      background: #fff8e1; border: 1.5px solid #fcd34d;
+      border-radius: 12px; padding: 20px 22px;
+      font-size: 0.87rem; color: #92400e; line-height: 1.7;
+      margin-bottom: 40px;
+    }
+    .reschedule-card strong { display: block; margin-bottom: 4px; }
+    .reschedule-card a { color: #b45309; font-weight: 600; }
+    .reschedule-card a:hover { text-decoration: underline; }
+
+    /* Home link */
+    .ty-footer-nav {
+      display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
+    }
+    .ty-footer-nav a { font-weight: 600; font-size: 0.9rem; color: var(--accent); }
+    .ty-footer-nav a:hover { text-decoration: underline; }
+    .ty-footer-nav .sep { color: var(--border); }
+
+    @media (max-width: 600px) {
+      .ty-hero { padding: 36px 22px; }
+      .checklist-grid { grid-template-columns: 1fr; }
+      .ns-step { flex-direction: column; gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==============================
+       NAV
+  =============================== -->
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="https://www.greateratlhealth.com" class="logo">
+        <span class="logo-cross">+</span>
+        Greater ATL Health
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="/#about">About</a>
+        <a href="/#services">Services</a>
+        <a href="/#how-it-works">How It Works</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/book" class="btn-primary nav-book-mobile">Book a Visit &rarr;</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="tel:+16785707587" class="nav-phone">&#128222; (678) 570-7587</a>
+        <span class="nav-join-wrap">
+          <a href="https://doxy.me/lynanp" target="_blank" rel="noopener noreferrer" class="btn-join-visit">Join Video Visit</a>
+        </span>
+        <a href="/book" class="btn-primary">Book a Visit</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="ty-page">
+    <div class="container">
+      <div class="ty-content">
+
+        <!-- Confirmation hero -->
+        <div class="ty-hero">
+          <div class="ty-checkmark">&#10003;</div>
+          <h1>You're all set!</h1>
+          <p>
+            Your appointment with <strong>Lyna Ashu, FNP-C</strong> has been confirmed.
+            Check your email for confirmation details and a link to join your video visit.
+          </p>
+          <a
+            href="https://doxy.me/lynanp"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="join-btn"
+          >
+            &#127916;&nbsp; Join Your Video Visit (Doxy.me)
+          </a>
+        </div>
+
+        <!-- Next steps -->
+        <h2 class="next-steps-heading">Before your visit — 3 steps</h2>
+        <div class="next-steps">
+
+          <div class="ns-step">
+            <div class="ns-num">1</div>
+            <div class="ns-body">
+              <h3>Check your email for the visit link</h3>
+              <p>
+                A confirmation has been sent to your email with your appointment details
+                and your secure <strong>Doxy.me waiting room link</strong>. Save it — you'll
+                click it at your appointment time. No account or download required.
+              </p>
+            </div>
+          </div>
+
+          <div class="ns-step">
+            <div class="ns-num">2</div>
+            <div class="ns-body">
+              <h3>Prepare for your visit</h3>
+              <p>
+                Have your <strong>current medications and dosages</strong>, known allergies,
+                your preferred pharmacy name and location, and a description of your
+                symptoms or concerns ready before the visit.
+                <a href="/prepare">View our full Before Your Visit checklist &rarr;</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="ns-step">
+            <div class="ns-num">3</div>
+            <div class="ns-body">
+              <h3>Click your link at appointment time</h3>
+              <p>
+                At your scheduled time, open the Doxy.me link from your confirmation email.
+                You'll be placed in a secure waiting room and Lyna will join you shortly.
+                Works best on Chrome, Safari, Firefox, or Edge. Make sure your camera
+                and microphone are enabled.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Quick tech checklist -->
+        <div class="checklist-section">
+          <h2>&#128241; Quick tech checklist</h2>
+          <div class="checklist-grid">
+            <div class="cl-item">
+              <span class="cl-check">&#10003;</span>
+              <span>Smartphone, tablet, or computer</span>
+            </div>
+            <div class="cl-item">
+              <span class="cl-check">&#10003;</span>
+              <span>Camera and microphone enabled</span>
+            </div>
+            <div class="cl-item">
+              <span class="cl-check">&#10003;</span>
+              <span>Stable Wi-Fi or cellular connection</span>
+            </div>
+            <div class="cl-item">
+              <span class="cl-check">&#10003;</span>
+              <span>Updated browser (Chrome, Safari, Firefox, Edge)</span>
+            </div>
+            <div class="cl-item">
+              <span class="cl-check">&#10003;</span>
+              <span>Quiet, private space for the visit</span>
+            </div>
+            <div class="cl-item">
+              <span class="cl-check">&#10003;</span>
+              <span>Good lighting — sit facing a window if possible</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reschedule notice -->
+        <div class="reschedule-card">
+          <strong>&#128197; Need to reschedule or cancel?</strong>
+          Please give us at least 24 hours notice. Call us at
+          <a href="tel:+16785707587">(678) 570-7587</a> or email
+          <a href="mailto:hello@greateratlhealth.com?subject=Reschedule%20Request">hello@greateratlhealth.com</a>.
+          We understand things come up and we'll do our best to find a new time that works for you.
+        </div>
+
+        <!-- Nav links -->
+        <div class="ty-footer-nav">
+          <a href="/">&#8592; Return to Home</a>
+          <span class="sep">|</span>
+          <a href="/prepare">Full Preparation Guide</a>
+          <span class="sep">|</span>
+          <a href="https://doxy.me/lynanp" target="_blank" rel="noopener noreferrer">Join Your Visit (Doxy.me)</a>
+          <span class="sep">|</span>
+          <a href="/contact">Contact Us</a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ==============================
+       FOOTER
+  =============================== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="https://www.greateratlhealth.com" class="logo logo-light">
+          <span class="logo-cross">+</span>
+          Greater ATL Health
+        </a>
+        <p>Lyna Ashu, FNP-C — AANP board-certified Family Nurse Practitioner providing telehealth care for Greater Atlanta. Convenient, personal, and secure.</p>
+        <a href="tel:+16785707587" class="footer-phone">&#128222; (678) 570-7587</a>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/#services">On-Demand Video Visits</a>
+          <a href="/#services">DOT Physicals</a>
+          <a href="/#services">Sports Physicals</a>
+          <a href="/#services">Weight Loss Programs</a>
+          <a href="/#services">Preventive Care</a>
+        </div>
+        <div class="footer-col">
+          <h4>Practice</h4>
+          <a href="/#about">About the Provider</a>
+          <a href="/book">Book a Visit</a>
+          <a href="/#faq">FAQ</a>
+          <a href="/contact">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="tel:+16785707587">(678) 570-7587</a>
+          <a href="mailto:hello@greateratlhealth.com">hello@greateratlhealth.com</a>
+          <a href="/prepare">Before Your Visit</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/hipaa">HIPAA Notice</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/nondiscrimination">Non-Discrimination Policy</a>
+          <a href="/accessibility">Accessibility</a>
+        </div>
+      </div>
+    </div>
+    <div class="emergency-bar">
+      <div class="container">
+        <strong>&#9888; For medical emergencies, call 911 immediately.</strong>
+        Greater ATL Health is a telehealth service and does not provide emergency care.
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <span>&copy; 2026 Greater ATL Health &mdash; Lyna Ashu, FNP-C. All rights reserved. Licensed APRN in Georgia.</span>
+        <span>Made with care in Atlanta, GA &#127829;</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="mobile-cta-bar" id="mobileCta">
+    <a href="tel:+16785707587" class="mobile-cta-call">&#128222; Call</a>
+    <a href="https://doxy.me/lynanp" target="_blank" rel="noopener noreferrer" class="btn-primary mobile-cta-book">
+      &#127916; Join Visit
+    </a>
+  </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&#8593;</button>
+  <script src="app.js?v=3"></script>
+</body>
+</html>

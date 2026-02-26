@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0e8c77" />
+  <meta name="robots" content="index, follow" />
+  <title>Book a Visit | Greater ATL Health — Lyna Ashu, FNP-C</title>
+  <meta name="description" content="Book a telehealth visit with Lyna Ashu, FNP-C. Same-day appointments available Mon–Fri 9am–7pm and Sat 9am–5pm. On-demand video visits, DOT physicals, sports physicals, weight loss programs, and more." />
+  <link rel="canonical" href="https://www.greateratlhealth.com/book" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <style>
+    /* ---- Book page layout ---- */
+    .book-page { padding: calc(var(--nav-h) + 52px) 0 96px; }
+    .book-content { max-width: 1100px; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 36px;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    .book-page-header { margin-bottom: 36px; }
+    .book-page-header h1 {
+      font-size: clamp(1.9rem, 4vw, 2.7rem); font-weight: 800;
+      letter-spacing: -.04em; line-height: 1.15; margin-bottom: 10px;
+    }
+    .book-page-header p {
+      color: var(--text-2); font-size: 1rem; line-height: 1.7; max-width: 580px;
+    }
+
+    /* ---- Visit type selector ---- */
+    .visit-select-label {
+      font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; color: var(--text-2); margin-bottom: 12px;
+    }
+    .visit-type-tabs {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px;
+    }
+    .vt-tab {
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 10px; padding: 11px 18px; cursor: pointer;
+      text-align: left; transition: border-color .18s, background .18s;
+      font-family: inherit; line-height: 1.35;
+    }
+    .vt-tab:hover { border-color: var(--accent-mid); }
+    .vt-tab.active { border-color: var(--accent); background: var(--accent-light); }
+    .vt-tab strong { display: block; font-size: 0.87rem; color: var(--text); }
+    .vt-tab em { font-size: 0.78rem; color: var(--text-2); font-style: normal; }
+    .vt-tab.active em { color: var(--accent-dark); }
+
+    /* ---- Two-column booking layout ---- */
+    .booking-layout {
+      display: grid; grid-template-columns: 1fr 348px; gap: 28px; align-items: start;
+    }
+
+    /* ---- Scheduler column ---- */
+    .calendly-container {
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+    }
+    .calendly-frame {
+      width: 100%; min-height: 700px; border: 0; display: block;
+    }
+    .calendly-placeholder {
+      padding: 52px 40px; text-align: center;
+    }
+    .calendly-placeholder .placeholder-icon { font-size: 3.2rem; margin-bottom: 20px; }
+    .calendly-placeholder h3 {
+      font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: var(--text);
+    }
+    .calendly-placeholder p {
+      color: var(--text-2); font-size: 0.93rem; line-height: 1.75;
+      max-width: 400px; margin: 0 auto 28px;
+    }
+    .or-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 22px auto; color: var(--text-3); font-size: 0.85rem; max-width: 340px;
+    }
+    .or-divider::before, .or-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .placeholder-actions { display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+    /* ---- Sidebar ---- */
+    .booking-sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+    .phone-cta-card {
+      background: var(--accent); border-radius: 14px; padding: 26px 22px;
+      color: #fff; text-align: center;
+    }
+    .phone-cta-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .phone-cta-card p { font-size: 0.82rem; opacity: 0.88; margin-bottom: 14px; line-height: 1.6; }
+    .phone-cta-card .phone-number {
+      display: block; font-size: 1.55rem; font-weight: 800;
+      color: #fff; letter-spacing: -.03em; margin-bottom: 14px; line-height: 1;
+    }
+    .phone-cta-card .phone-number:hover { opacity: 0.88; }
+    .btn-white {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #fff; color: var(--accent); font-weight: 700;
+      font-size: 0.9rem; padding: 11px 20px; border-radius: 8px;
+      width: 100%; transition: opacity .18s; font-family: inherit;
+    }
+    .btn-white:hover { opacity: 0.92; }
+
+    .sidebar-card {
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 14px; padding: 22px;
+    }
+    .sidebar-card h3 {
+      font-size: 0.9rem; font-weight: 700; margin-bottom: 14px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--border);
+    }
+
+    .price-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.84rem;
+    }
+    .price-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .price-row .pname { color: var(--text-2); }
+    .price-row strong { color: var(--text); }
+
+    .hours-list { display: flex; flex-direction: column; gap: 7px; }
+    .hours-row { display: flex; justify-content: space-between; font-size: 0.84rem; }
+    .hours-row .day { color: var(--text-2); }
+    .hours-row .time { font-weight: 600; color: var(--text); }
+    .hours-row .closed { color: var(--text-3); }
+    .hours-note {
+      font-size: 0.77rem; color: var(--text-3); margin-top: 12px; line-height: 1.5;
+    }
+
+    .trust-list { display: flex; flex-direction: column; gap: 9px; }
+    .trust-list li {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 0.83rem; color: var(--text-2); line-height: 1.5;
+    }
+    .trust-check { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+    /* ---- What happens next ---- */
+    .expect-section { margin-top: 60px; padding-top: 52px; border-top: 1px solid var(--border); }
+    .expect-section h2 {
+      font-size: 1.35rem; font-weight: 800; letter-spacing: -.02em;
+      margin-bottom: 28px;
+    }
+    .expect-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .expect-card {
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 24px 20px;
+    }
+    .expect-num {
+      display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      font-weight: 800; font-size: 0.9rem; margin-bottom: 14px; flex-shrink: 0;
+    }
+    .expect-card h3 { font-size: 0.93rem; font-weight: 700; margin-bottom: 7px; }
+    .expect-card p { font-size: 0.82rem; color: var(--text-2); line-height: 1.7; margin: 0; }
+    .expect-card a { color: var(--accent); font-weight: 600; }
+    .expect-card a:hover { text-decoration: underline; }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 920px) {
+      .booking-layout { grid-template-columns: 1fr; }
+      .booking-sidebar {
+        order: -1; display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .phone-cta-card { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      .booking-sidebar { grid-template-columns: 1fr; }
+      .expect-grid { grid-template-columns: 1fr; }
+      .visit-type-tabs { gap: 8px; }
+      .vt-tab { padding: 9px 13px; }
+      .vt-tab strong { font-size: 0.82rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==============================
+       NAV
+  =============================== -->
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="https://www.greateratlhealth.com" class="logo">
+        <span class="logo-cross">+</span>
+        Greater ATL Health
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="/#about">About</a>
+        <a href="/#services">Services</a>
+        <a href="/#how-it-works">How It Works</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/book" class="btn-primary nav-book-mobile">Book a Visit &rarr;</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="tel:+16785707587" class="nav-phone">&#128222; (678) 570-7587</a>
+        <span class="nav-join-wrap">
+          <a href="https://doxy.me/lynanp" target="_blank" rel="noopener noreferrer" class="btn-join-visit">Join Video Visit</a>
+        </span>
+        <a href="/book" class="btn-primary">Book a Visit</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="book-page">
+    <div class="container">
+      <div class="book-content">
+
+        <a href="/" class="back-link">&#8592; Back to home</a>
+
+        <div class="book-page-header">
+          <div class="section-tag">Schedule</div>
+          <h1>Book Your Visit</h1>
+          <p>Same-day and next-day appointments available. Self-pay only — transparent flat pricing, no insurance required. Call us or use the form below.</p>
+        </div>
+
+        <!-- Visit type selector -->
+        <div class="visit-select-label">Select your visit type</div>
+        <div class="visit-type-tabs" id="visitTypeTabs">
+          <button class="vt-tab active" data-type="ondemand">
+            <strong>On-Demand Video Visit</strong>
+            <em>$75 self-pay</em>
+          </button>
+          <button class="vt-tab" data-type="notwell">
+            <strong>Not Feeling Well</strong>
+            <em>$75 self-pay</em>
+          </button>
+          <button class="vt-tab" data-type="dot">
+            <strong>DOT Physical Exam</strong>
+            <em>$125 self-pay</em>
+          </button>
+          <button class="vt-tab" data-type="sports">
+            <strong>Sports Physical</strong>
+            <em>$40 self-pay</em>
+          </button>
+          <button class="vt-tab" data-type="weightloss">
+            <strong>Weight Loss Program</strong>
+            <em>$100 self-pay</em>
+          </button>
+          <button class="vt-tab" data-type="preventive">
+            <strong>Preventive &amp; Ongoing Care</strong>
+            <em>$100 self-pay</em>
+          </button>
+        </div>
+
+        <div class="booking-layout">
+
+          <!-- ---- Scheduler (Calendly) column ---- -->
+          <div class="scheduler-col">
+            <div class="calendly-container" id="schedulerContainer">
+
+              <!--
+                CALENDLY EMBED — configure to activate.
+                1. Sign up free at calendly.com
+                2. Create event types for each visit type (optional: one per type for separate pricing)
+                3. Replace REPLACE_WITH_YOUR_CALENDLY_USERNAME below
+                4. Remove the <div class="calendly-placeholder"> block and uncomment the <iframe> below
+              -->
+
+              <div class="calendly-placeholder" id="calendlyPlaceholder">
+                <div class="placeholder-icon">&#128197;</div>
+                <h3>Online Scheduling</h3>
+                <p>
+                  Call or text us during business hours to book your appointment.
+                  We typically respond within a few minutes and can often get you
+                  seen the same day.
+                </p>
+                <div class="placeholder-actions">
+                  <a href="tel:+16785707587" class="btn-primary btn-lg">
+                    &#128222;&nbsp; Call (678) 570-7587
+                  </a>
+                  <div class="or-divider">or send a message</div>
+                  <a href="mailto:hello@greateratlhealth.com?subject=Appointment%20Request" class="btn-outline-dark" style="min-width:260px;justify-content:center;">
+                    &#128140;&nbsp; hello@greateratlhealth.com
+                  </a>
+                </div>
+              </div>
+
+              <!--
+              <iframe
+                id="calendlyFrame"
+                class="calendly-frame"
+                src="https://calendly.com/REPLACE_WITH_YOUR_CALENDLY_USERNAME?hide_gdpr_banner=1&primary_color=0e8c77"
+                title="Schedule an appointment with Greater ATL Health"
+                loading="lazy"
+              ></iframe>
+              -->
+
+            </div>
+          </div>
+
+          <!-- ---- Sidebar ---- -->
+          <div class="booking-sidebar">
+
+            <!-- Phone CTA -->
+            <div class="phone-cta-card">
+              <h3>Prefer to call?</h3>
+              <p>We're available Mon–Fri 9am–7pm and Sat 9am–5pm (ET) to help you schedule the right appointment.</p>
+              <a href="tel:+16785707587" class="phone-number">(678) 570-7587</a>
+              <a href="tel:+16785707587" class="btn-white">&#128222;&nbsp; Call to Book Now</a>
+            </div>
+
+            <!-- Pricing -->
+            <div class="sidebar-card">
+              <h3>&#128176; Visit Pricing</h3>
+              <div class="price-row">
+                <span class="pname">On-Demand Video Visit</span>
+                <strong>$75</strong>
+              </div>
+              <div class="price-row">
+                <span class="pname">Not Feeling Well</span>
+                <strong>$75</strong>
+              </div>
+              <div class="price-row">
+                <span class="pname">Sports Physical</span>
+                <strong>$40</strong>
+              </div>
+              <div class="price-row">
+                <span class="pname">Weight Loss Program</span>
+                <strong>$100</strong>
+              </div>
+              <div class="price-row">
+                <span class="pname">Preventive / Ongoing Care</span>
+                <strong>$100</strong>
+              </div>
+              <div class="price-row">
+                <span class="pname">DOT Physical Exam</span>
+                <strong>$125</strong>
+              </div>
+            </div>
+
+            <!-- Hours -->
+            <div class="sidebar-card">
+              <h3>&#128337; Office Hours (ET)</h3>
+              <div class="hours-list">
+                <div class="hours-row">
+                  <span class="day">Monday – Friday</span>
+                  <span class="time">9am – 7pm</span>
+                </div>
+                <div class="hours-row">
+                  <span class="day">Saturday</span>
+                  <span class="time">9am – 5pm</span>
+                </div>
+                <div class="hours-row">
+                  <span class="day">Sunday</span>
+                  <span class="closed">Closed</span>
+                </div>
+              </div>
+              <p class="hours-note">Same-day visits often available — call to confirm. New patients always welcome.</p>
+            </div>
+
+            <!-- Trust signals -->
+            <div class="sidebar-card">
+              <h3>&#10003; What you get</h3>
+              <ul class="trust-list">
+                <li><span class="trust-check">&#10003;</span> Board-certified FNP-C (AANP)</li>
+                <li><span class="trust-check">&#10003;</span> HIPAA-secure Doxy.me video visit</li>
+                <li><span class="trust-check">&#10003;</span> Prescriptions sent to your pharmacy</li>
+                <li><span class="trust-check">&#10003;</span> Labs &amp; referrals ordered same visit</li>
+                <li><span class="trust-check">&#10003;</span> No app or account required</li>
+                <li><span class="trust-check">&#10003;</span> You always see Lyna — no rotating staff</li>
+              </ul>
+            </div>
+
+            <!-- Join visit -->
+            <div class="sidebar-card" style="text-align:center;">
+              <h3>Already booked?</h3>
+              <p style="font-size:0.83rem;color:var(--text-2);margin-bottom:14px;line-height:1.6;">
+                Click below to enter your Doxy.me waiting room at your scheduled appointment time.
+              </p>
+              <a
+                href="https://doxy.me/lynanp"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-primary"
+                style="width:100%;justify-content:center;"
+              >
+                &#127916;&nbsp; Join Video Visit
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- What happens next -->
+        <div class="expect-section">
+          <h2>What happens after you book?</h2>
+          <div class="expect-grid">
+            <div class="expect-card">
+              <div class="expect-num">1</div>
+              <h3>Confirmation Sent</h3>
+              <p>You'll receive a confirmation with your appointment details and a secure Doxy.me waiting room link to use at your appointment time.</p>
+            </div>
+            <div class="expect-card">
+              <div class="expect-num">2</div>
+              <h3>Prepare for Your Visit</h3>
+              <p>Have your medication list, allergies, and current symptoms ready. Review our <a href="/prepare">Before Your Visit guide</a> for a step-by-step checklist.</p>
+            </div>
+            <div class="expect-card">
+              <div class="expect-num">3</div>
+              <h3>Join at Your Appointment Time</h3>
+              <p>Click your Doxy.me waiting room link at the scheduled time. No downloads, no account — just a device with a camera and microphone.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ==============================
+       FOOTER
+  =============================== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="https://www.greateratlhealth.com" class="logo logo-light">
+          <span class="logo-cross">+</span>
+          Greater ATL Health
+        </a>
+        <p>Lyna Ashu, FNP-C — AANP board-certified Family Nurse Practitioner providing telehealth care for Greater Atlanta. Convenient, personal, and secure.</p>
+        <a href="tel:+16785707587" class="footer-phone">&#128222; (678) 570-7587</a>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/#services">On-Demand Video Visits</a>
+          <a href="/#services">DOT Physicals</a>
+          <a href="/#services">Sports Physicals</a>
+          <a href="/#services">Weight Loss Programs</a>
+          <a href="/#services">Preventive Care</a>
+          <a href="/#services">Illness &amp; Minor Injury</a>
+        </div>
+        <div class="footer-col">
+          <h4>Practice</h4>
+          <a href="/#about">About the Provider</a>
+          <a href="/book">Pricing &amp; Booking</a>
+          <a href="/#faq">FAQ</a>
+          <a href="/book">Book a Visit</a>
+          <a href="/contact">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="tel:+16785707587">(678) 570-7587</a>
+          <a href="mailto:hello@greateratlhealth.com">hello@greateratlhealth.com</a>
+          <a href="/prepare">Before Your Visit</a>
+          <a href="mailto:hello@greateratlhealth.com?subject=Medical%20Records%20Request">Medical Records Request</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/hipaa">HIPAA Notice</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/nondiscrimination">Non-Discrimination Policy</a>
+          <a href="/accessibility">Accessibility</a>
+        </div>
+      </div>
+    </div>
+    <div class="emergency-bar">
+      <div class="container">
+        <strong>&#9888; For medical emergencies, call 911 immediately.</strong>
+        Greater ATL Health is a telehealth service and does not provide emergency care.
+        If you are experiencing a life-threatening emergency, call 911 or go to the nearest emergency room.
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <span>&copy; 2026 Greater ATL Health &mdash; Lyna Ashu, FNP-C. All rights reserved. Licensed APRN in Georgia.</span>
+        <span>Made with care in Atlanta, GA &#127829;</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="mobile-cta-bar" id="mobileCta">
+    <a href="tel:+16785707587" class="mobile-cta-call">&#128222; Call</a>
+    <a href="/book" class="btn-primary mobile-cta-book">Book a Visit &rarr;</a>
+  </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&#8593;</button>
+
+  <script>
+    // ---- Visit type tab interaction ----
+    (function () {
+      var tabs = document.querySelectorAll('#visitTypeTabs .vt-tab');
+
+      // Pre-select from ?type= URL parameter
+      var params = new URLSearchParams(window.location.search);
+      var typeParam = params.get('type');
+
+      tabs.forEach(function (tab) {
+        if (typeParam && tab.dataset.type === typeParam) {
+          tabs.forEach(function (t) { t.classList.remove('active'); });
+          tab.classList.add('active');
+        }
+
+        tab.addEventListener('click', function () {
+          tabs.forEach(function (t) { t.classList.remove('active'); });
+          tab.classList.add('active');
+
+          // When Calendly is active, update the iframe src to the matching event type.
+          // Each event type slug should match the Calendly event name you configured.
+          // var frame = document.getElementById('calendlyFrame');
+          // if (frame) {
+          //   var slugMap = {
+          //     ondemand:  'on-demand-video-visit',
+          //     notwell:   'not-feeling-well',
+          //     dot:       'dot-physical-exam',
+          //     sports:    'sports-physical',
+          //     weightloss:'weight-loss-program',
+          //     preventive:'preventive-ongoing-care'
+          //   };
+          //   var base = 'https://calendly.com/REPLACE_WITH_YOUR_CALENDLY_USERNAME/';
+          //   var slug = slugMap[tab.dataset.type] || '';
+          //   frame.src = base + slug + '?hide_gdpr_banner=1&primary_color=0e8c77';
+          // }
+        });
+      });
+    }());
+  </script>
+  <script src="app.js?v=3"></script>
+</body>
+</html>
