@@ -36,10 +36,8 @@
     }
   ],
   "redirects": [
-    {
-      "source": "/home",
-      "destination": "/",
-      "permanent": true
-    }
+    { "source": "/home",    "destination": "/",        "permanent": true },
+    { "source": "/privacy", "destination": "/privacy", "permanent": false },
+    { "source": "/hipaa",   "destination": "/hipaa",   "permanent": false }
   ]
 }

@@ -1,6 +1,13 @@
 // =============================================
 // GREATER ATL HEALTH — app.js
 // =============================================
+
+// ---- Booking URL configuration ----
+// Replace with your Calendly (or other scheduler) link when ready.
+// e.g. 'https://calendly.com/greateratlhealth'
+// Leave empty to fall back to the phone number prompt.
+const BOOKING_URL = '';
+
 (function () {
   'use strict';
 
@@ -118,18 +125,41 @@
     if (radio.checked) update(); // init state
   });
 
+  // ---- Service links: pre-select visit type in booking widget ----
+  document.querySelectorAll('.svc-link[data-visit-type]').forEach(link => {
+    link.addEventListener('click', () => {
+      const type  = link.dataset.visitType;
+      const radio = document.querySelector(`input[name="visitType"][value="${type}"]`);
+      if (radio) {
+        radio.checked = true;
+        radio.dispatchEvent(new Event('change'));
+      }
+    });
+  });
+
   // ---- Book Now button: open booking system ----
   const bookBtn = document.getElementById('bookNowBtn');
   if (bookBtn) {
     bookBtn.addEventListener('click', (e) => {
-      // Replace '#' with your Calendly or booking URL when ready:
-      // e.g.  window.open('https://calendly.com/greateratlhealth', '_blank');
-      const selected = document.querySelector('input[name="visitType"]:checked');
-      const type     = selected ? selected.value : 'ondemand';
-      // Placeholder — swap in real booking URL:
-      alert(`Booking system coming soon!\n\nVisit type selected: ${type}\n\nFor now, please call: (678) 570-7587`);
       e.preventDefault();
+      if (BOOKING_URL) {
+        window.open(BOOKING_URL, '_blank', 'noopener,noreferrer');
+      } else {
+        // Fallback until booking URL is configured
+        window.location.href = 'tel:+16785707587';
+      }
     });
+  }
+
+  // ---- Back to top button ----
+  const backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+    backToTop.addEventListener('click', () =>
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    );
   }
 
   // ---- Animated counters (hero provider stats) ----

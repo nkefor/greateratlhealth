@@ -10,9 +10,53 @@
   <meta property="og:description" content="Lyna Ashu, FNP-C — board-certified telehealth care for Greater Atlanta. On-demand visits, DOT physicals, sports physicals, weight loss &amp; more." />
   <meta property="og:url" content="https://www.greateratlhealth.com" />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://www.greateratlhealth.com/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Greater ATL Health | Lyna Ashu, FNP-C" />
   <meta name="twitter:description" content="Telehealth care for Greater Atlanta — On-demand visits, DOT physicals, sports physicals, weight loss &amp; more." />
+  <meta name="twitter:image" content="https://www.greateratlhealth.com/og-image.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "Greater ATL Health",
+    "description": "Telehealth care for Greater Atlanta — On-demand video visits, DOT physicals, sports physicals, weight loss programs, and preventive care by Lyna Ashu, FNP-C.",
+    "url": "https://www.greateratlhealth.com",
+    "telephone": "+16785707587",
+    "email": "hello@greateratlhealth.com",
+    "logo": "https://www.greateratlhealth.com/favicon.svg",
+    "image": "https://www.greateratlhealth.com/og-image.png",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Atlanta",
+      "addressRegion": "GA",
+      "addressCountry": "US"
+    },
+    "areaServed": {
+      "@type": "State",
+      "name": "Georgia"
+    },
+    "medicalSpecialty": "Family Medicine",
+    "priceRange": "$$",
+    "employee": {
+      "@type": "Person",
+      "name": "Lyna Ashu",
+      "jobTitle": "Family Nurse Practitioner",
+      "honorificSuffix": "FNP-C",
+      "description": "ANCC board-certified Family Nurse Practitioner with full prescriptive authority. FMCSA-certified DOT Medical Examiner. Licensed APRN in Georgia."
+    },
+    "availableService": [
+      { "@type": "MedicalTherapy", "name": "On-Demand Video Visit", "offers": { "@type": "Offer", "price": "75", "priceCurrency": "USD" } },
+      { "@type": "MedicalTherapy", "name": "DOT Physical Exam", "offers": { "@type": "Offer", "price": "125", "priceCurrency": "USD" } },
+      { "@type": "MedicalTherapy", "name": "Sports Physical", "offers": { "@type": "Offer", "price": "65", "priceCurrency": "USD" } },
+      { "@type": "MedicalTherapy", "name": "Weight Loss Program", "offers": { "@type": "Offer", "price": "90", "priceCurrency": "USD" } },
+      { "@type": "MedicalTherapy", "name": "Preventive & Ongoing Care", "offers": { "@type": "Offer", "price": "100", "priceCurrency": "USD" } }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -65,6 +109,15 @@
             <a href="#book" class="btn-primary btn-lg">Book Your Visit &rarr;</a>
             <a href="#services" class="btn-outline-dark">See All Services</a>
           </div>
+          <div class="provider-mini">
+            <span class="avail-dot"></span>
+            <div class="provider-mini-info">
+              <strong>Lyna Ashu, FNP-C</strong>
+              <span>Family Nurse Practitioner &middot; Atlanta, GA</span>
+            </div>
+            <a href="#book" class="btn-primary">Book Now &rarr;</a>
+          </div>
+
           <div class="trust-row">
             <div class="trust-item">
               <span class="trust-icon">&#9989;</span>
@@ -119,7 +172,7 @@
           </div>
           <div class="next-avail">
             <span class="avail-dot"></span>
-            <span><strong>Next available:</strong> Today — as early as 2:00 PM</span>
+            <span><strong>Same-day appointments available</strong> — call to confirm</span>
           </div>
         </div>
 
@@ -177,6 +230,7 @@
             <div class="svc-icon">&#128249;</div>
             <div class="svc-badge">Most Popular</div>
             <h3>On-Demand Video Visits</h3>
+            <div class="svc-price">$75 <span>self-pay</span></div>
             <p>Connect with me in minutes for acute or chronic concerns. No appointment needed for urgent issues — join the virtual queue and I'll see you as soon as possible.</p>
             <ul class="svc-list">
               <li>&#10003; Cold, flu &amp; respiratory illness</li>
@@ -185,12 +239,13 @@
               <li>&#10003; Medication refills</li>
               <li>&#10003; Lab result reviews</li>
             </ul>
-            <a href="#book" class="svc-link">Book a Visit &rarr;</a>
+            <a href="#book" class="svc-link" data-visit-type="ondemand">Book a Visit &rarr;</a>
           </div>
 
           <div class="service-card">
             <div class="svc-icon">&#128663;</div>
             <h3>DOT Physical Exams</h3>
+            <div class="svc-price">$125 <span>self-pay</span></div>
             <p>Certified Medical Examiner (CME) on staff. I provide DOT physicals for commercial drivers (CDL) with fast turnaround and official FMCSA medical certificates.</p>
             <ul class="svc-list">
               <li>&#10003; FMCSA-compliant exam</li>
@@ -198,12 +253,13 @@
               <li>&#10003; Vision &amp; hearing screening</li>
               <li>&#10003; Urine drug screen available</li>
             </ul>
-            <a href="#book" class="svc-link">Schedule DOT Physical &rarr;</a>
+            <a href="#book" class="svc-link" data-visit-type="dot">Schedule DOT Physical &rarr;</a>
           </div>
 
           <div class="service-card">
             <div class="svc-icon">&#127944;</div>
             <h3>Sports Physicals</h3>
+            <div class="svc-price">$65 <span>self-pay</span></div>
             <p>Pre-participation physical evaluations (PPE) for student athletes, adults, and recreational sports leagues. Fast, thorough, and affordable.</p>
             <ul class="svc-list">
               <li>&#10003; School &amp; NCAA clearance forms</li>
@@ -211,12 +267,13 @@
               <li>&#10003; Return-to-play evaluations</li>
               <li>&#10003; Same-week availability</li>
             </ul>
-            <a href="#book" class="svc-link">Book a Sports Physical &rarr;</a>
+            <a href="#book" class="svc-link" data-visit-type="sports">Book a Sports Physical &rarr;</a>
           </div>
 
           <div class="service-card">
             <div class="svc-icon">&#128149;</div>
             <h3>Preventive &amp; Ongoing Care</h3>
+            <div class="svc-price">$100 <span>self-pay</span></div>
             <p>Stay ahead of health problems with regular check-ins, screenings, and personalized care plans. I manage chronic conditions and help you build lasting healthy habits.</p>
             <ul class="svc-list">
               <li>&#10003; Annual wellness visits</li>
@@ -225,12 +282,13 @@
               <li>&#10003; Thyroid &amp; hormonal health</li>
               <li>&#10003; Preventive screenings &amp; labs</li>
             </ul>
-            <a href="#book" class="svc-link">Start Your Care Plan &rarr;</a>
+            <a href="#book" class="svc-link" data-visit-type="preventive">Start Your Care Plan &rarr;</a>
           </div>
 
           <div class="service-card">
             <div class="svc-icon">&#9878;</div>
             <h3>Weight Loss Programs</h3>
+            <div class="svc-price">$90 <span>self-pay</span></div>
             <p>Medically supervised weight management tailored to your body and lifestyle. I combine evidence-based treatment with ongoing support and accountability.</p>
             <ul class="svc-list">
               <li>&#10003; Personalized weight loss plan</li>
@@ -239,12 +297,13 @@
               <li>&#10003; Regular progress check-ins</li>
               <li>&#10003; Lab monitoring included</li>
             </ul>
-            <a href="#book" class="svc-link">Start Your Journey &rarr;</a>
+            <a href="#book" class="svc-link" data-visit-type="weightloss">Start Your Journey &rarr;</a>
           </div>
 
           <div class="service-card">
             <div class="svc-icon">&#129657;</div>
             <h3>Illness &amp; Minor Injury</h3>
+            <div class="svc-price">$75 <span>self-pay</span></div>
             <p>Skip the ER or urgent care waiting room. For non-emergency illnesses and minor injuries, I can evaluate, treat, and prescribe — all via telehealth.</p>
             <ul class="svc-list">
               <li>&#10003; Sprains &amp; minor injuries</li>
@@ -253,7 +312,7 @@
               <li>&#10003; Allergies &amp; asthma flares</li>
               <li>&#10003; COVID-19 testing guidance</li>
             </ul>
-            <a href="#book" class="svc-link">Book Urgent Visit &rarr;</a>
+            <a href="#book" class="svc-link" data-visit-type="ondemand">Book Urgent Visit &rarr;</a>
           </div>
 
         </div>
@@ -631,6 +690,13 @@
         </div>
       </div>
     </div>
+    <div class="emergency-bar">
+      <div class="container">
+        <strong>&#9888; For medical emergencies, call 911 immediately.</strong>
+        Greater ATL Health is a telehealth service and does not provide emergency care.
+        If you are experiencing a life-threatening emergency, call 911 or go to the nearest emergency room.
+      </div>
+    </div>
     <div class="footer-bottom">
       <div class="container">
         <span>&copy; 2026 Greater ATL Health &mdash; Lyna Ashu, FNP-C. All rights reserved. Licensed APRN in Georgia.</span>
@@ -639,6 +705,7 @@
     </div>
   </footer>
 
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&#8593;</button>
   <script src="app.js"></script>
 </body>
 </html>
