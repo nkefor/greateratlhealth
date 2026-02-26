@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Before Your Visit | Greater ATL Health</title>
+  <meta name="description" content="Preparing for your telehealth visit with Lyna Ashu, FNP-C — what to have ready, technology check, and what to expect during and after your appointment." />
+  <link rel="canonical" href="https://www.greateratlhealth.com/prepare" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=2" />
+  <style>
+    .prepare-page { padding: calc(var(--nav-h) + 60px) 0 80px; }
+    .prepare-page h1 { font-size: clamp(1.9rem,3.5vw,2.6rem); font-weight: 800; letter-spacing:-.03em; margin-bottom: 10px; }
+    .prepare-page .page-sub { color: var(--text-2); font-size: 1rem; line-height: 1.75; margin-bottom: 56px; max-width: 580px; }
+    .prepare-content { max-width: 900px; }
+    .prepare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 56px; }
+    .prepare-card {
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 16px; padding: 28px 24px;
+    }
+    .prepare-card-icon { font-size: 2rem; margin-bottom: 14px; }
+    .prepare-card h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 14px; color: var(--text); }
+    .prepare-checklist { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+    .prepare-checklist li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.9rem; color: var(--text-2); line-height: 1.6;
+    }
+    .prepare-checklist li::before {
+      content: '✓'; color: var(--accent); font-weight: 700;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .prepare-section { margin-bottom: 48px; }
+    .prepare-section h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 6px; }
+    .prepare-section p { font-size: 0.93rem; color: var(--text-2); line-height: 1.8; margin-bottom: 14px; }
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item { display: flex; gap: 20px; padding-bottom: 32px; position: relative; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-left { display: flex; flex-direction: column; align-items: center; }
+    .timeline-num {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1rem; flex-shrink: 0;
+    }
+    .timeline-line {
+      width: 2px; flex: 1; background: var(--accent-mid);
+      margin-top: 8px;
+    }
+    .timeline-item:last-child .timeline-line { display: none; }
+    .timeline-body { padding-top: 8px; }
+    .timeline-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .timeline-body p { font-size: 0.88rem; color: var(--text-2); line-height: 1.75; margin: 0; }
+    .tech-check {
+      background: var(--bg); border-radius: 16px; padding: 28px 24px;
+      border: 1.5px solid var(--border); margin-bottom: 48px;
+    }
+    .tech-check h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 18px; }
+    .tech-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .tech-item {
+      background: var(--white); border-radius: 10px;
+      padding: 16px 14px; border: 1px solid var(--border);
+      text-align: center;
+    }
+    .tech-item-icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .tech-item strong { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
+    .tech-item span { font-size: 0.78rem; color: var(--text-3); line-height: 1.5; display: block; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 40px; }
+    .back-link:hover { text-decoration: underline; }
+    .cta-box {
+      background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+      border-radius: 16px; padding: 36px 32px; color: #fff; text-align: center;
+    }
+    .cta-box h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; }
+    .cta-box p { opacity: .85; margin-bottom: 22px; font-size: 0.97rem; }
+    .cta-box .btn-white {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff; color: var(--accent-dark);
+      padding: 13px 28px; border-radius: 10px; font-weight: 700; font-size: 1rem;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .cta-box .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    @media (max-width: 768px) {
+      .prepare-grid { grid-template-columns: 1fr; }
+      .tech-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .tech-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="https://www.greateratlhealth.com" class="logo">
+        <span class="logo-cross">+</span>Greater ATL Health
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="/#services">Services</a>
+        <a href="/#about">About</a>
+        <a href="/#faq">FAQ</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="tel:+16785707587" class="nav-phone">&#128222; (678) 570-7587</a>
+        <a href="https://www.greateratlhealth.com/#book" class="btn-primary">Book a Visit</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="prepare-page">
+    <div class="container prepare-content">
+
+      <a href="/" class="back-link">&#8592; Back to home</a>
+
+      <div class="section-tag">Before Your Visit</div>
+      <h1>Get the most from<br />your telehealth visit.</h1>
+      <p class="page-sub">A few minutes of preparation makes for a faster, more focused appointment — so you leave with everything you need.</p>
+
+      <!-- TECHNOLOGY CHECK -->
+      <div class="tech-check">
+        <h2>&#128187; Technology Check — What You Need</h2>
+        <div class="tech-grid">
+          <div class="tech-item">
+            <div class="tech-item-icon">&#128248;</div>
+            <strong>Camera &amp; Mic</strong>
+            <span>Built into any modern smartphone, tablet, or laptop</span>
+          </div>
+          <div class="tech-item">
+            <div class="tech-item-icon">&#127758;</div>
+            <strong>Internet Connection</strong>
+            <span>WiFi or 4G/5G — a stable connection prevents freezing</span>
+          </div>
+          <div class="tech-item">
+            <div class="tech-item-icon">&#128269;</div>
+            <strong>Modern Browser</strong>
+            <span>Chrome, Safari, Firefox, or Edge — no app to download</span>
+          </div>
+          <div class="tech-item">
+            <div class="tech-item-icon">&#128274;</div>
+            <strong>Private Space</strong>
+            <span>A quiet, well-lit location where you can speak freely</span>
+          </div>
+          <div class="tech-item">
+            <div class="tech-item-icon">&#128140;</div>
+            <strong>Secure Link</strong>
+            <span>You'll receive a visit link via email before your appointment</span>
+          </div>
+          <div class="tech-item">
+            <div class="tech-item-icon">&#9201;</div>
+            <strong>5 Min Early</strong>
+            <span>Click your link a few minutes early to test your audio &amp; video</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- WHAT TO HAVE READY -->
+      <div class="prepare-grid">
+        <div class="prepare-card">
+          <div class="prepare-card-icon">&#128203;</div>
+          <h2>Health Information to Have Ready</h2>
+          <ul class="prepare-checklist">
+            <li>List of all current medications (name, dose, frequency)</li>
+            <li>List of any vitamins, supplements, or over-the-counter drugs</li>
+            <li>Known allergies (medication and other)</li>
+            <li>Description of your symptoms — when they started, how severe, what makes them better or worse</li>
+            <li>Any recent lab results or test reports you'd like reviewed</li>
+            <li>Family medical history (if relevant to your concern)</li>
+            <li>Name of your preferred pharmacy (and its address)</li>
+          </ul>
+        </div>
+
+        <div class="prepare-card">
+          <div class="prepare-card-icon">&#127979;</div>
+          <h2>For Specific Visit Types</h2>
+          <ul class="prepare-checklist">
+            <li><strong>Chronic conditions:</strong> Recent blood pressure readings, blood sugar log, or weight log if monitoring those</li>
+            <li><strong>DOT Physical:</strong> Your CDL license or driver's license, and a list of any health conditions or medications you take</li>
+            <li><strong>Sports Physical:</strong> Your school's or league's required form — we'll sign and return it</li>
+            <li><strong>Weight loss:</strong> Your current weight, height, and any prior weight loss attempts</li>
+            <li><strong>Lab review:</strong> Upload or have the lab report open on your device to share during the visit</li>
+            <li><strong>Skin concern:</strong> Have good lighting so I can clearly see the area on camera</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- VISIT TIMELINE -->
+      <div class="prepare-section">
+        <div class="section-tag">What to Expect</div>
+        <h2>How Your Visit Flows</h2>
+        <p>Here's what happens from the moment you book to the moment you're done — typically 20–30 minutes total.</p>
+
+        <div class="timeline" style="margin-top: 32px;">
+          <div class="timeline-item">
+            <div class="timeline-left">
+              <div class="timeline-num">1</div>
+              <div class="timeline-line"></div>
+            </div>
+            <div class="timeline-body">
+              <h3>Booking Confirmation (immediate)</h3>
+              <p>After booking you'll receive a confirmation email with your appointment time, a secure visit link, and a brief intake form to complete. The intake form takes about 3–5 minutes and covers your reason for visiting, medications, and allergies.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-left">
+              <div class="timeline-num">2</div>
+              <div class="timeline-line"></div>
+            </div>
+            <div class="timeline-body">
+              <h3>Before the Visit (15 min prior)</h3>
+              <p>Find a quiet, private space with good lighting. Test your camera and microphone by clicking your visit link early — it'll show a preview before entering the room. Have your medication list nearby.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-left">
+              <div class="timeline-num">3</div>
+              <div class="timeline-line"></div>
+            </div>
+            <div class="timeline-body">
+              <h3>The Visit (15–25 minutes)</h3>
+              <p>I'll review your intake and health history, discuss your concerns in detail, and complete any relevant examination via video. I'll explain my findings and walk you through your care plan. There's always time for your questions — please ask them.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-left">
+              <div class="timeline-num">4</div>
+              <div class="timeline-line"></div>
+            </div>
+            <div class="timeline-body">
+              <h3>After the Visit (same day)</h3>
+              <p>Any prescriptions are sent electronically to your pharmacy — usually ready within 1–2 hours. If labs or imaging were ordered, you'll receive electronic orders to take to your nearest LabCorp or Quest. You'll also receive a visit summary with your care plan and any follow-up instructions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIPS -->
+      <div class="prepare-section">
+        <h2>&#128161; Quick Tips for the Best Experience</h2>
+        <div class="prepare-grid" style="margin-top: 20px;">
+          <div class="prepare-card">
+            <ul class="prepare-checklist">
+              <li>Charge your device fully before the visit</li>
+              <li>Use WiFi over cellular when possible for a more stable connection</li>
+              <li>Close other apps and browser tabs to free up bandwidth</li>
+              <li>Use earbuds or headphones to improve audio clarity</li>
+            </ul>
+          </div>
+          <div class="prepare-card">
+            <ul class="prepare-checklist">
+              <li>Sit with light in front of you (facing a window) rather than behind you</li>
+              <li>Wear comfortable clothing you can adjust if showing a rash or injury</li>
+              <li>Write down your questions in advance — it's easy to forget during the visit</li>
+              <li>Have a notepad handy to write down care instructions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-box">
+        <h2>Ready to book your visit?</h2>
+        <p>Same-day and next-day appointments available. Mon–Fri 8am–8pm · Sat–Sun 9am–2pm (ET)</p>
+        <a href="/#book" class="btn-white">Book Your Appointment &rarr;</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="emergency-bar">
+      <div class="container">
+        <strong>&#9888; For medical emergencies, call 911 immediately.</strong>
+        Greater ATL Health is a telehealth service and does not provide emergency care.
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <span>&copy; 2026 Greater ATL Health &mdash; Lyna Ashu, FNP-C. All rights reserved.</span>
+        <span>
+          <a href="/privacy" style="color:rgba(255,255,255,.4);text-decoration:underline;">Privacy</a> &nbsp;|&nbsp;
+          <a href="/hipaa" style="color:rgba(255,255,255,.4);text-decoration:underline;">HIPAA</a> &nbsp;|&nbsp;
+          <a href="/terms" style="color:rgba(255,255,255,.4);text-decoration:underline;">Terms</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

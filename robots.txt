@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow incomplete/placeholder pages
+Disallow: /portal
+Disallow: /records
+
+Sitemap: https://www.greateratlhealth.com/sitemap.xml

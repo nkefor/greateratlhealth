@@ -104,6 +104,8 @@ ul   { list-style: none; }
   transition: color .2s;
 }
 .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+/* Hide the mobile-only Book button in nav on desktop */
+.nav-book-mobile { display: none !important; }
 .nav-actions {
   display: flex; align-items: center; gap: 16px; margin-left: auto;
 }
@@ -149,7 +151,16 @@ ul   { list-style: none; }
   font-size: 1.05rem; color: var(--text-2); line-height: 1.75;
   margin-bottom: 32px; max-width: 500px;
 }
-.hero-actions { display: flex; align-items: center; gap: 14px; margin-bottom: 32px; flex-wrap: wrap; }
+.hero-actions { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
+.hours-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(14,140,119,.08);
+  border: 1px solid var(--accent-mid);
+  color: var(--accent-dark);
+  font-size: 0.82rem; font-weight: 600;
+  padding: 7px 16px; border-radius: 100px;
+  margin-bottom: 24px;
+}
 .trust-row { display: flex; flex-wrap: wrap; gap: 20px; }
 .trust-item { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; font-weight: 500; color: var(--text-2); }
 .trust-icon { font-size: 0.85rem; }
@@ -534,6 +545,61 @@ ul   { list-style: none; }
 }
 
 /* =============================================
+   EMAIL CAPTURE
+   ============================================= */
+.email-capture-section { background: var(--bg); }
+.email-capture-inner {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 40px; align-items: center;
+  background: var(--white); border-radius: 20px;
+  border: 1.5px solid var(--border);
+  padding: 40px 48px;
+}
+.email-capture-text h2 {
+  font-size: 1.4rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: 8px;
+}
+.email-capture-text p { font-size: 0.9rem; color: var(--text-2); line-height: 1.6; margin: 0; }
+.email-capture-form {
+  display: flex; gap: 10px; align-items: center;
+}
+.email-input {
+  padding: 12px 18px; border-radius: 8px;
+  border: 1.5px solid var(--border);
+  font-size: 0.9rem; font-family: inherit;
+  width: 260px; transition: border-color .2s;
+  outline: none;
+}
+.email-input:focus { border-color: var(--accent); }
+.email-capture-note {
+  font-size: 0.75rem; color: var(--text-3);
+  margin-top: 12px; text-align: right;
+}
+
+/* =============================================
+   MOBILE STICKY CTA BAR
+   ============================================= */
+.mobile-cta-bar {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 96;
+  background: #fff;
+  border-top: 1px solid var(--border);
+  padding: 12px 16px;
+  gap: 10px;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.1);
+}
+.mobile-cta-call {
+  flex: 1; text-align: center;
+  padding: 13px 10px; border-radius: 8px;
+  border: 1.5px solid var(--border);
+  font-weight: 700; font-size: 0.92rem; color: var(--text);
+  transition: border-color .2s, color .2s;
+}
+.mobile-cta-call:hover { border-color: var(--accent); color: var(--accent); }
+.mobile-cta-book {
+  flex: 2; justify-content: center; text-align: center;
+}
+
+/* =============================================
    BACK TO TOP
    ============================================= */
 .back-to-top {
@@ -608,6 +674,16 @@ ul   { list-style: none; }
   .nav-links.open a { font-size: 1rem; color: var(--text); }
   .hamburger { display: flex; }
   .services-grid { grid-template-columns: 1fr; }
+  /* Show mobile sticky CTA */
+  .mobile-cta-bar { display: flex; }
+  body { padding-bottom: 72px; }
+  /* Show Book button inside open mobile nav */
+  .nav-links.open .nav-book-mobile { display: flex !important; }
+  /* Raise back-to-top above mobile bar */
+  .back-to-top { bottom: 88px; }
+  /* Email capture stacks on mobile */
+  .email-capture-inner { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+  .email-capture-form { justify-content: center; }
 }
 @media (max-width: 540px) {
   .section-pad { padding: 60px 0; }
@@ -618,4 +694,15 @@ ul   { list-style: none; }
   .steps-row   { grid-template-columns: 1fr; }
   .footer-cols { grid-template-columns: 1fr; }
   .footer-bottom .container { flex-direction: column; text-align: center; }
+}
+
+/* =============================================
+   PRINT
+   ============================================= */
+@media print {
+  .nav, .mobile-cta-bar, .back-to-top, .book, .email-capture-section { display: none !important; }
+  body { color: #000; background: #fff; padding: 0; }
+  a[href]::after { content: ' (' attr(href) ')'; font-size: 0.75em; color: #555; }
+  .hero { padding-top: 24px; }
+  .hero-card { display: none; }
 }
