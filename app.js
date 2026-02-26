@@ -127,7 +127,7 @@
       const selected = document.querySelector('input[name="visitType"]:checked');
       const type     = selected ? selected.value : 'ondemand';
       // Placeholder — swap in real booking URL:
-      alert(`Booking system coming soon!\n\nVisit type selected: ${type}\n\nFor now, please call: (404) 933-9170`);
+      alert(`Booking system coming soon!\n\nVisit type selected: ${type}\n\nFor now, please call: (678) 570-7587`);
       e.preventDefault();
     });
   }
