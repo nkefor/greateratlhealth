@@ -184,8 +184,8 @@ ul   { list-style: none; }
   box-shadow: var(--shadow-sm);
 }
 .provider-info { padding: 20px 22px; }
-.provider-info h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 3px; }
-.provider-title { font-size: 0.82rem; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.provider-info h3 { font-size: 1.35rem; font-weight: 800; margin-bottom: 4px; }
+.provider-title { font-size: 1rem; color: var(--accent); font-weight: 700; margin-bottom: 6px; }
 .provider-location { font-size: 0.8rem; color: var(--text-3); margin-bottom: 16px; }
 .provider-stats { display: flex; gap: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 0; }
 .pstat {
