@@ -8,6 +8,11 @@
 // Leave empty to fall back to scrolling the user to the booking widget.
 const BOOKING_URL = '';
 
+// ---- Doxy.me waiting room (free tier) ----
+// Sign up free at doxy.me, then replace YOUR_DOXY_USERNAME with your room name.
+// e.g. 'https://doxy.me/greateratlhealth'
+const DOXY_ROOM_URL = 'https://doxy.me/REPLACE_WITH_YOUR_DOXY_USERNAME';
+
 (function () {
   'use strict';
 
@@ -203,6 +208,23 @@ const BOOKING_URL = '';
     }, { threshold: .5 });
     statEls.forEach(el => cObs.observe(el));
   }
+
+  // ---- Doxy.me join-visit buttons ----
+  const doxyConfigured = DOXY_ROOM_URL && !DOXY_ROOM_URL.includes('REPLACE_WITH');
+
+  document.querySelectorAll('.join-visit-btn').forEach(btn => {
+    if (doxyConfigured) {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.open(DOXY_ROOM_URL, '_blank', 'noopener,noreferrer');
+      });
+    } else {
+      // Hide join-visit elements until Doxy.me is configured
+      const wrapper = btn.closest('.join-appt-note, .nav-join-wrap');
+      if (wrapper) wrapper.style.display = 'none';
+      else btn.style.display = 'none';
+    }
+  });
 
   // ---- Email capture: async submit with inline success state ----
   const emailForm    = document.getElementById('emailCaptureForm');

@@ -89,7 +89,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
 </head>
 <body>
 
@@ -111,6 +111,9 @@
       </nav>
       <div class="nav-actions">
         <a href="tel:+16785707587" class="nav-phone">&#128222; (678) 570-7587</a>
+        <span class="nav-join-wrap">
+          <a href="#" class="btn-join-visit join-visit-btn">Join Video Visit</a>
+        </span>
         <a href="#book" class="btn-primary">Book a Visit</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Open menu">
@@ -265,6 +268,7 @@
             <h3>On-Demand Video Visits</h3>
             <div class="svc-price">$75 <span>self-pay</span></div>
             <p>Connect with me in minutes for acute or chronic concerns. No appointment needed for urgent issues — join the virtual queue and I'll see you as soon as possible.</p>
+            <div class="svc-platform">&#127916; Video visits via <strong>Doxy.me</strong> — no app or account needed</div>
             <ul class="svc-list">
               <li>&#10003; Cold, flu &amp; respiratory illness</li>
               <li>&#10003; Infections &amp; antibiotics</li>
@@ -385,7 +389,7 @@
             </div>
             <div class="step-connector"></div>
             <h3>Meet With Me via Video</h3>
-            <p>Click your link at appointment time. No downloads required — just a secure, private video call from your browser.</p>
+            <p>Click your <strong>Doxy.me</strong> waiting room link at appointment time. No account, no download — your browser opens a secure waiting room and I'll join you from my end.</p>
           </div>
           <div class="step-item">
             <div class="step-circle">
@@ -536,7 +540,7 @@
               <span class="faq-arrow">&#8964;</span>
             </button>
             <div class="faq-a">
-              <p>Just a smartphone, tablet, or computer with a camera and microphone. You'll receive a secure link via email or text — click it at your appointment time and you're in. No downloads or apps required. Chrome, Safari, and Firefox all work.</p>
+              <p>Just a smartphone, tablet, or computer with a camera and microphone. Video visits are conducted through <strong>Doxy.me</strong> — a free, browser-based HIPAA-compliant platform. You'll receive a Doxy.me waiting room link before your appointment. Click it, and you're in. No account, no download, no app. Chrome, Safari, Firefox, and Edge all work.</p>
             </div>
           </div>
 
@@ -556,7 +560,7 @@
               <span class="faq-arrow">&#8964;</span>
             </button>
             <div class="faq-a">
-              <p>Absolutely. All video visits are conducted on a fully encrypted, HIPAA-compliant platform. Your health information is never shared or stored without your consent. I take your privacy as seriously as your health.</p>
+              <p>Yes. Video visits are conducted through <strong>Doxy.me</strong>, a fully encrypted, HIPAA-compliant telehealth platform. Doxy.me does not record visits, does not store patient data, and operates under a signed Business Associate Agreement (BAA). Your health information is never shared without your consent.</p>
             </div>
           </div>
 
@@ -727,7 +731,11 @@
             <a href="#" class="btn-primary btn-lg" style="width:100%;justify-content:center;margin-top:20px;" id="bookNowBtn">
               Book Now &rarr;
             </a>
-            <p class="book-card-note">&#128274; Secure booking &nbsp;|&nbsp; Confirmation sent via email</p>
+            <p class="book-card-note">&#128274; Secure booking &nbsp;|&nbsp; Doxy.me visit link sent in confirmation</p>
+            <div class="join-appt-note">
+              <span>Already have an appointment?</span>
+              <a href="#" class="join-visit-btn join-appt-link">Join your Doxy.me video visit &rarr;</a>
+            </div>
           </div>
           <div class="book-phone-alt">
             Prefer to call? <a href="tel:+16785707587"><strong>(678) 570-7587</strong></a>
@@ -812,6 +820,6 @@
   </div>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">&#8593;</button>
-  <script src="app.js?v=2"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>
