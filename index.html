@@ -77,6 +77,7 @@
     },
     "availableService": [
       { "@type": "MedicalTherapy", "name": "On-Demand Video Visit", "offers": { "@type": "Offer", "price": "75", "priceCurrency": "USD" } },
+      { "@type": "MedicalTherapy", "name": "Not Feeling Well Visit", "offers": { "@type": "Offer", "price": "75", "priceCurrency": "USD" } },
       { "@type": "MedicalTherapy", "name": "DOT Physical Exam", "offers": { "@type": "Offer", "price": "125", "priceCurrency": "USD" } },
       { "@type": "MedicalTherapy", "name": "Sports Physical", "offers": { "@type": "Offer", "price": "40", "priceCurrency": "USD" } },
       { "@type": "MedicalTherapy", "name": "Weight Loss Program", "offers": { "@type": "Offer", "price": "100", "priceCurrency": "USD" } },
@@ -613,6 +614,7 @@
               <p>Greater ATL Health is a <strong>self-pay practice</strong> — meaning you pay a flat, transparent fee at the time of your visit with no insurance required. Our prices are:</p>
               <ul style="margin: 10px 0 10px 18px; list-style: disc;">
                 <li style="margin-bottom:5px;">On-Demand Video Visit — <strong>$75</strong></li>
+                <li style="margin-bottom:5px;">Not Feeling Well — <strong>$75</strong></li>
                 <li style="margin-bottom:5px;">Sports Physical — <strong>$40</strong></li>
                 <li style="margin-bottom:5px;">Weight Loss Consultation — <strong>$100</strong></li>
                 <li style="margin-bottom:5px;">DOT Physical Exam — <strong>$125</strong></li>
@@ -696,6 +698,13 @@
                 <input type="radio" name="visitType" value="ondemand" checked />
                 <span>
                   <strong>On-Demand Video Visit</strong>
+                  <em>$75 self-pay</em>
+                </span>
+              </label>
+              <label class="visit-type-option">
+                <input type="radio" name="visitType" value="notwell" />
+                <span>
+                  <strong>Not Feeling Well</strong>
                   <em>$75 self-pay</em>
                 </span>
               </label>
