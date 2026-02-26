@@ -1,0 +1,33 @@
+{
+  "name": "Greater ATL Health",
+  "short_name": "ATL Health",
+  "description": "Telehealth care for Greater Atlanta — Lyna Ashu, FNP-C",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0e8c77",
+  "background_color": "#ffffff",
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Book a Visit",
+      "short_name": "Book",
+      "description": "Schedule a telehealth appointment",
+      "url": "/#book"
+    },
+    {
+      "name": "Call Us",
+      "short_name": "Call",
+      "description": "Call Greater ATL Health",
+      "url": "tel:+16785707587"
+    }
+  ]
+}

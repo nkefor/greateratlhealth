@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0e8c77" />
+  <title>Contact Us | Greater ATL Health</title>
+  <meta name="description" content="Contact Greater ATL Health — Lyna Ashu, FNP-C. Call, email, or send a message. Telehealth provider serving Greater Atlanta, GA." />
+  <link rel="canonical" href="https://www.greateratlhealth.com/contact" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="stylesheet" href="styles.css?v=3" />
+  <style>
+    .contact-page { padding: calc(var(--nav-h) + 60px) 0 80px; }
+    .contact-page h1 { font-size: clamp(1.9rem,3.5vw,2.6rem); font-weight: 800; letter-spacing:-.03em; margin-bottom: 10px; }
+    .contact-page .page-sub { color: var(--text-2); font-size: 1rem; line-height: 1.75; margin-bottom: 48px; max-width: 520px; }
+    .contact-content { max-width: 960px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 48px; align-items: start; }
+    .contact-info-card {
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 16px; padding: 32px 28px;
+    }
+    .contact-info-card h2 { font-size: 1.05rem; font-weight: 700; margin-bottom: 24px; }
+    .contact-method {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px 0; border-bottom: 1px solid var(--border);
+    }
+    .contact-method:last-of-type { border-bottom: none; padding-bottom: 0; }
+    .contact-method-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--accent-light); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .contact-method-body strong { display: block; font-size: 0.88rem; font-weight: 700; margin-bottom: 3px; }
+    .contact-method-body a, .contact-method-body p { font-size: 0.85rem; color: var(--text-2); line-height: 1.6; margin: 0; }
+    .contact-method-body a { color: var(--accent); font-weight: 600; }
+    .contact-method-body a:hover { text-decoration: underline; }
+    .hours-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .hours-table td { font-size: 0.83rem; color: var(--text-2); padding: 4px 0; }
+    .hours-table td:last-child { text-align: right; font-weight: 600; color: var(--text); }
+    .contact-form-card {
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 16px; padding: 36px 32px;
+    }
+    .contact-form-card h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+    .contact-form-card .form-note { font-size: 0.83rem; color: var(--text-3); margin-bottom: 24px; line-height: 1.6; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group label { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 11px 14px; border-radius: 8px;
+      border: 1.5px solid var(--border); font-size: 0.9rem;
+      font-family: inherit; color: var(--text); background: var(--white);
+      transition: border-color .2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--accent);
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit { margin-top: 8px; width: 100%; justify-content: center; padding: 14px; font-size: 1rem; }
+    .contact-success {
+      display: none; align-items: center; gap: 10px;
+      background: var(--accent-light); border: 1.5px solid var(--accent-mid);
+      border-radius: 10px; padding: 16px 20px;
+      font-weight: 600; font-size: 0.93rem; color: var(--accent-dark);
+      margin-top: 12px;
+    }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 36px; }
+    .back-link:hover { text-decoration: underline; }
+    .not-emergency {
+      background: #fff8e1; border-left: 4px solid #fbbf24;
+      border-radius: 0 8px 8px 0; padding: 12px 16px;
+      font-size: 0.82rem; color: #92400e; margin-bottom: 32px; line-height: 1.6;
+    }
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="https://www.greateratlhealth.com" class="logo">
+        <span class="logo-cross">+</span>Greater ATL Health
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="/#services">Services</a>
+        <a href="/#about">About</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/#book" class="btn-primary nav-book-mobile">Book a Visit &rarr;</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="tel:+16785707587" class="nav-phone">&#128222; (678) 570-7587</a>
+        <a href="https://www.greateratlhealth.com/#book" class="btn-primary">Book a Visit</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="contact-page">
+    <div class="container contact-content">
+
+      <a href="/" class="back-link">&#8592; Back to home</a>
+
+      <div class="not-emergency">
+        <strong>&#9888; Medical emergency?</strong> Call <strong>911</strong> or go to the nearest emergency room.
+        Greater ATL Health is a telehealth service and cannot respond to emergencies.
+      </div>
+
+      <div class="section-tag">Contact</div>
+      <h1>Get in touch.</h1>
+      <p class="page-sub">Questions before booking? Want to confirm availability? We're here to help — reach out any way that works for you.</p>
+
+      <div class="contact-grid">
+
+        <!-- LEFT: Contact info -->
+        <div>
+          <div class="contact-info-card">
+            <h2>Ways to reach us</h2>
+
+            <div class="contact-method">
+              <div class="contact-method-icon">&#128222;</div>
+              <div class="contact-method-body">
+                <strong>Phone</strong>
+                <a href="tel:+16785707587">(678) 570-7587</a>
+                <p>Call or text during business hours</p>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="contact-method-icon">&#128140;</div>
+              <div class="contact-method-body">
+                <strong>Email</strong>
+                <a href="mailto:hello@greateratlhealth.com">hello@greateratlhealth.com</a>
+                <p>We respond within 1 business day</p>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="contact-method-icon">&#128337;</div>
+              <div class="contact-method-body">
+                <strong>Hours</strong>
+                <table class="hours-table">
+                  <tr><td>Mon &ndash; Fri</td><td>8:00 am &ndash; 8:00 pm ET</td></tr>
+                  <tr><td>Sat &ndash; Sun</td><td>9:00 am &ndash; 2:00 pm ET</td></tr>
+                </table>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="contact-method-icon">&#128203;</div>
+              <div class="contact-method-body">
+                <strong>Medical Records Request</strong>
+                <a href="mailto:hello@greateratlhealth.com?subject=Medical%20Records%20Request">Email a records request</a>
+                <p>Please include your full name and date of birth</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 20px; padding: 18px 20px; background: var(--accent-light); border-radius: 12px; border: 1px solid var(--accent-mid);">
+            <p style="font-size: 0.85rem; color: var(--accent-dark); font-weight: 600; margin-bottom: 6px;">Ready to book?</p>
+            <p style="font-size: 0.82rem; color: var(--text-2); margin-bottom: 12px; line-height: 1.6;">Same-day and next-day appointments are available. Skip the message and go straight to booking.</p>
+            <a href="/#book" class="btn-primary" style="font-size: 0.88rem; padding: 10px 20px;">Book Your Visit &rarr;</a>
+          </div>
+        </div>
+
+        <!-- RIGHT: Contact form -->
+        <div class="contact-form-card">
+          <h2>Send us a message</h2>
+          <p class="form-note">Not ready to book yet? Ask a question, confirm availability, or request more information. We'll get back to you within 1 business day.</p>
+
+          <form id="contactForm" action="https://formspree.io/f/REPLACE_WITH_YOUR_FORMSPREE_ID" method="POST" novalidate>
+            <!-- To activate: sign up free at formspree.io, create a form, replace the ID above -->
+            <input type="hidden" name="_subject" value="New contact message — Greater ATL Health" />
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First name <span style="color:#e53e3e">*</span></label>
+                <input type="text" id="firstName" name="firstName" placeholder="Jane" required />
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last name <span style="color:#e53e3e">*</span></label>
+                <input type="text" id="lastName" name="lastName" placeholder="Smith" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contactEmail">Email address <span style="color:#e53e3e">*</span></label>
+              <input type="email" id="contactEmail" name="email" placeholder="jane@example.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="contactPhone">Phone number (optional)</label>
+              <input type="tel" id="contactPhone" name="phone" placeholder="(678) 555-0100" />
+            </div>
+
+            <div class="form-group">
+              <label for="subject">What can we help you with? <span style="color:#e53e3e">*</span></label>
+              <select id="subject" name="subject" required>
+                <option value="" disabled selected>Select a topic</option>
+                <option value="booking">Booking / scheduling a visit</option>
+                <option value="services">Questions about services</option>
+                <option value="pricing">Pricing / self-pay</option>
+                <option value="dot">DOT physical inquiry</option>
+                <option value="records">Medical records request</option>
+                <option value="technical">Technical / visit link issue</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message <span style="color:#e53e3e">*</span></label>
+              <textarea id="message" name="message" placeholder="Tell us what's on your mind…" required></textarea>
+            </div>
+
+            <p style="font-size: 0.74rem; color: var(--text-3); margin-bottom: 16px; line-height: 1.6;">
+              By submitting this form you agree to our <a href="/privacy" style="color:var(--accent);">Privacy Policy</a>.
+              Do not include sensitive medical information — use your secure patient portal for clinical questions.
+            </p>
+
+            <button type="submit" class="btn-primary form-submit">Send Message &rarr;</button>
+          </form>
+
+          <div class="contact-success" id="contactSuccess">
+            <span>&#10003;</span> Message sent! We'll be in touch within 1 business day.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="emergency-bar">
+      <div class="container">
+        <strong>&#9888; For medical emergencies, call 911 immediately.</strong>
+        Greater ATL Health is a telehealth service and does not provide emergency care.
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <span>&copy; 2026 Greater ATL Health &mdash; Lyna Ashu, FNP-C. All rights reserved.</span>
+        <span>
+          <a href="/privacy" style="color:rgba(255,255,255,.4);text-decoration:underline;">Privacy</a> &nbsp;|&nbsp;
+          <a href="/hipaa" style="color:rgba(255,255,255,.4);text-decoration:underline;">HIPAA</a> &nbsp;|&nbsp;
+          <a href="/terms" style="color:rgba(255,255,255,.4);text-decoration:underline;">Terms</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky mobile Book Now bar -->
+  <div class="mobile-cta-bar" id="mobileCta">
+    <a href="tel:+16785707587" class="mobile-cta-call">&#128222; Call</a>
+    <a href="https://www.greateratlhealth.com/#book" class="btn-primary mobile-cta-book">Book a Visit &rarr;</a>
+  </div>
+
+  <script>
+    // Mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        const open = navLinks.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', String(open));
+        hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+      navLinks.querySelectorAll('a').forEach(a =>
+        a.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+          hamburger.setAttribute('aria-label', 'Open menu');
+        })
+      );
+    }
+
+    // Nav shadow on scroll
+    const nav = document.getElementById('nav');
+    if (nav) {
+      window.addEventListener('scroll', () => {
+        nav.style.boxShadow = window.scrollY > 8 ? '0 2px 16px rgba(0,0,0,0.08)' : 'none';
+      }, { passive: true });
+    }
+
+    // Contact form async submit
+    const contactForm    = document.getElementById('contactForm');
+    const contactSuccess = document.getElementById('contactSuccess');
+    if (contactForm && contactSuccess) {
+      contactForm.addEventListener('submit', async (e) => {
+        const action = contactForm.getAttribute('action') || '';
+        if (action.includes('REPLACE_WITH')) return;
+        e.preventDefault();
+        const btn = contactForm.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+        try {
+          const res = await fetch(action, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: new FormData(contactForm)
+          });
+          if (res.ok) {
+            contactForm.style.display = 'none';
+            contactSuccess.style.display = 'flex';
+          } else {
+            if (btn) { btn.disabled = false; btn.textContent = 'Try again'; }
+          }
+        } catch {
+          if (btn) { btn.disabled = false; btn.textContent = 'Try again'; }
+        }
+      });
+    }
+  </script>
+</body>
+</html>

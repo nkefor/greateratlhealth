@@ -5,7 +5,7 @@
 // ---- Booking URL configuration ----
 // Replace with your Calendly (or other scheduler) link when ready.
 // e.g. 'https://calendly.com/greateratlhealth'
-// Leave empty to fall back to the phone number prompt.
+// Leave empty to fall back to scrolling the user to the booking widget.
 const BOOKING_URL = '';
 
 (function () {
@@ -19,13 +19,20 @@ const BOOKING_URL = '';
     hamburger.addEventListener('click', () => {
       const open = navLinks.classList.toggle('open');
       hamburger.setAttribute('aria-expanded', String(open));
+      hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     });
     navLinks.querySelectorAll('a').forEach(a =>
-      a.addEventListener('click', () => navLinks.classList.remove('open'))
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Open menu');
+      })
     );
     document.addEventListener('click', (e) => {
       if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
         navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Open menu');
       }
     });
   }
@@ -73,7 +80,7 @@ const BOOKING_URL = '';
   // ---- Scroll-reveal animations ----
   const revealEls = document.querySelectorAll(
     '.why-card, .service-card, .step-item, .review-card, ' +
-    '.ins-item, .price-row, .cred-badge, .provider-stats, .trust-item'
+    '.cred-badge, .provider-stats, .trust-item'
   );
   if ('IntersectionObserver' in window) {
     const obs = new IntersectionObserver((entries) => {
@@ -145,8 +152,15 @@ const BOOKING_URL = '';
       if (BOOKING_URL) {
         window.open(BOOKING_URL, '_blank', 'noopener,noreferrer');
       } else {
-        // Fallback until booking URL is configured
-        window.location.href = 'tel:+16785707587';
+        // Fallback: scroll to the booking widget (works on both desktop & mobile)
+        const bookSection = document.getElementById('book');
+        if (bookSection) {
+          const offset = nav ? nav.offsetHeight + 16 : 86;
+          window.scrollTo({
+            top: bookSection.getBoundingClientRect().top + window.scrollY - offset,
+            behavior: 'smooth'
+          });
+        }
       }
     });
   }
@@ -188,6 +202,38 @@ const BOOKING_URL = '';
       });
     }, { threshold: .5 });
     statEls.forEach(el => cObs.observe(el));
+  }
+
+  // ---- Email capture: async submit with inline success state ----
+  const emailForm    = document.getElementById('emailCaptureForm');
+  const emailSuccess = document.getElementById('emailSuccess');
+
+  if (emailForm && emailSuccess) {
+    emailForm.addEventListener('submit', async (e) => {
+      const action = emailForm.getAttribute('action') || '';
+      if (action.includes('REPLACE_WITH')) return; // not yet configured — let native POST through
+
+      e.preventDefault();
+
+      const submitBtn = emailForm.querySelector('button[type="submit"]');
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+
+      try {
+        const res = await fetch(action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(emailForm)
+        });
+        if (res.ok) {
+          emailForm.style.display    = 'none';
+          emailSuccess.style.display = 'flex';
+        } else {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Try again'; }
+        }
+      } catch {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Try again'; }
+      }
+    });
   }
 
 })();
