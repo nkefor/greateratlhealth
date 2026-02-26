@@ -11,7 +11,7 @@ const BOOKING_URL = '';
 // ---- Doxy.me waiting room (free tier) ----
 // Sign up free at doxy.me, then replace YOUR_DOXY_USERNAME with your room name.
 // e.g. 'https://doxy.me/greateratlhealth'
-const DOXY_ROOM_URL = 'https://doxy.me/REPLACE_WITH_YOUR_DOXY_USERNAME';
+const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
 
 (function () {
   'use strict';
