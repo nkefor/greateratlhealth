@@ -104,8 +104,9 @@ ul   { list-style: none; }
   transition: color .2s;
 }
 .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-/* Hide the mobile-only Book button in nav on desktop */
-.nav-book-mobile { display: none !important; }
+/* Hide the mobile-only Book button and phone in nav on desktop */
+.nav-book-mobile  { display: none !important; }
+.nav-phone-mobile { display: none !important; }
 /* Join Video Visit — secondary nav button */
 .btn-join-visit {
   display: inline-flex; align-items: center; gap: 5px;
@@ -418,7 +419,9 @@ ul   { list-style: none; }
 .review-card {
   background: var(--bg); border-radius: var(--radius);
   padding: 26px 22px; border: 1px solid var(--border);
+  transition: box-shadow .2s, transform .2s;
 }
+.review-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
 .review-stars { color: #f59e0b; font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 12px; }
 .review-card > p {
   font-size: 0.88rem; color: var(--text-2); line-height: 1.75;
@@ -469,7 +472,7 @@ ul   { list-style: none; }
   padding: 0 22px;
   transition: max-height .35s ease, padding .35s ease;
 }
-.faq-a.open { max-height: 320px; padding: 0 22px 18px; }
+.faq-a.open { max-height: 640px; padding: 0 22px 18px; }
 .faq-a p { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; }
 
 /* =============================================
@@ -600,7 +603,7 @@ ul   { list-style: none; }
   padding: 12px 18px; border-radius: 8px;
   border: 1.5px solid var(--border);
   font-size: 0.9rem; font-family: inherit;
-  width: 260px; transition: border-color .2s;
+  width: 260px; max-width: 100%; transition: border-color .2s;
   outline: none;
 }
 .email-input:focus { border-color: var(--accent); }
@@ -724,13 +727,15 @@ ul   { list-style: none; }
   /* Show mobile sticky CTA */
   .mobile-cta-bar { display: flex; }
   body { padding-bottom: 72px; }
-  /* Show Book button inside open mobile nav */
-  .nav-links.open .nav-book-mobile { display: flex !important; }
+  /* Show Book button and phone inside open mobile nav */
+  .nav-links.open .nav-book-mobile  { display: flex !important; }
+  .nav-links.open .nav-phone-mobile { display: flex !important; }
   /* Raise back-to-top above mobile bar */
   .back-to-top { bottom: 88px; }
   /* Email capture stacks on mobile */
   .email-capture-inner { grid-template-columns: 1fr; gap: 20px; text-align: center; }
-  .email-capture-form { justify-content: center; }
+  .email-capture-form { justify-content: center; flex-wrap: wrap; }
+  .email-input { width: 100%; }
 }
 @media (max-width: 540px) {
   .section-pad { padding: 60px 0; }
@@ -741,6 +746,40 @@ ul   { list-style: none; }
   .steps-row   { grid-template-columns: 1fr; }
   .footer-cols { grid-template-columns: 1fr; }
   .footer-bottom .container { flex-direction: column; text-align: center; }
+}
+
+/* =============================================
+   FOCUS VISIBLE (keyboard accessibility)
+   ============================================= */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.btn-primary:focus-visible,
+.btn-primary.btn-lg:focus-visible {
+  outline: 3px solid var(--accent-dark);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgba(14,140,119,.2);
+}
+.faq-q:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+}
+.btn-primary:active { transform: translateY(0); box-shadow: none; }
+
+/* =============================================
+   REDUCED MOTION
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .avail-dot { animation: none; }
 }
 
 /* =============================================
