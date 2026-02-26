@@ -1,23 +1,21 @@
 {
   "version": 2,
-  "name": "greateratlhealth",
   "buildCommand": null,
   "outputDirectory": ".",
-  "routes": [
-    {
-      "src": "/(.*)",
-      "headers": {
-        "X-Content-Type-Options": "nosniff",
-        "X-Frame-Options": "DENY",
-        "X-XSS-Protection": "1; mode=block",
-        "Referrer-Policy": "strict-origin-when-cross-origin",
-        "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
-        "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload"
-      },
-      "dest": "/$1"
-    }
-  ],
+  "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
+      ]
+    },
     {
       "source": "/styles.css",
       "headers": [
@@ -43,7 +41,5 @@
       "destination": "/",
       "permanent": true
     }
-  ],
-  "cleanUrls": true,
-  "trailingSlash": false
+  ]
 }
