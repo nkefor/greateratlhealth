@@ -6,7 +6,7 @@
 // Replace with your Calendly (or other scheduler) link when ready.
 // e.g. 'https://calendly.com/greateratlhealth'
 // Leave empty to fall back to scrolling the user to the booking widget.
-const BOOKING_URL = '';
+const BOOKING_URL = 'https://calendly.com/lynaashu/telehealth';
 
 // ---- Doxy.me waiting room (free tier) ----
 // Sign up free at doxy.me, then replace YOUR_DOXY_USERNAME with your room name.
