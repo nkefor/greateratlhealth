@@ -266,60 +266,6 @@
     <a href="https://www.greateratlhealth.com/#book" class="btn-primary mobile-cta-book">Book a Visit &rarr;</a>
   </div>
 
-  <script>
-    // Mobile nav toggle
-    const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('navLinks');
-    if (hamburger && navLinks) {
-      hamburger.addEventListener('click', () => {
-        const open = navLinks.classList.toggle('open');
-        hamburger.setAttribute('aria-expanded', String(open));
-        hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      });
-      navLinks.querySelectorAll('a').forEach(a =>
-        a.addEventListener('click', () => {
-          navLinks.classList.remove('open');
-          hamburger.setAttribute('aria-expanded', 'false');
-          hamburger.setAttribute('aria-label', 'Open menu');
-        })
-      );
-    }
-
-    // Nav shadow on scroll
-    const nav = document.getElementById('nav');
-    if (nav) {
-      window.addEventListener('scroll', () => {
-        nav.style.boxShadow = window.scrollY > 8 ? '0 2px 16px rgba(0,0,0,0.08)' : 'none';
-      }, { passive: true });
-    }
-
-    // Contact form async submit
-    const contactForm    = document.getElementById('contactForm');
-    const contactSuccess = document.getElementById('contactSuccess');
-    if (contactForm && contactSuccess) {
-      contactForm.addEventListener('submit', async (e) => {
-        const action = contactForm.getAttribute('action') || '';
-        if (action.includes('REPLACE_WITH')) return;
-        e.preventDefault();
-        const btn = contactForm.querySelector('button[type="submit"]');
-        if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
-        try {
-          const res = await fetch(action, {
-            method: 'POST',
-            headers: { 'Accept': 'application/json' },
-            body: new FormData(contactForm)
-          });
-          if (res.ok) {
-            contactForm.style.display = 'none';
-            contactSuccess.style.display = 'flex';
-          } else {
-            if (btn) { btn.disabled = false; btn.textContent = 'Try again'; }
-          }
-        } catch {
-          if (btn) { btn.disabled = false; btn.textContent = 'Try again'; }
-        }
-      });
-    }
-  </script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>

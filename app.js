@@ -109,7 +109,7 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
       // Close all
       document.querySelectorAll('.faq-q').forEach(b => {
         b.setAttribute('aria-expanded', 'false');
-        b.nextElementSibling.classList.remove('open');
+        if (b.nextElementSibling) b.nextElementSibling.classList.remove('open');
       });
 
       // Open clicked (unless it was already open)
@@ -223,6 +223,57 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
       else btn.style.display = 'none';
     }
   });
+
+  // ---- Contact form async submit ----
+  const contactForm    = document.getElementById('contactForm');
+  const contactSuccess = document.getElementById('contactSuccess');
+  if (contactForm && contactSuccess) {
+    contactForm.addEventListener('submit', async (e) => {
+      const action = contactForm.getAttribute('action') || '';
+      if (action.includes('REPLACE_WITH')) return;
+      e.preventDefault();
+      const btn = contactForm.querySelector('button[type="submit"]');
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      try {
+        const res = await fetch(action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(contactForm)
+        });
+        if (res.ok) {
+          contactForm.style.display = 'none';
+          contactSuccess.style.display = 'flex';
+        } else {
+          if (btn) { btn.disabled = false; btn.textContent = 'Try again'; }
+        }
+      } catch {
+        if (btn) { btn.disabled = false; btn.textContent = 'Try again'; }
+      }
+    });
+  }
+
+  // ---- Book page: visit type tab interaction ----
+  const ALLOWED_VISIT_TYPES = new Set([
+    'ondemand', 'notwell', 'dot', 'sports', 'weightloss', 'preventive'
+  ]);
+  const visitTypeTabs = document.getElementById('visitTypeTabs');
+  if (visitTypeTabs) {
+    const tabs = visitTypeTabs.querySelectorAll('.vt-tab');
+    const params   = new URLSearchParams(window.location.search);
+    const rawParam = params.get('type');
+    const typeParam = ALLOWED_VISIT_TYPES.has(rawParam) ? rawParam : null;
+
+    tabs.forEach(function (tab) {
+      if (typeParam && tab.dataset.type === typeParam) {
+        tabs.forEach(function (t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+      }
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+      });
+    });
+  }
 
   // ---- Email capture: async submit with inline success state ----
   const emailForm    = document.getElementById('emailCaptureForm');

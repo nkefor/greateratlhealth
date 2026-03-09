@@ -490,45 +490,6 @@
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">&#8593;</button>
 
-  <script>
-    // ---- Visit type tab interaction ----
-    (function () {
-      var tabs = document.querySelectorAll('#visitTypeTabs .vt-tab');
-
-      // Pre-select from ?type= URL parameter
-      var params = new URLSearchParams(window.location.search);
-      var typeParam = params.get('type');
-
-      tabs.forEach(function (tab) {
-        if (typeParam && tab.dataset.type === typeParam) {
-          tabs.forEach(function (t) { t.classList.remove('active'); });
-          tab.classList.add('active');
-        }
-
-        tab.addEventListener('click', function () {
-          tabs.forEach(function (t) { t.classList.remove('active'); });
-          tab.classList.add('active');
-
-          // When Calendly is active, update the iframe src to the matching event type.
-          // Each event type slug should match the Calendly event name you configured.
-          // var frame = document.getElementById('calendlyFrame');
-          // if (frame) {
-          //   var slugMap = {
-          //     ondemand:  'on-demand-video-visit',
-          //     notwell:   'not-feeling-well',
-          //     dot:       'dot-physical-exam',
-          //     sports:    'sports-physical',
-          //     weightloss:'weight-loss-program',
-          //     preventive:'preventive-ongoing-care'
-          //   };
-          //   var base = 'https://calendly.com/REPLACE_WITH_YOUR_CALENDLY_USERNAME/';
-          //   var slug = slugMap[tab.dataset.type] || '';
-          //   frame.src = base + slug + '?hide_gdpr_banner=1&primary_color=0e8c77';
-          // }
-        });
-      });
-    }());
-  </script>
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>
