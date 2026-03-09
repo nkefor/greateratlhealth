@@ -198,7 +198,10 @@ ul   { list-style: none; }
 }
 .photo-label { font-size: 0.75rem; color: var(--accent-dark); font-weight: 500; opacity: .7; }
 /* Real provider photo — hero card */
-.provider-photo-img { display: block; width: 100%; }
+.provider-photo-img {
+  display: block; width: 100%;
+  background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent-mid) 100%);
+}
 .provider-photo-img img {
   width: 100%; height: 260px;
   object-fit: cover; object-position: center top; display: block;
@@ -389,7 +392,11 @@ ul   { list-style: none; }
 }
 .about-photo-placeholder > span:last-child { font-size: 0.8rem; color: var(--accent-dark); font-weight: 500; }
 /* Real provider photo — about section */
-.about-photo-img { display: block; width: 100%; margin-bottom: 16px; }
+.about-photo-img {
+  display: block; width: 100%; margin-bottom: 16px;
+  background: linear-gradient(145deg, var(--accent-light) 0%, var(--accent-mid) 100%);
+  border-radius: var(--radius-lg);
+}
 .about-photo-img img {
   width: 100%; aspect-ratio: 4/5;
   object-fit: cover; object-position: center top;
