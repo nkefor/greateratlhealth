@@ -28,10 +28,7 @@
       display: flex; align-items: flex-start; gap: 10px;
       font-size: 0.9rem; color: var(--text-2); line-height: 1.6;
     }
-    .prepare-checklist li::before {
-      content: '✓'; color: var(--accent); font-weight: 700;
-      flex-shrink: 0; margin-top: 1px;
-    }
+    .prepare-checklist li:hover .check-box { border-color: var(--accent); }
     .prepare-section { margin-bottom: 48px; }
     .prepare-section h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 6px; }
     .prepare-section p { font-size: 0.93rem; color: var(--text-2); line-height: 1.8; margin-bottom: 14px; }
@@ -92,6 +89,7 @@
   </style>
 </head>
 <body>
+  <div id="scrollProgress" class="scroll-progress-bar"></div>
 
   <header class="nav" id="nav">
     <div class="container nav-inner">
@@ -161,27 +159,43 @@
         <div class="prepare-card">
           <div class="prepare-card-icon">&#128203;</div>
           <h2>Health Information to Have Ready</h2>
-          <ul class="prepare-checklist">
-            <li>List of all current medications (name, dose, frequency)</li>
-            <li>List of any vitamins, supplements, or over-the-counter drugs</li>
-            <li>Known allergies (medication and other)</li>
-            <li>Description of your symptoms — when they started, how severe, what makes them better or worse</li>
-            <li>Any recent lab results or test reports you'd like reviewed</li>
-            <li>Family medical history (if relevant to your concern)</li>
-            <li>Name of your preferred pharmacy (and its address)</li>
+          <div class="checklist-progress" id="progress-health">
+            <div class="checklist-progress-label">
+              <span>Your progress</span><span id="count-health">0 / 7</span>
+            </div>
+            <div class="checklist-progress-bar-wrap">
+              <div class="checklist-progress-bar" id="bar-health"></div>
+            </div>
+          </div>
+          <ul class="prepare-checklist" data-group="health">
+            <li data-key="h1"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label">List of all current medications (name, dose, frequency)</span></li>
+            <li data-key="h2"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label">List of any vitamins, supplements, or over-the-counter drugs</span></li>
+            <li data-key="h3"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label">Known allergies (medication and other)</span></li>
+            <li data-key="h4"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label">Description of your symptoms — when they started, how severe, what makes them better or worse</span></li>
+            <li data-key="h5"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label">Any recent lab results or test reports you'd like reviewed</span></li>
+            <li data-key="h6"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label">Family medical history (if relevant to your concern)</span></li>
+            <li data-key="h7"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label">Name of your preferred pharmacy (and its address)</span></li>
           </ul>
         </div>
 
         <div class="prepare-card">
           <div class="prepare-card-icon">&#127979;</div>
           <h2>For Specific Visit Types</h2>
-          <ul class="prepare-checklist">
-            <li><strong>Chronic conditions:</strong> Recent blood pressure readings, blood sugar log, or weight log if monitoring those</li>
-            <li><strong>DOT Physical:</strong> Your CDL license or driver's license, and a list of any health conditions or medications you take</li>
-            <li><strong>Sports Physical:</strong> Your school's or league's required form — we'll sign and return it</li>
-            <li><strong>Weight loss:</strong> Your current weight, height, and any prior weight loss attempts</li>
-            <li><strong>Lab review:</strong> Upload or have the lab report open on your device to share during the visit</li>
-            <li><strong>Skin concern:</strong> Have good lighting so I can clearly see the area on camera</li>
+          <div class="checklist-progress" id="progress-visit">
+            <div class="checklist-progress-label">
+              <span>Your progress</span><span id="count-visit">0 / 6</span>
+            </div>
+            <div class="checklist-progress-bar-wrap">
+              <div class="checklist-progress-bar" id="bar-visit"></div>
+            </div>
+          </div>
+          <ul class="prepare-checklist" data-group="visit">
+            <li data-key="v1"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label"><strong>Chronic conditions:</strong> Recent blood pressure readings, blood sugar log, or weight log if monitoring those</span></li>
+            <li data-key="v2"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label"><strong>DOT Physical:</strong> Your CDL license or driver's license, and a list of any health conditions or medications you take</span></li>
+            <li data-key="v3"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label"><strong>Sports Physical:</strong> Your school's or league's required form — we'll sign and return it</span></li>
+            <li data-key="v4"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label"><strong>Weight loss:</strong> Your current weight, height, and any prior weight loss attempts</span></li>
+            <li data-key="v5"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label"><strong>Lab review:</strong> Upload or have the lab report open on your device to share during the visit</span></li>
+            <li data-key="v6"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label"><strong>Skin concern:</strong> Have good lighting so I can clearly see the area on camera</span></li>
           </ul>
         </div>
       </div>
@@ -244,19 +258,19 @@
         <h2>&#128161; Quick Tips for the Best Experience</h2>
         <div class="prepare-grid" style="margin-top: 20px;">
           <div class="prepare-card">
-            <ul class="prepare-checklist">
-              <li>Charge your device fully before the visit</li>
-              <li>Use WiFi over cellular when possible for a more stable connection</li>
-              <li>Close other apps and browser tabs to free up bandwidth</li>
-              <li>Use earbuds or headphones to improve audio clarity</li>
+            <ul class="prepare-checklist" data-group="tips1">
+              <li data-key="t1"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label">Charge your device fully before the visit</span></li>
+              <li data-key="t2"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label">Use WiFi over cellular when possible for a more stable connection</span></li>
+              <li data-key="t3"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label">Close other apps and browser tabs to free up bandwidth</span></li>
+              <li data-key="t4"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label">Use earbuds or headphones to improve audio clarity</span></li>
             </ul>
           </div>
           <div class="prepare-card">
-            <ul class="prepare-checklist">
-              <li>Sit with light in front of you (facing a window) rather than behind you</li>
-              <li>Wear comfortable clothing you can adjust if showing a rash or injury</li>
-              <li>Write down your questions in advance — it's easy to forget during the visit</li>
-              <li>Have a notepad handy to write down care instructions</li>
+            <ul class="prepare-checklist" data-group="tips2">
+              <li data-key="t5"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label">Sit with light in front of you (facing a window) rather than behind you</span></li>
+              <li data-key="t6"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label">Wear comfortable clothing you can adjust if showing a rash or injury</span></li>
+              <li data-key="t7"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label">Write down your questions in advance — it's easy to forget during the visit</span></li>
+              <li data-key="t8"><span class="check-box"><span class="check-mark">&#10003;</span></span><span class="check-label">Have a notepad handy to write down care instructions</span></li>
             </ul>
           </div>
         </div>
@@ -298,5 +312,68 @@
     </div>
   </footer>
 
+  <script>
+    // ---- #10 Scroll progress bar ----
+    const progressBar = document.getElementById('scrollProgress');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        progressBar.style.width = (h > 0 ? (window.scrollY / h * 100) : 0) + '%';
+      }, { passive: true });
+    }
+
+    // ---- Mobile nav + hamburger X ----
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        const open = navLinks.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', String(open));
+        hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+    }
+    const prepNav = document.getElementById('nav');
+    if (prepNav) {
+      window.addEventListener('scroll', () => {
+        prepNav.style.boxShadow = window.scrollY > 8 ? '0 2px 16px rgba(0,0,0,0.08)' : 'none';
+      }, { passive: true });
+    }
+
+    // ---- #1 Interactive checklist with localStorage ----
+    const STORAGE_KEY = 'gah_checklist';
+    let checked = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+    function updateProgress(group, total) {
+      const bar   = document.getElementById('bar-'   + group);
+      const count = document.getElementById('count-' + group);
+      if (!bar || !count) return;
+      const items = document.querySelectorAll('[data-group="' + group + '"] li');
+      const done  = Array.from(items).filter(li => li.classList.contains('checked')).length;
+      bar.style.width = (done / total * 100) + '%';
+      count.textContent = done + ' / ' + total;
+    }
+
+    document.querySelectorAll('.prepare-checklist li').forEach(li => {
+      const key   = li.dataset.key;
+      const group = li.closest('[data-group]') && li.closest('[data-group]').dataset.group;
+
+      // Restore saved state
+      if (checked[key]) li.classList.add('checked');
+
+      li.addEventListener('click', () => {
+        li.classList.toggle('checked');
+        checked[key] = li.classList.contains('checked');
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
+        if (group) {
+          const total = li.closest('[data-group]').querySelectorAll('li').length;
+          updateProgress(group, total);
+        }
+      });
+    });
+
+    // Init progress bars
+    updateProgress('health', 7);
+    updateProgress('visit',  6);
+  </script>
 </body>
 </html>

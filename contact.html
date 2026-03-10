@@ -84,6 +84,8 @@
   </style>
 </head>
 <body>
+  <div id="scrollProgress" class="scroll-progress-bar"></div>
+  <div id="toastContainer" class="toast-container"></div>
 
   <header class="nav" id="nav">
     <div class="container nav-inner">
@@ -131,7 +133,10 @@
               <div class="contact-method-icon">&#128222;</div>
               <div class="contact-method-body">
                 <strong>Phone</strong>
-                <a href="tel:+16785707587">(678) 570-7587</a>
+                <div class="copy-phone-wrap">
+                  <a href="tel:+16785707587" id="phoneLink">(678) 570-7587</a>
+                  <span class="copy-hint" id="copyPhoneBtn" title="Copy number">Copy</span>
+                </div>
                 <p>Call or text during business hours</p>
               </div>
             </div>
@@ -183,27 +188,31 @@
             <input type="hidden" name="_subject" value="New contact message — Greater ATL Health" />
 
             <div class="form-row">
-              <div class="form-group">
+              <div class="form-group" id="fg-firstName">
                 <label for="firstName">First name <span style="color:#e53e3e">*</span></label>
                 <input type="text" id="firstName" name="firstName" placeholder="Jane" required />
+                <span class="field-error">Please enter your first name.</span>
               </div>
-              <div class="form-group">
+              <div class="form-group" id="fg-lastName">
                 <label for="lastName">Last name <span style="color:#e53e3e">*</span></label>
                 <input type="text" id="lastName" name="lastName" placeholder="Smith" required />
+                <span class="field-error">Please enter your last name.</span>
               </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="fg-email">
               <label for="contactEmail">Email address <span style="color:#e53e3e">*</span></label>
               <input type="email" id="contactEmail" name="email" placeholder="jane@example.com" required />
+              <span class="field-error">Please enter a valid email address.</span>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="fg-phone">
               <label for="contactPhone">Phone number (optional)</label>
               <input type="tel" id="contactPhone" name="phone" placeholder="(678) 555-0100" />
+              <span class="field-error">Please enter a valid phone number.</span>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="fg-subject">
               <label for="subject">What can we help you with? <span style="color:#e53e3e">*</span></label>
               <select id="subject" name="subject" required>
                 <option value="" disabled selected>Select a topic</option>
@@ -215,11 +224,13 @@
                 <option value="technical">Technical / visit link issue</option>
                 <option value="other">Other</option>
               </select>
+              <span class="field-error">Please select a topic.</span>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="fg-message">
               <label for="message">Message <span style="color:#e53e3e">*</span></label>
               <textarea id="message" name="message" placeholder="Tell us what's on your mind…" required></textarea>
+              <span class="field-error">Please enter your message.</span>
             </div>
 
             <p style="font-size: 0.74rem; color: var(--text-3); margin-bottom: 16px; line-height: 1.6;">
@@ -266,7 +277,31 @@
   </div>
 
   <script>
-    // Mobile nav toggle
+    // ---- Toast helper ----
+    function showToast(msg, type) {
+      const container = document.getElementById('toastContainer');
+      if (!container) return;
+      const t = document.createElement('div');
+      t.className = 'toast ' + (type || '');
+      t.textContent = msg;
+      container.appendChild(t);
+      requestAnimationFrame(() => { requestAnimationFrame(() => t.classList.add('show')); });
+      setTimeout(() => {
+        t.classList.remove('show');
+        setTimeout(() => t.remove(), 350);
+      }, 3500);
+    }
+
+    // ---- #10 Scroll progress bar ----
+    const progressBar = document.getElementById('scrollProgress');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        progressBar.style.width = (h > 0 ? (window.scrollY / h * 100) : 0) + '%';
+      }, { passive: true });
+    }
+
+    // ---- Mobile nav toggle + hamburger X ----
     const hamburger = document.getElementById('hamburger');
     const navLinks  = document.getElementById('navLinks');
     if (hamburger && navLinks) {
@@ -284,7 +319,7 @@
       );
     }
 
-    // Nav shadow on scroll
+    // ---- Nav shadow on scroll ----
     const nav = document.getElementById('nav');
     if (nav) {
       window.addEventListener('scroll', () => {
@@ -292,11 +327,81 @@
       }, { passive: true });
     }
 
-    // Contact form async submit
+    // ---- #7 Click-to-copy phone number ----
+    const copyBtn = document.getElementById('copyPhoneBtn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText('6785707587').then(() => {
+          copyBtn.textContent = 'Copied!';
+          copyBtn.classList.add('copied');
+          showToast('Phone number copied to clipboard!', 'success');
+          setTimeout(() => {
+            copyBtn.textContent = 'Copy';
+            copyBtn.classList.remove('copied');
+          }, 2000);
+        }).catch(() => showToast('Could not copy — please copy manually.', 'error'));
+      });
+    }
+
+    // ---- #2 Inline form validation ----
+    function validateField(fg, input) {
+      if (!fg || !input) return true;
+      const val = input.value.trim();
+      let valid = true;
+      if (input.required) {
+        if (input.type === 'email') {
+          valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+        } else if (input.tagName === 'SELECT') {
+          valid = val !== '';
+        } else {
+          valid = val.length >= 1;
+        }
+      }
+      if (input.id === 'contactPhone' && val !== '') {
+        valid = /^[\d\s\(\)\-\+]{7,}$/.test(val);
+      }
+      fg.classList.toggle('field-invalid', !valid);
+      fg.classList.toggle('field-valid', valid && (input.required || val !== ''));
+      return valid;
+    }
+
+    ['firstName','lastName','contactEmail','contactPhone','subject','message'].forEach(id => {
+      const el = document.getElementById(id);
+      const fg = el && document.getElementById('fg-' + (id === 'contactEmail' ? 'email' : id === 'contactPhone' ? 'phone' : id === 'subject' ? 'subject' : id));
+      if (!el) return;
+      const fgId = {
+        firstName: 'fg-firstName', lastName: 'fg-lastName',
+        contactEmail: 'fg-email', contactPhone: 'fg-phone',
+        subject: 'fg-subject', message: 'fg-message'
+      }[id];
+      const fgEl = document.getElementById(fgId);
+      el.addEventListener('blur', () => validateField(fgEl, el));
+      el.addEventListener('input', () => {
+        if (fgEl && fgEl.classList.contains('field-invalid')) validateField(fgEl, el);
+      });
+    });
+
+    // ---- Contact form async submit ----
     const contactForm    = document.getElementById('contactForm');
     const contactSuccess = document.getElementById('contactSuccess');
     if (contactForm && contactSuccess) {
       contactForm.addEventListener('submit', async (e) => {
+        // Validate all required fields first
+        const fields = [
+          ['firstName','fg-firstName'], ['lastName','fg-lastName'],
+          ['contactEmail','fg-email'], ['subject','fg-subject'], ['message','fg-message']
+        ];
+        let allValid = true;
+        fields.forEach(([id, fgId]) => {
+          const el = document.getElementById(id);
+          const fg = document.getElementById(fgId);
+          if (!validateField(fg, el)) allValid = false;
+        });
+        if (!allValid) {
+          e.preventDefault();
+          showToast('Please fill in all required fields.', 'error');
+          return;
+        }
         const action = contactForm.getAttribute('action') || '';
         if (action.includes('REPLACE_WITH')) return;
         e.preventDefault();
@@ -311,11 +416,14 @@
           if (res.ok) {
             contactForm.style.display = 'none';
             contactSuccess.style.display = 'flex';
+            showToast('✓ Message sent! We\'ll be in touch within 1 business day.', 'success');
           } else {
-            if (btn) { btn.disabled = false; btn.textContent = 'Try again'; }
+            if (btn) { btn.disabled = false; btn.textContent = 'Send Message →'; }
+            showToast('Something went wrong. Please try again.', 'error');
           }
         } catch {
-          if (btn) { btn.disabled = false; btn.textContent = 'Try again'; }
+          if (btn) { btn.disabled = false; btn.textContent = 'Send Message →'; }
+          showToast('Network error. Please check your connection.', 'error');
         }
       });
     }

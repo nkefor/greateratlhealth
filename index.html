@@ -94,6 +94,18 @@
 </head>
 <body>
 
+  <!-- #10 Scroll progress bar -->
+  <div id="scrollProgress" class="scroll-progress-bar"></div>
+
+  <!-- #5 Toast container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- #4 Sticky booking bar -->
+  <div class="sticky-book-bar" id="stickyBookBar">
+    <span class="sticky-book-text">Same-day appointments available &mdash; <strong>book in seconds.</strong></span>
+    <a href="#book" class="btn-primary sticky-book-btn">Book a Visit &rarr;</a>
+  </div>
+
   <!-- ==============================
        NAV
   =============================== -->
@@ -260,13 +272,14 @@
         </div>
         <div class="services-grid">
 
-          <div class="service-card featured-service">
+          <div class="service-card featured-service expanded">
             <div class="svc-icon">&#128249;</div>
             <div class="svc-badge">Most Popular</div>
             <h3>On-Demand Video Visits</h3>
             <div class="svc-price">$75 <span>self-pay</span></div>
             <p>Connect with me in minutes for acute or chronic concerns. No appointment needed for urgent issues — join the virtual queue and I'll see you as soon as possible.</p>
             <div class="svc-platform">&#127916; Video visits via <strong>Doxy.me</strong> — no app or account needed</div>
+            <button class="svc-expand-btn" aria-expanded="true">Hide details <span class="svc-expand-arrow">&#8964;</span></button>
             <ul class="svc-list">
               <li>&#10003; Cold, flu &amp; respiratory illness</li>
               <li>&#10003; Infections &amp; antibiotics</li>
@@ -282,6 +295,7 @@
             <h3>DOT Physical Exams</h3>
             <div class="svc-price">$125 <span>self-pay</span></div>
             <p>Certified Medical Examiner (CME) on staff. I provide DOT physicals for commercial drivers (CDL) with fast turnaround and official FMCSA medical certificates.</p>
+            <button class="svc-expand-btn" aria-expanded="false">See what&rsquo;s included <span class="svc-expand-arrow">&#8964;</span></button>
             <ul class="svc-list">
               <li>&#10003; FMCSA-compliant exam</li>
               <li>&#10003; Medical certificate issued same day</li>
@@ -296,6 +310,7 @@
             <h3>Sports Physicals</h3>
             <div class="svc-price">$40 <span>self-pay</span></div>
             <p>Pre-participation physical evaluations (PPE) for student athletes, adults, and recreational sports leagues. Fast, thorough, and affordable.</p>
+            <button class="svc-expand-btn" aria-expanded="false">See what&rsquo;s included <span class="svc-expand-arrow">&#8964;</span></button>
             <ul class="svc-list">
               <li>&#10003; School &amp; NCAA clearance forms</li>
               <li>&#10003; Cardiac &amp; musculoskeletal screening</li>
@@ -310,6 +325,7 @@
             <h3>Preventive &amp; Ongoing Care</h3>
             <div class="svc-price">$100 <span>self-pay</span></div>
             <p>Stay ahead of health problems with regular check-ins, screenings, and personalized care plans. I manage chronic conditions and help you build lasting healthy habits.</p>
+            <button class="svc-expand-btn" aria-expanded="false">See what&rsquo;s included <span class="svc-expand-arrow">&#8964;</span></button>
             <ul class="svc-list">
               <li>&#10003; Annual wellness visits</li>
               <li>&#10003; Diabetes management</li>
@@ -325,6 +341,7 @@
             <h3>Weight Loss Programs</h3>
             <div class="svc-price">$100 <span>self-pay</span></div>
             <p>Medically supervised weight management tailored to your body and lifestyle. I combine evidence-based treatment with ongoing support and accountability.</p>
+            <button class="svc-expand-btn" aria-expanded="false">See what&rsquo;s included <span class="svc-expand-arrow">&#8964;</span></button>
             <ul class="svc-list">
               <li>&#10003; Personalized weight loss plan</li>
               <li>&#10003; Medication-assisted options (GLP-1)</li>
@@ -340,6 +357,7 @@
             <h3>Illness &amp; Minor Injury</h3>
             <div class="svc-price">$75 <span>self-pay</span></div>
             <p>Skip the ER or urgent care waiting room. For non-emergency illnesses and minor injuries, I can evaluate, treat, and prescribe — all via telehealth.</p>
+            <button class="svc-expand-btn" aria-expanded="false">See what&rsquo;s included <span class="svc-expand-arrow">&#8964;</span></button>
             <ul class="svc-list">
               <li>&#10003; Sprains &amp; minor injuries</li>
               <li>&#10003; UTIs &amp; sinus infections</li>
@@ -476,42 +494,59 @@
           <h2>What my patients say</h2>
           <p class="section-sub">Real feedback from Greater Atlanta patients who've experienced care through Greater ATL Health.</p>
         </div>
-        <div class="reviews-grid">
-          <div class="review-card">
-            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <p>"I needed a DOT physical on short notice and every clinic had a week wait. Greater ATL Health got me in the same day. The doctor was thorough, professional, and I had my medical certificate before I even got home."</p>
-            <div class="reviewer">
-              <div class="rev-avatar">TR</div>
-              <div>
-                <strong>Tony R.</strong>
-                <span>CDL Driver &mdash; Marietta, GA</span>
-                <span class="verified-badge">&#10003; Verified Patient</span>
+        <div class="reviews-carousel" id="reviewCarousel">
+          <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide">
+              <div class="review-card">
+                <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"I needed a DOT physical on short notice and every clinic had a week wait. Greater ATL Health got me in the same day. The doctor was thorough, professional, and I had my medical certificate before I even got home."</p>
+                <div class="reviewer">
+                  <div class="rev-avatar">TR</div>
+                  <div>
+                    <strong>Tony R.</strong>
+                    <span>CDL Driver &mdash; Marietta, GA</span>
+                    <span class="verified-badge">&#10003; Verified Patient</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="review-card">
+                <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"I've been managing my blood pressure for years but could never get a consistent provider. With Greater ATL Health I see the same doctor every time, she knows my history, and I feel like I actually have a doctor — not just a clinic."</p>
+                <div class="reviewer">
+                  <div class="rev-avatar">DW</div>
+                  <div>
+                    <strong>Denise W.</strong>
+                    <span>Patient since 2023 &mdash; Decatur, GA</span>
+                    <span class="verified-badge">&#10003; Verified Patient</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="review-card">
+                <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"My son needed a sports physical for football and we couldn't get in anywhere. Booked online, had the video visit the next morning, and the form was signed and emailed within the hour. Couldn't be easier."</p>
+                <div class="reviewer">
+                  <div class="rev-avatar">MJ</div>
+                  <div>
+                    <strong>Marcus J.</strong>
+                    <span>Parent &mdash; Alpharetta, GA</span>
+                    <span class="verified-badge">&#10003; Verified Patient</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="review-card">
-            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <p>"I've been managing my blood pressure for years but could never get a consistent provider. With Greater ATL Health I see the same doctor every time, she knows my history, and I feel like I actually have a doctor — not just a clinic."</p>
-            <div class="reviewer">
-              <div class="rev-avatar">DW</div>
-              <div>
-                <strong>Denise W.</strong>
-                <span>Patient since 2023 &mdash; Decatur, GA</span>
-                <span class="verified-badge">&#10003; Verified Patient</span>
-              </div>
+          <div class="carousel-controls">
+            <button class="carousel-prev" id="carouselPrev" aria-label="Previous review">&#8249;</button>
+            <div class="carousel-dots" id="carouselDots">
+              <button class="carousel-dot active" data-index="0" aria-label="Review 1"></button>
+              <button class="carousel-dot" data-index="1" aria-label="Review 2"></button>
+              <button class="carousel-dot" data-index="2" aria-label="Review 3"></button>
             </div>
-          </div>
-          <div class="review-card">
-            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <p>"My son needed a sports physical for football and we couldn't get in anywhere. Booked online, had the video visit the next morning, and the form was signed and emailed within the hour. Couldn't be easier."</p>
-            <div class="reviewer">
-              <div class="rev-avatar">MJ</div>
-              <div>
-                <strong>Marcus J.</strong>
-                <span>Parent &mdash; Alpharetta, GA</span>
-                <span class="verified-badge">&#10003; Verified Patient</span>
-              </div>
-            </div>
+            <button class="carousel-next" id="carouselNext" aria-label="Next review">&#8250;</button>
           </div>
         </div>
       </div>
@@ -527,6 +562,12 @@
           <h2>Common questions</h2>
           <p class="section-sub">Everything you need to know before your first visit.</p>
         </div>
+        <div class="faq-search-wrap">
+          <span class="faq-search-icon">&#128269;</span>
+          <input type="text" id="faqSearch" class="faq-search" placeholder="Search questions…" aria-label="Search FAQ" />
+        </div>
+        <div class="faq-no-results" id="faqNoResults">No questions match your search. Try different keywords.</div>
+
         <div class="faq-list">
 
           <div class="faq-item">
@@ -822,6 +863,6 @@
   </div>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">&#8593;</button>
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>

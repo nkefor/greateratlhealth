@@ -226,6 +226,111 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
     }
   });
 
+  // ---- #10 Scroll progress bar ----
+  const progressBar = document.getElementById('scrollProgress');
+  if (progressBar) {
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      progressBar.style.width = (h > 0 ? (window.scrollY / h * 100) : 0) + '%';
+    }, { passive: true });
+  }
+
+  // ---- #5 Toast notification system ----
+  function showToast(msg, type) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+    const t = document.createElement('div');
+    t.className = 'toast ' + (type || '');
+    t.textContent = msg;
+    container.appendChild(t);
+    requestAnimationFrame(() => { requestAnimationFrame(() => t.classList.add('show')); });
+    setTimeout(() => {
+      t.classList.remove('show');
+      setTimeout(() => t.remove(), 350);
+    }, 3500);
+  }
+
+  // ---- #4 Sticky booking bar ----
+  const stickyBar = document.getElementById('stickyBookBar');
+  if (stickyBar) {
+    const heroSection = document.querySelector('.hero');
+    const checkSticky = () => {
+      if (!heroSection) return;
+      const threshold = heroSection.offsetTop + heroSection.offsetHeight;
+      stickyBar.classList.toggle('visible', window.scrollY > threshold);
+    };
+    window.addEventListener('scroll', checkSticky, { passive: true });
+    checkSticky();
+  }
+
+  // ---- #3 Review carousel ----
+  const carouselTrack = document.getElementById('carouselTrack');
+  const carouselDots  = document.querySelectorAll('.carousel-dot');
+  const prevBtn       = document.getElementById('carouselPrev');
+  const nextBtn       = document.getElementById('carouselNext');
+
+  if (carouselTrack && carouselDots.length) {
+    let current   = 0;
+    const total   = carouselDots.length;
+    let autoTimer = null;
+
+    const goTo = (idx) => {
+      current = (idx + total) % total;
+      carouselTrack.style.transform = `translateX(-${current * 100}%)`;
+      carouselDots.forEach((d, i) => d.classList.toggle('active', i === current));
+    };
+
+    const startAuto = () => {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => goTo(current + 1), 5000);
+    };
+
+    if (prevBtn) prevBtn.addEventListener('click', () => { goTo(current - 1); startAuto(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { goTo(current + 1); startAuto(); });
+    carouselDots.forEach(dot =>
+      dot.addEventListener('click', () => { goTo(Number(dot.dataset.index)); startAuto(); })
+    );
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    carouselTrack.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    carouselTrack.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) { goTo(dx < 0 ? current + 1 : current - 1); startAuto(); }
+    }, { passive: true });
+
+    startAuto();
+  }
+
+  // ---- #6 FAQ search / filter ----
+  const faqSearch = document.getElementById('faqSearch');
+  const faqNoResults = document.getElementById('faqNoResults');
+  if (faqSearch) {
+    faqSearch.addEventListener('input', () => {
+      const q = faqSearch.value.trim().toLowerCase();
+      let visible = 0;
+      document.querySelectorAll('.faq-item').forEach(item => {
+        const text = item.textContent.toLowerCase();
+        const show = !q || text.includes(q);
+        item.classList.toggle('faq-hidden', !show);
+        if (show) visible++;
+      });
+      if (faqNoResults) faqNoResults.classList.toggle('show', visible === 0 && q !== '');
+    });
+  }
+
+  // ---- #8 Service card expand / collapse ----
+  document.querySelectorAll('.svc-expand-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card     = btn.closest('.service-card');
+      const expanded = card.classList.toggle('expanded');
+      btn.setAttribute('aria-expanded', String(expanded));
+      btn.innerHTML  = expanded
+        ? 'Hide details <span class="svc-expand-arrow" style="transform:rotate(180deg)">&#8964;</span>'
+        : 'See what&rsquo;s included <span class="svc-expand-arrow">&#8964;</span>';
+    });
+  });
+
   // ---- Email capture: async submit with inline success state ----
   const emailForm    = document.getElementById('emailCaptureForm');
   const emailSuccess = document.getElementById('emailSuccess');
@@ -249,11 +354,14 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
         if (res.ok) {
           emailForm.style.display    = 'none';
           emailSuccess.style.display = 'flex';
+          showToast('✓ You\'re subscribed — thanks for joining!', 'success');
         } else {
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Try again'; }
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Stay Informed →'; }
+          showToast('Something went wrong. Please try again.', 'error');
         }
       } catch {
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Try again'; }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Stay Informed →'; }
+        showToast('Network error. Please check your connection.', 'error');
       }
     });
   }
