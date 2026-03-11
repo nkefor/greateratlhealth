@@ -179,15 +179,15 @@ ul   { list-style: none; }
 .provider-card {
   background: var(--white);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--border);
-  overflow: hidden;
 }
 .provider-photo { position: relative; }
 .provider-photo-img {
-  width: 100%; height: 320px;
+  width: 100%; aspect-ratio: 4/5;
   object-fit: cover; object-position: center top;
+  border-radius: var(--radius-lg);
   display: block;
+  margin-bottom: 0;
+  box-shadow: var(--shadow-lg);
 }
 .online-badge {
   position: absolute; top: 14px; right: 14px;
