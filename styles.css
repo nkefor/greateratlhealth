@@ -236,7 +236,8 @@ ul   { list-style: none; }
   transition: box-shadow .2s, transform .2s;
 }
 .why-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
-.why-icon { font-size: 2rem; margin-bottom: 14px; }
+.why-icon { font-size: 2rem; margin-bottom: 14px; color: var(--accent); }
+.why-icon i { font-size: inherit; color: var(--accent); }
 .why-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
 .why-card p  { font-size: 0.87rem; color: var(--text-2); line-height: 1.7; }
 
@@ -281,7 +282,8 @@ ul   { list-style: none; }
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(14,140,119,.1), var(--shadow);
 }
-.svc-icon { font-size: 2rem; margin-bottom: 10px; }
+.svc-icon { font-size: 2rem; margin-bottom: 10px; color: var(--accent); }
+.svc-icon i { font-size: inherit; color: var(--accent); }
 .svc-badge {
   position: absolute; top: 18px; right: 18px;
   background: var(--accent); color: #fff;
@@ -342,6 +344,16 @@ ul   { list-style: none; }
   z-index: 0;
 }
 .step-connector.last { display: none; }
+
+/* Lottie step animation */
+.step-lottie {
+  width: 88px; height: 88px;
+  margin: 0 auto 18px;
+  position: relative; z-index: 1;
+}
+.step-lottie lottie-player {
+  width: 100%; height: 100%;
+}
 .step-item h3 { font-size: 0.97rem; font-weight: 700; margin-bottom: 8px; }
 .step-item p  { font-size: 0.85rem; color: var(--text-2); line-height: 1.7; }
 .steps-cta {
@@ -446,8 +458,10 @@ ul   { list-style: none; }
 .faq-q[aria-expanded="true"] { color: var(--accent); }
 .faq-arrow {
   font-size: 1.2rem; color: var(--text-3); flex-shrink: 0;
-  transition: transform .3s;
+  transition: transform .3s, color .2s;
+  display: inline-flex; align-items: center;
 }
+.faq-arrow i { font-size: inherit; color: inherit; transition: inherit; }
 .faq-q[aria-expanded="true"] .faq-arrow { transform: rotate(180deg); color: var(--accent); }
 .faq-a {
   max-height: 0; overflow: hidden;
@@ -662,13 +676,17 @@ ul   { list-style: none; }
 .provider-mini-info span  { font-size: 0.75rem; color: var(--text-3); }
 
 /* =============================================
-   SCROLL REVEAL
+   SCROLL REVEAL (fallback — GSAP preferred)
    ============================================= */
 .reveal {
   opacity: 0; transform: translateY(20px);
   transition: opacity .55s ease, transform .55s ease;
 }
 .reveal.visible { opacity: 1; transform: none; }
+
+/* Trust icon color for Phosphor icons */
+.trust-icon { display: inline-flex; align-items: center; }
+.trust-icon i { font-size: 1.1rem; color: var(--accent); }
 
 /* =============================================
    #9 HAMBURGER → X ANIMATION

@@ -82,12 +82,39 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
     });
   });
 
-  // ---- Scroll-reveal animations ----
-  const revealEls = document.querySelectorAll(
-    '.why-card, .service-card, .step-item, .review-card, ' +
-    '.cred-badge, .provider-stats, .trust-item'
-  );
-  if ('IntersectionObserver' in window) {
+  // ---- Scroll-reveal animations (GSAP ScrollTrigger) ----
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero entrance
+    gsap.from('.hero-text > *', {
+      opacity: 0, y: 32, duration: 0.7, stagger: 0.12,
+      ease: 'power2.out', delay: 0.15
+    });
+    gsap.from('.hero-card', {
+      opacity: 0, x: 48, duration: 0.8, ease: 'power2.out', delay: 0.35
+    });
+
+    // Staggered section reveals
+    [
+      { targets: '.why-card',          trigger: '.why-grid' },
+      { targets: '.service-card',      trigger: '.services-grid' },
+      { targets: '.step-item',         trigger: '.steps-row' },
+      { targets: '.carousel-slide .review-card', trigger: '.carousel-track' },
+      { targets: '.faq-item',          trigger: '.faq-list' },
+      { targets: '.cred-badge',        trigger: '.about-creds' },
+      { targets: '.trust-item',        trigger: '.trust-row' },
+      { targets: '.email-capture-inner', trigger: '.email-capture-section' },
+    ].forEach(({ targets, trigger }) => {
+      const els = document.querySelectorAll(targets);
+      if (!els.length || !document.querySelector(trigger)) return;
+      gsap.from(els, {
+        scrollTrigger: { trigger, start: 'top 82%', once: true },
+        opacity: 0, y: 36, duration: 0.6, stagger: 0.09, ease: 'power2.out'
+      });
+    });
+  } else {
+    // Fallback: simple IntersectionObserver reveal
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
@@ -98,7 +125,9 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
         obs.unobserve(entry.target);
       });
     }, { threshold: 0.1 });
-    revealEls.forEach(el => { el.classList.add('reveal'); obs.observe(el); });
+    document.querySelectorAll(
+      '.why-card, .service-card, .step-item, .review-card, .cred-badge, .provider-stats, .trust-item'
+    ).forEach(el => { el.classList.add('reveal'); obs.observe(el); });
   }
 
   // ---- FAQ accordion ----
@@ -182,32 +211,40 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
   }
 
   // ---- Animated counters (hero provider stats) ----
-  function counter(el, end, suffix = '') {
-    const dur  = 1200;
-    const start = performance.now();
-    const run = (now) => {
-      const p = Math.min((now - start) / dur, 1);
-      const v = Math.round(end * (1 - Math.pow(1 - p, 3)));
-      el.textContent = v + suffix;
-      if (p < 1) requestAnimationFrame(run);
-    };
-    requestAnimationFrame(run);
-  }
+  document.querySelectorAll('.pstat strong').forEach(el => {
+    const raw = el.textContent.trim();
+    const targets = raw.includes('500') ? { end: 500, suffix: '+' }
+                  : raw.includes('10')  ? { end: 10,  suffix: '+' }
+                  : null;
+    if (!targets) return;
 
-  const statEls = document.querySelectorAll('.pstat strong');
-  if ('IntersectionObserver' in window && statEls.length) {
-    const cObs = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const el  = entry.target;
-        const raw = el.textContent.trim();
-        if (raw.includes('500')) counter(el, 500, '+');
-        if (raw.includes('10'))  counter(el, 10,  '+');
-        cObs.unobserve(el);
-      });
-    }, { threshold: .5 });
-    statEls.forEach(el => cObs.observe(el));
-  }
+    const animate = () => {
+      if (window.gsap) {
+        const proxy = { val: 0 };
+        gsap.to(proxy, {
+          val: targets.end, duration: 1.4, ease: 'power2.out',
+          onUpdate() { el.textContent = Math.round(proxy.val) + targets.suffix; }
+        });
+      } else {
+        // Fallback RAF counter
+        const dur = 1200, t0 = performance.now();
+        const run = (now) => {
+          const p = Math.min((now - t0) / dur, 1);
+          el.textContent = Math.round(targets.end * (1 - Math.pow(1 - p, 3))) + targets.suffix;
+          if (p < 1) requestAnimationFrame(run);
+        };
+        requestAnimationFrame(run);
+      }
+    };
+
+    if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver(entries => {
+        if (!entries[0].isIntersecting) return;
+        animate(); obs.unobserve(el);
+      }, { threshold: 0.5 });
+      obs.observe(el);
+    }
+  });
 
   // ---- Doxy.me join-visit buttons ----
   const doxyConfigured = DOXY_ROOM_URL && !DOXY_ROOM_URL.includes('REPLACE_WITH');
