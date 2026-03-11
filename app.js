@@ -263,7 +263,7 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
     checkSticky();
   }
 
-  // ---- #3 Review carousel ----
+  // ---- #3 Review carousel (mobile only — desktop shows 3-column grid) ----
   const carouselTrack = document.getElementById('carouselTrack');
   const carouselDots  = document.querySelectorAll('.carousel-dot');
   const prevBtn       = document.getElementById('carouselPrev');
@@ -273,8 +273,10 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
     let current   = 0;
     const total   = carouselDots.length;
     let autoTimer = null;
+    const isMobile = () => window.innerWidth <= 768;
 
     const goTo = (idx) => {
+      if (!isMobile()) return;
       current = (idx + total) % total;
       carouselTrack.style.transform = `translateX(-${current * 100}%)`;
       carouselDots.forEach((d, i) => d.classList.toggle('active', i === current));
@@ -282,8 +284,19 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
 
     const startAuto = () => {
       clearInterval(autoTimer);
-      autoTimer = setInterval(() => goTo(current + 1), 5000);
+      if (isMobile()) autoTimer = setInterval(() => goTo(current + 1), 5000);
     };
+
+    const resetDesktop = () => {
+      clearInterval(autoTimer);
+      carouselTrack.style.transform = '';
+      carouselDots.forEach((d, i) => d.classList.toggle('active', i === 0));
+      current = 0;
+    };
+
+    window.addEventListener('resize', () => {
+      isMobile() ? startAuto() : resetDesktop();
+    }, { passive: true });
 
     if (prevBtn) prevBtn.addEventListener('click', () => { goTo(current - 1); startAuto(); });
     if (nextBtn) nextBtn.addEventListener('click', () => { goTo(current + 1); startAuto(); });
@@ -295,11 +308,12 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
     let touchStartX = 0;
     carouselTrack.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
     carouselTrack.addEventListener('touchend', e => {
+      if (!isMobile()) return;
       const dx = e.changedTouches[0].clientX - touchStartX;
       if (Math.abs(dx) > 40) { goTo(dx < 0 ? current + 1 : current - 1); startAuto(); }
     }, { passive: true });
 
-    startAuto();
+    if (isMobile()) startAuto();
   }
 
   // ---- #6 FAQ search / filter ----
@@ -319,15 +333,15 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
     });
   }
 
-  // ---- #8 Service card expand / collapse ----
+  // ---- #8 Service card expand / collapse (visible by default, toggle to collapse) ----
   document.querySelectorAll('.svc-expand-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const card     = btn.closest('.service-card');
-      const expanded = card.classList.toggle('expanded');
-      btn.setAttribute('aria-expanded', String(expanded));
-      btn.innerHTML  = expanded
-        ? 'Hide details <span class="svc-expand-arrow" style="transform:rotate(180deg)">&#8964;</span>'
-        : 'See what&rsquo;s included <span class="svc-expand-arrow">&#8964;</span>';
+      const card      = btn.closest('.service-card');
+      const collapsed = card.classList.toggle('collapsed');
+      btn.setAttribute('aria-expanded', String(!collapsed));
+      btn.innerHTML = collapsed
+        ? 'Show details <span class="svc-expand-arrow">&#8964;</span>'
+        : 'Hide details <span class="svc-expand-arrow">&#8964;</span>';
     });
   });
 

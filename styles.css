@@ -727,17 +727,24 @@ ul   { list-style: none; }
 
 /* =============================================
    #3 REVIEW CAROUSEL
+   Desktop: 3-column grid. Mobile (<769px): slider.
    ============================================= */
-.reviews-carousel { position: relative; overflow: hidden; }
+.reviews-carousel { position: relative; }
+/* Desktop — all 3 reviews visible as a grid */
 .carousel-track {
-  display: flex;
-  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
-.carousel-slide { min-width: 100%; box-sizing: border-box; padding: 4px 2px; }
-.carousel-controls {
-  display: flex; align-items: center; justify-content: center;
-  gap: 16px; margin-top: 28px;
+.carousel-slide { box-sizing: border-box; }
+.carousel-controls { display: none; }
+.carousel-dots { display: flex; gap: 8px; }
+.carousel-dot {
+  width: 8px; height: 8px; border-radius: 50%; border: none;
+  background: var(--border); cursor: pointer;
+  transition: background 0.2s, transform 0.2s; padding: 0;
 }
+.carousel-dot.active { background: var(--accent); transform: scale(1.35); }
 .carousel-prev, .carousel-next {
   width: 44px; height: 44px; border-radius: 50%;
   border: 1.5px solid var(--border); background: var(--white);
@@ -748,13 +755,21 @@ ul   { list-style: none; }
 .carousel-prev:hover, .carousel-next:hover {
   background: var(--accent-light); border-color: var(--accent); color: var(--accent);
 }
-.carousel-dots { display: flex; gap: 8px; }
-.carousel-dot {
-  width: 8px; height: 8px; border-radius: 50%; border: none;
-  background: var(--border); cursor: pointer;
-  transition: background 0.2s, transform 0.2s; padding: 0;
+/* Mobile — activate slider */
+@media (max-width: 768px) {
+  .reviews-carousel { overflow: hidden; max-width: 100%; }
+  .carousel-track {
+    display: flex;
+    grid-template-columns: unset;
+    gap: 0;
+    transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .carousel-slide { min-width: 100%; padding: 0 2px; }
+  .carousel-controls {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; margin-top: 24px;
+  }
 }
-.carousel-dot.active { background: var(--accent); transform: scale(1.35); }
 
 /* =============================================
    #6 FAQ SEARCH
@@ -782,11 +797,11 @@ ul   { list-style: none; }
    #8 SERVICE CARD EXPAND
    ============================================= */
 .svc-list {
-  overflow: hidden; max-height: 0;
+  overflow: hidden; max-height: 400px;
   transition: max-height 0.4s ease, opacity 0.3s ease;
-  opacity: 0; margin-top: 0;
+  opacity: 1; margin-top: 12px;
 }
-.service-card.expanded .svc-list { max-height: 400px; opacity: 1; margin-top: 12px; }
+.service-card.collapsed .svc-list { max-height: 0; opacity: 0; margin-top: 0; }
 .svc-expand-btn {
   background: none; border: none; cursor: pointer;
   color: var(--accent); font-size: 0.84rem; font-weight: 600;
@@ -794,8 +809,8 @@ ul   { list-style: none; }
   font-family: inherit; transition: color 0.15s;
 }
 .svc-expand-btn:hover { color: var(--accent-dark); }
-.svc-expand-arrow { transition: transform 0.25s; display: inline-block; }
-.service-card.expanded .svc-expand-arrow { transform: rotate(180deg); }
+.svc-expand-arrow { transition: transform 0.25s; display: inline-block; transform: rotate(180deg); }
+.service-card.collapsed .svc-expand-arrow { transform: rotate(0deg); }
 
 /* =============================================
    #2 FORM FIELD VALIDATION
@@ -892,6 +907,8 @@ ul   { list-style: none; }
   /* Show mobile sticky CTA */
   .mobile-cta-bar { display: flex; }
   body { padding-bottom: 72px; }
+  /* Sticky booking bar is desktop-only — mobile already has bottom CTA bar */
+  .sticky-book-bar { display: none !important; }
   /* Show Book button inside open mobile nav */
   .nav-links.open .nav-book-mobile { display: flex !important; }
   /* Raise back-to-top above mobile bar */
@@ -901,7 +918,6 @@ ul   { list-style: none; }
   .email-capture-form { justify-content: center; }
 }
 @media (max-width: 540px) {
-  .sticky-book-text { display: none; }
   .section-pad { padding: 60px 0; }
   .hero        { padding-top: calc(var(--nav-h) + 36px); padding-bottom: 48px; }
   .hero-actions { flex-direction: column; align-items: flex-start; }

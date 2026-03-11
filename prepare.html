@@ -111,7 +111,17 @@
   <main class="prepare-page">
     <div class="container prepare-content">
 
-      <a href="/" class="back-link">&#8592; Back to home</a>
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:36px;">
+        <a href="/" class="back-link" style="margin-bottom:0;">&#8592; Back to home</a>
+        <button id="resetChecklist" style="
+          background:none; border:1.5px solid var(--border); border-radius:8px;
+          padding:7px 16px; font-size:0.82rem; font-weight:600; color:var(--text-2);
+          cursor:pointer; font-family:inherit; transition:border-color .2s, color .2s;
+        " onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
+           onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-2)'">
+          &#8635; Reset checklist
+        </button>
+      </div>
 
       <div class="section-tag">Before Your Visit</div>
       <h1>Get the most from<br />your telehealth visit.</h1>
@@ -374,6 +384,19 @@
     // Init progress bars
     updateProgress('health', 7);
     updateProgress('visit',  6);
+
+    // ---- Reset button ----
+    const resetBtn = document.getElementById('resetChecklist');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (!confirm('Reset all checkmarks and start fresh?')) return;
+        checked = {};
+        localStorage.removeItem(STORAGE_KEY);
+        document.querySelectorAll('.prepare-checklist li').forEach(li => li.classList.remove('checked'));
+        updateProgress('health', 7);
+        updateProgress('visit',  6);
+      });
+    }
   </script>
 </body>
 </html>
