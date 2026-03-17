@@ -14,7 +14,7 @@
   <meta property="og:url"          content="https://www.greateratlhealth.com/landing" />
   <meta property="og:title"        content="Greater ATL Health | Telehealth Atlanta — Starting at $40" />
   <meta property="og:description"  content="Board-certified telehealth with Lyna Ashu, FNP-C. Video visits, DOT physicals, sports physicals & more. Same-week appointments. No insurance." />
-  <meta property="og:image"        content="https://www.greateratlhealth.com/og-image.svg" />
+  <meta property="og:image"        content="https://www.greateratlhealth.com/og-image.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
 
@@ -22,7 +22,7 @@
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="Greater ATL Health | Telehealth Care — Starting at $40" />
   <meta name="twitter:description" content="Same-week telehealth with Lyna Ashu, FNP-C. No insurance required. DOT physicals, sports physicals, video visits & more." />
-  <meta name="twitter:image"       content="https://www.greateratlhealth.com/og-image.svg" />
+  <meta name="twitter:image"       content="https://www.greateratlhealth.com/og-image.png" />
 
   <!-- Apple / PWA -->
   <meta name="apple-mobile-web-app-capable"          content="yes" />
@@ -313,18 +313,28 @@
       background: var(--bg); border: 1.5px solid var(--border);
       border-radius: var(--radius-sm); padding: 18px 16px;
       transition: border-color .2s, box-shadow .2s;
+      cursor: pointer; text-decoration: none; color: inherit;
+      display: block;
     }
-    .tile:hover { border-color: #b3dfd8; box-shadow: 0 8px 24px rgba(6,95,82,.08); }
-    .tile-icon { font-size: 1.45rem; margin-bottom: 9px; }
-    .tile h3 { font-size: .97rem; font-weight: 800; margin-bottom: 6px; }
+    .tile:hover { border-color: var(--primary); box-shadow: 0 8px 24px rgba(6,95,82,.12); }
+    .tile-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .tile-top-left { display: flex; align-items: center; gap: 9px; }
+    .tile-icon { font-size: 1.3rem; }
+    .tile h3 { font-size: .97rem; font-weight: 800; }
     .tile p  { color: var(--muted); font-size: .84rem; line-height: 1.72; }
+    .tile-price {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem; font-weight: 800; color: var(--primary-dark);
+    }
     .tile-footer {
       display: flex; align-items: center; justify-content: space-between;
-      margin-top: 13px; gap: 8px; flex-wrap: wrap;
+      margin-top: 10px; gap: 8px;
     }
-    .tile-price {
-      display: inline-block; background: var(--soft); color: var(--primary-dark);
-      font-size: .79rem; font-weight: 700; padding: 4px 10px; border-radius: 6px;
+    .tile-label {
+      font-size: .73rem; color: var(--muted); font-weight: 600;
+    }
+    .tile-arrow {
+      font-size: .85rem; font-weight: 700; color: var(--primary);
     }
 
     /* ── WHY TILES ───────────────────────────────────────── */
@@ -521,8 +531,8 @@
       display: grid; grid-template-columns: 1fr auto;
       gap: 12px; align-items: center;
     }
-    .sticky-copy strong { display: block; font-size: .87rem; font-weight: 800; color: var(--text); }
-    .sticky-copy span   { font-size: .73rem; color: var(--muted); }
+    .sticky-text { font-size: .82rem; color: var(--muted); }
+    .sticky-text strong { color: var(--text); font-weight: 800; }
 
     /* ── REVEAL ANIMATION ────────────────────────────────── */
     .reveal {
@@ -582,12 +592,11 @@
   <!-- Mobile nav drawer -->
   <nav class="drawer" id="drawer" aria-label="Mobile navigation">
     <a href="#services"  onclick="closeDrawer()">Services</a>
-    <a href="#why"       onclick="closeDrawer()">Why Us</a>
+    <a href="#reviews"   onclick="closeDrawer()">Reviews</a>
     <a href="#how"       onclick="closeDrawer()">How It Works</a>
     <a href="#reviews"   onclick="closeDrawer()">Reviews</a>
     <a href="#provider"  onclick="closeDrawer()">About Lyna</a>
     <a href="#faq"       onclick="closeDrawer()">FAQ</a>
-    <a href="#contact"   onclick="closeDrawer()">Contact</a>
     <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="drawer-book" onclick="closeDrawer()">📅 Book a Visit</a>
   </nav>
 
@@ -618,9 +627,8 @@
             <span>👩‍⚕️</span> Lyna Ashu, FNP-C · AANP Board-Certified Family Nurse Practitioner
           </div>
 
-          <!-- Urgency + Google Reviews badge -->
+          <!-- Social proof + urgency (single line) -->
           <div class="hero-extras">
-            <div class="urgency-pill">⚡ Slots available <strong style="margin-left:3px;">this week</strong></div>
             <div class="google-badge">
               <div class="google-g">G</div>
               <div>
@@ -628,14 +636,7 @@
                 <div class="google-label">4.9 · Google Reviews</div>
               </div>
             </div>
-          </div>
-
-          <!-- Stats -->
-          <div class="stats">
-            <div class="stat"><strong>4.9★</strong><span>Google Rating</span></div>
-            <div class="stat"><strong>$40</strong><span>Starting Price</span></div>
-            <div class="stat"><strong>Same-Week</strong><span>Appointments</span></div>
-            <div class="stat"><strong>Self-Pay</strong><span>No Insurance</span></div>
+            <div class="urgency-pill">⚡ Same-week slots available</div>
           </div>
 
           <!-- CTAs -->
@@ -679,169 +680,64 @@
       <p class="section-lead">Flat-rate self-pay pricing — no insurance, no hidden fees. Book online in under 2 minutes.</p>
       <div class="tiles reveal">
 
-        <div class="tile">
-          <div class="tile-icon">🎥</div>
-          <h3>On-Demand Video Visit</h3>
+        <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="tile">
+          <div class="tile-top">
+            <div class="tile-top-left"><span class="tile-icon">🎥</span><h3>On-Demand Video Visit</h3></div>
+            <div class="tile-price">$75</div>
+          </div>
           <p>Acute or chronic concerns, prescriptions, lab orders, and specialist referrals — all from home via secure video.</p>
-          <div class="tile-footer">
-            <div class="tile-price">$75 self-pay</div>
-            <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="btn-sm primary">Book Now →</a>
-          </div>
-        </div>
-
-        <div class="tile">
-          <div class="tile-icon">🤒</div>
-          <h3>Illness &amp; Minor Injury</h3>
-          <p>Cold, flu, UTI, sinus infection, pink eye, ear infection, rashes — treated fast from home without a waiting room.</p>
-          <div class="tile-footer">
-            <div class="tile-price">$75 self-pay</div>
-            <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="btn-sm primary">Book Now →</a>
-          </div>
-        </div>
-
-        <div class="tile">
-          <div class="tile-icon">🚛</div>
-          <h3>DOT Physical Exam</h3>
-          <p>FMCSA-certified exam for commercial drivers. Same-day medical certificate when cleared. CDL and non-CDL welcome.</p>
-          <div class="tile-footer">
-            <div class="tile-price">$125 self-pay</div>
-            <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="btn-sm primary">Schedule →</a>
-          </div>
-        </div>
-
-        <div class="tile">
-          <div class="tile-icon">🏆</div>
-          <h3>Sports Physical &amp; School Clearance</h3>
-          <p>Pre-participation physicals for student athletes. Form signed and emailed the same day as your visit.</p>
-          <div class="tile-footer">
-            <div class="tile-price">$40 self-pay</div>
-            <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="btn-sm primary">Book Now →</a>
-          </div>
-        </div>
-
-        <div class="tile">
-          <div class="tile-icon">❤️</div>
-          <h3>Preventive &amp; Ongoing Care</h3>
-          <p>Diabetes, hypertension, cholesterol, thyroid, medication management, wellness visits, and continuous care.</p>
-          <div class="tile-footer">
-            <div class="tile-price">$100 self-pay</div>
-            <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="btn-sm primary">Start Care →</a>
-          </div>
-        </div>
-
-        <div class="tile">
-          <div class="tile-icon">⚖️</div>
-          <h3>Weight Loss Program</h3>
-          <p>Medical weight management with GLP-1 / Semaglutide evaluation, personalized nutrition plan, and regular check-ins.</p>
-          <div class="tile-footer">
-            <div class="tile-price">From $100</div>
-            <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="btn-sm primary">Start →</a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ═══ WHY CHOOSE US ═══════════════════════════════ -->
-    <section class="card section" id="why">
-      <span class="section-tag">Why Greater ATL Health</span>
-      <h2>A Better Way to Get the Care You Deserve</h2>
-      <p class="section-lead">No crowded waiting rooms. No rushed visits. No surprise bills. Just real care from a provider who actually knows you.</p>
-      <div class="tiles reveal">
-        <div class="why-tile">
-          <div class="why-icon">👩‍⚕️</div>
-          <h3>Same Provider Every Visit</h3>
-          <p>You always see Lyna — not a rotating roster of strangers. She knows your history, your goals, and your health story.</p>
-        </div>
-        <div class="why-tile">
-          <div class="why-icon">📅</div>
-          <h3>Flexible Scheduling</h3>
-          <p>Same-day and next-day slots available online 24/7 — evenings until 7 pm and Saturdays. No phone tag, no weeks of waiting.</p>
-        </div>
-        <div class="why-tile">
-          <div class="why-icon">💳</div>
-          <h3>Transparent Flat-Rate Pricing</h3>
-          <p>Prices are clearly shown up front — starting at $40. No insurance? No problem. Pay only for the care you receive.</p>
-        </div>
-        <div class="why-tile">
-          <div class="why-icon">💊</div>
-          <h3>Prescriptions Sent Same Day</h3>
-          <p>Prescriptions, lab orders, imaging orders, and specialist referrals sent directly to your pharmacy — same visit, no delays.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ HOW IT WORKS ════════════════════════════════ -->
-    <section class="card section" id="how">
-      <span class="section-tag">How It Works</span>
-      <h2>From Booking to Better in <em>3 Simple Steps</em></h2>
-      <p class="section-lead">Getting care has never been this easy. Connected with Lyna in hours, not weeks.</p>
-      <div class="steps reveal">
-        <div class="step">
-          <div class="step-n">1</div>
-          <div>
-            <h3>Choose Your Visit &amp; Book</h3>
-            <p>Select the service, pick a time that works — same-day and next-day slots available online 24/7. Takes under 2 minutes. No credit card required to schedule.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-n">2</div>
-          <div>
-            <h3>Complete Your Secure Intake Form</h3>
-            <p>A short intake form is sent before your visit so Lyna arrives prepared — no paperwork during the appointment itself.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-n">3</div>
-          <div>
-            <h3>Join Your Secure Video Visit</h3>
-            <p>Click your appointment link and connect via doxy.me — no app download, no account required. Works on any phone, tablet, or laptop.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-n">4</div>
-          <div>
-            <h3>Receive Your Care Plan</h3>
-            <p>Get your prescription, signed form, lab order, or personalized care plan — all delivered the same day as your visit.</p>
-          </div>
-        </div>
-      </div>
-      <div style="margin-top:18px;">
-        <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="btn-primary" style="max-width:340px;">
-          📅 Book Now — Starting at $40
+          <div class="tile-footer"><span class="tile-label">self-pay</span><span class="tile-arrow">Book →</span></div>
         </a>
+
+        <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="tile">
+          <div class="tile-top">
+            <div class="tile-top-left"><span class="tile-icon">🤒</span><h3>Illness &amp; Minor Injury</h3></div>
+            <div class="tile-price">$75</div>
+          </div>
+          <p>Cold, flu, UTI, sinus infection, pink eye, ear infection, rashes — treated fast from home without a waiting room.</p>
+          <div class="tile-footer"><span class="tile-label">self-pay</span><span class="tile-arrow">Book →</span></div>
+        </a>
+
+        <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="tile">
+          <div class="tile-top">
+            <div class="tile-top-left"><span class="tile-icon">🚛</span><h3>DOT Physical Exam</h3></div>
+            <div class="tile-price">$125</div>
+          </div>
+          <p>FMCSA-certified exam for commercial drivers. Same-day medical certificate when cleared. CDL and non-CDL welcome.</p>
+          <div class="tile-footer"><span class="tile-label">self-pay</span><span class="tile-arrow">Schedule →</span></div>
+        </a>
+
+        <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="tile">
+          <div class="tile-top">
+            <div class="tile-top-left"><span class="tile-icon">🏆</span><h3>Sports Physical</h3></div>
+            <div class="tile-price">$40</div>
+          </div>
+          <p>Pre-participation physicals for student athletes. School clearance form signed and emailed the same day.</p>
+          <div class="tile-footer"><span class="tile-label">self-pay</span><span class="tile-arrow">Book →</span></div>
+        </a>
+
+        <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="tile">
+          <div class="tile-top">
+            <div class="tile-top-left"><span class="tile-icon">❤️</span><h3>Preventive &amp; Ongoing Care</h3></div>
+            <div class="tile-price">$100</div>
+          </div>
+          <p>Diabetes, hypertension, cholesterol, thyroid, medication management, wellness visits, and continuous care.</p>
+          <div class="tile-footer"><span class="tile-label">self-pay</span><span class="tile-arrow">Start Care →</span></div>
+        </a>
+
+        <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="tile">
+          <div class="tile-top">
+            <div class="tile-top-left"><span class="tile-icon">⚖️</span><h3>Weight Loss Program</h3></div>
+            <div class="tile-price">From $100</div>
+          </div>
+          <p>Medical weight management with GLP-1 / Semaglutide evaluation, personalized nutrition plan, and regular check-ins.</p>
+          <div class="tile-footer"><span class="tile-label">self-pay</span><span class="tile-arrow">Start →</span></div>
+        </a>
+
       </div>
     </section>
 
-    <!-- ═══ PROVIDER / ABOUT ════════════════════════════ -->
-    <section class="card section" id="provider">
-      <span class="section-tag">About Your Provider</span>
-      <h2>Hi, I'm Lyna — <em>Your Provider, Not a Stranger</em></h2>
-      <p class="section-lead">I started Greater ATL Health because I believe patients deserve a provider who truly knows them — not a revolving door of strangers or a rushed 7-minute slot.</p>
-      <div class="bio-points reveal">
-        <div class="bio-point">
-          <div class="bio-num">1</div>
-          <p>Board-certified FNP-C with Georgia licensure and full prescriptive authority. I can diagnose, treat, prescribe, and refer — all in one convenient video visit.</p>
-        </div>
-        <div class="bio-point">
-          <div class="bio-num">2</div>
-          <p>FMCSA Certified Medical Examiner for DOT physical exams. I provide same-day documentation when you're cleared, so you stay on the road without delay.</p>
-        </div>
-        <div class="bio-point">
-          <div class="bio-num">3</div>
-          <p>My practice is 100% self-pay with transparent flat-rate pricing, because healthcare shouldn't be complicated or financially stressful. Starting at $40.</p>
-        </div>
-      </div>
-      <div class="cred-badges">
-        <div class="cred-badge">🎓 MSN, Family Nurse Practitioner</div>
-        <div class="cred-badge">✅ AANP Board Certified</div>
-        <div class="cred-badge">📍 Licensed in Georgia</div>
-        <div class="cred-badge">🔒 HIPAA Compliant</div>
-        <div class="cred-badge">🚛 FMCSA Certified Examiner</div>
-      </div>
-    </section>
-
-    <!-- ═══ REVIEWS ══════════════════════════════════════ -->
+    <!-- ═══ REVIEWS (moved up — social proof after services) ═══ -->
     <section class="card section" id="reviews">
       <span class="section-tag">Patient Reviews</span>
       <h2>What My Patients Say</h2>
@@ -887,6 +783,77 @@
           </div>
         </div>
 
+      </div>
+      <!-- CTA right after social proof -->
+      <div style="margin-top:18px;">
+        <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="btn-primary" style="max-width:380px;">
+          📅 Book Now — Starting at $40
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══ HOW IT WORKS ════════════════════════════════ -->
+    <section class="card section" id="how">
+      <span class="section-tag">How It Works</span>
+      <h2>From Booking to Better in <em>3 Simple Steps</em></h2>
+      <p class="section-lead">Getting care has never been this easy. Connected with Lyna in hours, not weeks.</p>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-n">1</div>
+          <div>
+            <h3>Choose Your Visit &amp; Book</h3>
+            <p>Select the service, pick a time that works — same-day and next-day slots available online 24/7. Takes under 2 minutes. No credit card required to schedule.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <div>
+            <h3>Complete Your Secure Intake Form</h3>
+            <p>A short intake form is sent before your visit so Lyna arrives prepared — no paperwork during the appointment itself.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <div>
+            <h3>Join Your Secure Video Visit</h3>
+            <p>Click your appointment link and connect via doxy.me — no app download, no account required. Works on any phone, tablet, or laptop.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">4</div>
+          <div>
+            <h3>Receive Your Care Plan</h3>
+            <p>Get your prescription, signed form, lab order, or personalized care plan — all delivered the same day as your visit.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROVIDER / ABOUT ════════════════════════════ -->
+    <section class="card section" id="provider">
+      <span class="section-tag">About Your Provider</span>
+      <h2>Hi, I'm Lyna — <em>Your Provider, Not a Stranger</em></h2>
+      <p class="section-lead">I started Greater ATL Health because I believe patients deserve a provider who truly knows them — not a revolving door of strangers or a rushed 7-minute slot.</p>
+      <div class="bio-points reveal">
+        <div class="bio-point">
+          <div class="bio-num">1</div>
+          <p>Board-certified FNP-C with Georgia licensure and full prescriptive authority. I can diagnose, treat, prescribe, and refer — all in one convenient video visit.</p>
+        </div>
+        <div class="bio-point">
+          <div class="bio-num">2</div>
+          <p>FMCSA Certified Medical Examiner for DOT physical exams. I provide same-day documentation when you're cleared, so you stay on the road without delay.</p>
+        </div>
+        <div class="bio-point">
+          <div class="bio-num">3</div>
+          <p>My practice is 100% self-pay with transparent flat-rate pricing, because healthcare shouldn't be complicated or financially stressful. Starting at $40.</p>
+        </div>
+      </div>
+      <div class="cred-badges">
+        <div class="cred-badge">🎓 MSN, Family Nurse Practitioner</div>
+        <div class="cred-badge">✅ AANP Board Certified</div>
+        <div class="cred-badge">📍 Licensed in Georgia</div>
+        <div class="cred-badge">🔒 HIPAA Compliant</div>
+        <div class="cred-badge">🚛 FMCSA Certified Examiner</div>
       </div>
     </section>
 
@@ -935,64 +902,6 @@
       </div>
     </section>
 
-    <!-- ═══ CONTACT / LEAD CAPTURE ══════════════════════ -->
-    <section class="card section" id="contact">
-      <span class="section-tag">Get in Touch</span>
-      <h2>Have Questions? <em>Let's Talk.</em></h2>
-      <p class="section-lead">Fill out the form and we'll get back to you within one business day. Or reach out directly below.</p>
-
-      <div class="contact-chips">
-        <a href="tel:+16785707587" class="contact-chip">📞 (678) 570-7587</a>
-        <a href="mailto:lyna.ashu@greateratlhealth.com" class="contact-chip">✉️ lyna.ashu@greateratlhealth.com</a>
-        <a href="https://doxy.me/lynanp" target="_blank" rel="noopener" class="contact-chip">💻 Join Video Visit</a>
-      </div>
-
-      <form id="contactForm" action="https://formspree.io/f/xabcdefg" method="POST" novalidate>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="fname">First Name *</label>
-            <input type="text" id="fname" name="first_name" class="form-input" placeholder="Jane" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="lname">Last Name *</label>
-            <input type="text" id="lname" name="last_name" class="form-input" placeholder="Smith" required />
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="cemail">Email Address *</label>
-          <input type="email" id="cemail" name="email" class="form-input" placeholder="jane@email.com" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="cphone">Phone Number</label>
-          <input type="tel" id="cphone" name="phone" class="form-input" placeholder="(678) 000-0000" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="cservice">Service of Interest</label>
-          <select id="cservice" name="service" class="form-select">
-            <option value="">— Select a service —</option>
-            <option>On-Demand Video Visit ($75)</option>
-            <option>Illness / Sick Visit ($75)</option>
-            <option>Sports Physical &amp; School Clearance ($40)</option>
-            <option>Weight Loss Program ($100+)</option>
-            <option>DOT Physical Exam ($125)</option>
-            <option>Preventive &amp; Ongoing Care ($100)</option>
-            <option>General Question</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="cmsg">Message</label>
-          <textarea id="cmsg" name="message" class="form-textarea" placeholder="Tell us how we can help…"></textarea>
-        </div>
-        <button type="submit" class="btn-primary" id="formBtn" style="width:100%;">
-          Send Message ✉️
-        </button>
-        <div class="form-success" id="formSuccess">
-          ✅ Message sent! We'll be in touch within 1 business day.
-        </div>
-        <p class="form-note">🔒 Your information is private and never shared.</p>
-      </form>
-    </section>
-
     <!-- ═══ FINAL CTA ════════════════════════════════════ -->
     <section class="final-cta">
       <h2>Your Health Shouldn't Wait.<br>Book Your Visit Today.</h2>
@@ -1016,10 +925,7 @@
 
   <!-- ═══ STICKY BAR ══════════════════════════════════════ -->
   <div class="sticky-bar">
-    <div class="sticky-copy">
-      <strong>Need care today? ⚡</strong>
-      <span>Same-week visits from $40 · No insurance required</span>
-    </div>
+    <span class="sticky-text">Same-week visits from <strong>$40</strong></span>
     <a href="https://calendly.com/lynaashu/telehealth?utm_source=social&utm_medium=landing_page&utm_campaign=greateratlhealth" target="_blank" rel="noopener" class="btn-sm primary" style="white-space:nowrap;">
       📅 Book Now
     </a>
@@ -1070,29 +976,20 @@
     }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-    // ── Contact form (async Formspree) ─────────────────────
-    const form    = document.getElementById('contactForm');
-    const formBtn = document.getElementById('formBtn');
-    const formMsg = document.getElementById('formSuccess');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      formBtn.textContent = 'Sending…'; formBtn.disabled = true;
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST', body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (res.ok) {
-          form.reset();
-          formMsg.style.display = 'block';
-          formBtn.textContent = '✅ Message Sent!';
-        } else { throw new Error(); }
-      } catch {
-        formBtn.textContent = 'Send Message ✉️'; formBtn.disabled = false;
-        alert('Something went wrong. Please call us at (678) 570-7587.');
-      }
-    });
+    // ── Sticky bar: only show after scrolling past hero ────
+    const stickyBar = document.querySelector('.sticky-bar');
+    const heroSection = document.querySelector('.hero');
+    if (stickyBar && heroSection) {
+      stickyBar.style.opacity = '0';
+      stickyBar.style.pointerEvents = 'none';
+      stickyBar.style.transition = 'opacity .3s';
+      const stickyIO = new IntersectionObserver(([entry]) => {
+        const pastHero = !entry.isIntersecting;
+        stickyBar.style.opacity = pastHero ? '1' : '0';
+        stickyBar.style.pointerEvents = pastHero ? 'auto' : 'none';
+      }, { threshold: 0 });
+      stickyIO.observe(heroSection);
+    }
   </script>
 </body>
 </html>
