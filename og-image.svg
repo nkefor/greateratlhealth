@@ -1,7 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#09705f"/>
+      <stop offset="0%"   stop-color="#042f29"/>
+      <stop offset="45%"  stop-color="#065f52"/>
+      <stop offset="100%" stop-color="#0e8c77"/>
+    </linearGradient>
+    <linearGradient id="pill" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10b981"/>
       <stop offset="100%" stop-color="#0e8c77"/>
     </linearGradient>
   </defs>
@@ -9,50 +14,77 @@
   <!-- Background -->
   <rect width="1200" height="630" fill="url(#bg)"/>
 
-  <!-- Subtle decorative circles -->
-  <circle cx="1100" cy="80"  r="280" fill="rgba(255,255,255,0.04)"/>
-  <circle cx="1050" cy="580" r="200" fill="rgba(255,255,255,0.03)"/>
-  <circle cx="80"   cy="560" r="160" fill="rgba(255,255,255,0.04)"/>
+  <!-- Decorative circles -->
+  <circle cx="1060" cy="90"  r="320" fill="rgba(255,255,255,0.04)"/>
+  <circle cx="1020" cy="600" r="220" fill="rgba(255,255,255,0.03)"/>
+  <circle cx="60"   cy="580" r="180" fill="rgba(255,255,255,0.03)"/>
+  <circle cx="0"    cy="0"   r="140" fill="rgba(255,255,255,0.02)"/>
 
   <!-- Logo mark -->
-  <rect x="80" y="76" width="70" height="70" rx="14" fill="rgba(255,255,255,0.18)"/>
-  <text x="115" y="126" font-size="44" font-weight="800" text-anchor="middle"
+  <rect x="64" y="56" width="58" height="58" rx="12" fill="rgba(255,255,255,0.18)"/>
+  <text x="93" y="100" font-size="40" font-weight="900" text-anchor="middle"
         fill="white" font-family="Arial, Helvetica, sans-serif">+</text>
 
   <!-- Practice name -->
-  <text x="168" y="126" font-size="38" font-weight="700"
+  <text x="138" y="99" font-size="32" font-weight="700"
         fill="white" font-family="Arial, Helvetica, sans-serif">Greater ATL Health</text>
 
-  <!-- Divider line -->
-  <rect x="80" y="172" width="520" height="2" fill="rgba(255,255,255,0.2)" rx="1"/>
+  <!-- Divider -->
+  <rect x="64" y="138" width="480" height="2" fill="rgba(255,255,255,0.18)" rx="1"/>
 
-  <!-- Provider name + credentials -->
-  <text x="80" y="240" font-size="56" font-weight="800"
+  <!-- Provider name -->
+  <text x="64" y="214" font-size="62" font-weight="800"
         fill="white" font-family="Arial, Helvetica, sans-serif">Lyna Ashu, FNP-C</text>
-  <text x="80" y="295" font-size="30" fill="rgba(255,255,255,0.82)"
-        font-family="Arial, Helvetica, sans-serif">ANCC Board-Certified Family Nurse Practitioner</text>
+
+  <!-- Credential -->
+  <text x="64" y="262" font-size="26" fill="rgba(255,255,255,0.75)"
+        font-family="Arial, Helvetica, sans-serif">AANP Board-Certified Family Nurse Practitioner</text>
 
   <!-- Tagline -->
-  <text x="80" y="370" font-size="26" fill="rgba(255,255,255,0.65)"
+  <text x="64" y="318" font-size="24" fill="rgba(255,255,255,0.58)"
         font-family="Arial, Helvetica, sans-serif">Telehealth care for Greater Atlanta — convenient, personal, secure.</text>
 
-  <!-- Trust badge row -->
-  <rect x="80"  y="416" width="260" height="48" rx="24" fill="rgba(255,255,255,0.14)"/>
-  <text x="210" y="447" font-size="18" font-weight="600" text-anchor="middle"
-        fill="white" font-family="Arial, Helvetica, sans-serif">✓  Same-Day Visits</text>
+  <!-- Big price feature -->
+  <rect x="64" y="348" width="340" height="90" rx="16" fill="url(#pill)"/>
+  <text x="234" y="385" font-size="18" font-weight="600" text-anchor="middle"
+        fill="rgba(255,255,255,0.85)" font-family="Arial, Helvetica, sans-serif">STARTING AT</text>
+  <text x="234" y="426" font-size="42" font-weight="900" text-anchor="middle"
+        fill="white" font-family="Arial, Helvetica, sans-serif">$40</text>
 
-  <rect x="358" y="416" width="260" height="48" rx="24" fill="rgba(255,255,255,0.14)"/>
-  <text x="488" y="447" font-size="18" font-weight="600" text-anchor="middle"
-        fill="white" font-family="Arial, Helvetica, sans-serif">✓  HIPAA Secure</text>
+  <!-- Services column (right side of price) -->
+  <text x="430" y="375" font-size="20" fill="rgba(255,255,255,0.82)"
+        font-family="Arial, Helvetica, sans-serif">🎥  On-Demand Video Visits · $75</text>
+  <text x="430" y="405" font-size="20" fill="rgba(255,255,255,0.82)"
+        font-family="Arial, Helvetica, sans-serif">🚛  DOT Physical Exams · $125</text>
+  <text x="430" y="435" font-size="20" fill="rgba(255,255,255,0.82)"
+        font-family="Arial, Helvetica, sans-serif">🏆  Sports Physicals · $40</text>
 
-  <rect x="636" y="416" width="280" height="48" rx="24" fill="rgba(255,255,255,0.14)"/>
-  <text x="776" y="447" font-size="18" font-weight="600" text-anchor="middle"
-        fill="white" font-family="Arial, Helvetica, sans-serif">✓  Self-Pay Pricing</text>
+  <!-- Trust badges row -->
+  <rect x="64"  y="462" width="220" height="44" rx="22" fill="rgba(255,255,255,0.12)"/>
+  <text x="174" y="489" font-size="16" font-weight="600" text-anchor="middle"
+        fill="white" font-family="Arial, Helvetica, sans-serif">✓  Same-Week Appts</text>
+
+  <rect x="300" y="462" width="200" height="44" rx="22" fill="rgba(255,255,255,0.12)"/>
+  <text x="400" y="489" font-size="16" font-weight="600" text-anchor="middle"
+        fill="white" font-family="Arial, Helvetica, sans-serif">✓  No Insurance</text>
+
+  <rect x="516" y="462" width="196" height="44" rx="22" fill="rgba(255,255,255,0.12)"/>
+  <text x="614" y="489" font-size="16" font-weight="600" text-anchor="middle"
+        fill="white" font-family="Arial, Helvetica, sans-serif">★ 4.9  Google</text>
+
+  <!-- Google reviews callout (right side) -->
+  <rect x="760" y="340" width="376" height="170" rx="20" fill="rgba(255,255,255,0.1)"/>
+  <text x="948" y="392" font-size="20" font-weight="600" text-anchor="middle"
+        fill="rgba(255,255,255,0.7)" font-family="Arial, Helvetica, sans-serif">Google Reviews</text>
+  <text x="948" y="440" font-size="52" font-weight="900" text-anchor="middle"
+        fill="white" font-family="Arial, Helvetica, sans-serif">4.9 ★</text>
+  <text x="948" y="478" font-size="18" text-anchor="middle"
+        fill="rgba(255,255,255,0.6)" font-family="Arial, Helvetica, sans-serif">Verified Patient Reviews</text>
 
   <!-- Bottom bar -->
-  <rect x="0" y="570" width="1200" height="60" fill="rgba(0,0,0,0.2)"/>
-  <text x="80" y="607" font-size="22" fill="rgba(255,255,255,0.7)"
-        font-family="Arial, Helvetica, sans-serif">greateratlhealth.com</text>
-  <text x="1120" y="607" font-size="22" fill="rgba(255,255,255,0.7)"
+  <rect x="0" y="560" width="1200" height="70" fill="rgba(0,0,0,0.25)"/>
+  <text x="64" y="603" font-size="26" font-weight="700" fill="rgba(255,255,255,0.9)"
+        font-family="Arial, Helvetica, sans-serif">📅 Book at greateratlhealth.com/landing</text>
+  <text x="1136" y="603" font-size="22" fill="rgba(255,255,255,0.65)"
         text-anchor="end" font-family="Arial, Helvetica, sans-serif">(678) 570-7587</text>
 </svg>
