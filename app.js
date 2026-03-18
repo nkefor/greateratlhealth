@@ -213,24 +213,27 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
   // ---- Animated counters (hero provider stats) ----
   document.querySelectorAll('.pstat strong').forEach(el => {
     const raw = el.textContent.trim();
-    const targets = raw.includes('500') ? { end: 500, suffix: '+' }
-                  : raw.includes('10')  ? { end: 10,  suffix: '+' }
+    const targets = raw.includes('500') ? { end: 500, suffix: '+',  dec: 0 }
+                  : raw.includes('10')  ? { end: 10,  suffix: '+',  dec: 0 }
+                  : raw.includes('4.9') ? { end: 4.9, suffix: '\u2605', dec: 1 }
                   : null;
     if (!targets) return;
+
+    const fmt = (v) => (targets.dec ? v.toFixed(targets.dec) : Math.round(v)) + targets.suffix;
 
     const animate = () => {
       if (window.gsap) {
         const proxy = { val: 0 };
         gsap.to(proxy, {
           val: targets.end, duration: 1.4, ease: 'power2.out',
-          onUpdate() { el.textContent = Math.round(proxy.val) + targets.suffix; }
+          onUpdate() { el.textContent = fmt(proxy.val); }
         });
       } else {
         // Fallback RAF counter
         const dur = 1200, t0 = performance.now();
         const run = (now) => {
           const p = Math.min((now - t0) / dur, 1);
-          el.textContent = Math.round(targets.end * (1 - Math.pow(1 - p, 3))) + targets.suffix;
+          el.textContent = fmt(targets.end * (1 - Math.pow(1 - p, 3)));
           if (p < 1) requestAnimationFrame(run);
         };
         requestAnimationFrame(run);
@@ -300,7 +303,7 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
     checkSticky();
   }
 
-  // ---- #3 Review carousel (mobile only — desktop shows 3-column grid) ----
+  // ---- #3 Review carousel — all screen sizes ----
   const carouselTrack = document.getElementById('carouselTrack');
   const carouselDots  = document.querySelectorAll('.carousel-dot');
   const prevBtn       = document.getElementById('carouselPrev');
@@ -310,10 +313,8 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
     let current   = 0;
     const total   = carouselDots.length;
     let autoTimer = null;
-    const isMobile = () => window.innerWidth <= 768;
 
     const goTo = (idx) => {
-      if (!isMobile()) return;
       current = (idx + total) % total;
       carouselTrack.style.transform = `translateX(-${current * 100}%)`;
       carouselDots.forEach((d, i) => d.classList.toggle('active', i === current));
@@ -321,19 +322,8 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
 
     const startAuto = () => {
       clearInterval(autoTimer);
-      if (isMobile()) autoTimer = setInterval(() => goTo(current + 1), 5000);
+      autoTimer = setInterval(() => goTo(current + 1), 6000);
     };
-
-    const resetDesktop = () => {
-      clearInterval(autoTimer);
-      carouselTrack.style.transform = '';
-      carouselDots.forEach((d, i) => d.classList.toggle('active', i === 0));
-      current = 0;
-    };
-
-    window.addEventListener('resize', () => {
-      isMobile() ? startAuto() : resetDesktop();
-    }, { passive: true });
 
     if (prevBtn) prevBtn.addEventListener('click', () => { goTo(current - 1); startAuto(); });
     if (nextBtn) nextBtn.addEventListener('click', () => { goTo(current + 1); startAuto(); });
@@ -345,12 +335,11 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
     let touchStartX = 0;
     carouselTrack.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
     carouselTrack.addEventListener('touchend', e => {
-      if (!isMobile()) return;
       const dx = e.changedTouches[0].clientX - touchStartX;
       if (Math.abs(dx) > 40) { goTo(dx < 0 ? current + 1 : current - 1); startAuto(); }
     }, { passive: true });
 
-    if (isMobile()) startAuto();
+    startAuto();
   }
 
   // ---- #6 FAQ search / filter ----
