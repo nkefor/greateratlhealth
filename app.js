@@ -13,6 +13,11 @@ const BOOKING_URL = 'https://calendly.com/lynaashu/telehealth';
 // e.g. 'https://doxy.me/greateratlhealth'
 const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
 
+// ---- VideoAsk intro (optional) ----
+// Sign up at videoask.com, create a 30-sec intro, then paste your share URL here.
+// When set, the "Meet Lyna" button in the hero will automatically appear.
+const VIDEOASK_URL = ''; // e.g. 'https://www.videoask.com/fABCDEF'
+
 (function () {
   'use strict';
 
@@ -249,6 +254,14 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
     }
   });
 
+  // ---- VideoAsk intro button ----
+  const videoAskBtn = document.getElementById('videoAskBtn');
+  if (videoAskBtn && VIDEOASK_URL && !VIDEOASK_URL.includes('REPLACE_WITH')) {
+    videoAskBtn.href = VIDEOASK_URL;
+    videoAskBtn.style.display = '';
+    videoAskBtn.removeAttribute('aria-hidden');
+  }
+
   // ---- Doxy.me join-visit buttons ----
   const doxyConfigured = DOXY_ROOM_URL && !DOXY_ROOM_URL.includes('REPLACE_WITH');
 
@@ -453,7 +466,9 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
     showQuizStep('quizStep3', '100%');
   }
 
-  if (quizTrigger)  quizTrigger.addEventListener('click', openQuiz);
+  document.querySelectorAll('#quizTrigger, #quizTriggerEntry').forEach(el => {
+    el.addEventListener('click', openQuiz);
+  });
   if (quizClose)    quizClose.addEventListener('click', closeQuiz);
   if (quizRestart)  quizRestart.addEventListener('click', () => { openQuiz(); });
   if (quizOverlay)  quizOverlay.addEventListener('click', e => { if (e.target === quizOverlay) closeQuiz(); });
@@ -512,23 +527,24 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
   const symptomResultList  = document.getElementById('symptomResultList');
   const symptomResultClose = document.getElementById('symptomResultClose');
 
-  document.querySelectorAll('.symptom-cat').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const cat = btn.dataset.cat;
-      const data = symptomData[cat];
-      if (!data || !symptomResult) return;
-      document.querySelectorAll('.symptom-cat').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      if (symptomResultTitle) symptomResultTitle.textContent = data.title;
-      if (symptomResultList)  symptomResultList.innerHTML = data.items.map(i => `<li>${i}</li>`).join('');
-      symptomResult.hidden = false;
-      symptomResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    });
+  function activateSF(cat) {
+    const data = symptomData[cat];
+    if (!data || !symptomResult) return;
+    document.querySelectorAll('.sf-card, .sf-zone').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll(`[data-cat="${cat}"]`).forEach(el => el.classList.add('active'));
+    if (symptomResultTitle) symptomResultTitle.textContent = data.title;
+    if (symptomResultList)  symptomResultList.innerHTML = data.items.map(i => `<li>${i}</li>`).join('');
+    symptomResult.hidden = false;
+    symptomResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  document.querySelectorAll('.sf-card, .sf-zone').forEach(el => {
+    el.addEventListener('click', () => activateSF(el.dataset.cat));
   });
   if (symptomResultClose) {
     symptomResultClose.addEventListener('click', () => {
       symptomResult.hidden = true;
-      document.querySelectorAll('.symptom-cat').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.sf-card, .sf-zone').forEach(el => el.classList.remove('active'));
     });
   }
 

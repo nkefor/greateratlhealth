@@ -90,7 +90,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="styles.css?v=6" />
   <!-- Phosphor Icons -->
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
@@ -303,35 +303,106 @@
       <div class="container">
         <div class="section-header">
           <div class="section-tag">Symptom Finder</div>
-          <h2>What are you dealing with?</h2>
-          <p class="section-sub">Click your symptom area — I'll show you exactly what I treat and how to book.</p>
+          <h2>Where does it hurt?</h2>
+          <p class="section-sub">Tap a body area or choose a category — I'll show you exactly what I treat and how to book.</p>
         </div>
-        <div class="symptom-grid">
-          <button class="symptom-cat" data-cat="head" type="button">
-            <span class="symptom-icon"><i class="ph ph-smiley"></i></span>
-            <span class="symptom-label">Head &amp; Throat</span>
-          </button>
-          <button class="symptom-cat" data-cat="chest" type="button">
-            <span class="symptom-icon"><i class="ph ph-lungs"></i></span>
-            <span class="symptom-label">Chest &amp; Respiratory</span>
-          </button>
-          <button class="symptom-cat" data-cat="skin" type="button">
-            <span class="symptom-icon"><i class="ph ph-hand"></i></span>
-            <span class="symptom-label">Skin &amp; Rashes</span>
-          </button>
-          <button class="symptom-cat" data-cat="chronic" type="button">
-            <span class="symptom-icon"><i class="ph ph-heartbeat"></i></span>
-            <span class="symptom-label">Chronic Conditions</span>
-          </button>
-          <button class="symptom-cat" data-cat="injury" type="button">
-            <span class="symptom-icon"><i class="ph ph-bandaids"></i></span>
-            <span class="symptom-label">Injuries &amp; Pain</span>
-          </button>
-          <button class="symptom-cat" data-cat="womens" type="button">
-            <span class="symptom-icon"><i class="ph ph-gender-female"></i></span>
-            <span class="symptom-label">Women's Health</span>
-          </button>
+        <div class="sf-layout">
+
+          <!-- Interactive body diagram -->
+          <div class="sf-diagram-col">
+            <p class="sf-diagram-hint"><i class="ph ph-cursor-click"></i> Tap a region</p>
+            <svg viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg" class="sf-body-svg" role="img" aria-label="Interactive body diagram">
+              <!-- Head & Throat -->
+              <ellipse class="sf-zone" data-cat="head" cx="100" cy="46" rx="34" ry="38" />
+              <rect   class="sf-zone" data-cat="head" x="90" y="82" width="20" height="16" rx="4" />
+              <!-- Chest & Respiratory -->
+              <rect class="sf-zone" data-cat="chest" x="58" y="98" width="84" height="68" rx="10" />
+              <!-- Skin (arms) -->
+              <rect class="sf-zone" data-cat="skin" x="22" y="102" width="32" height="58" rx="14" />
+              <rect class="sf-zone" data-cat="skin" x="146" y="102" width="32" height="58" rx="14" />
+              <rect class="sf-zone" data-cat="skin" x="16" y="160" width="26" height="46" rx="12" />
+              <rect class="sf-zone" data-cat="skin" x="158" y="160" width="26" height="46" rx="12" />
+              <!-- Chronic (abdomen) -->
+              <rect class="sf-zone" data-cat="chronic" x="60" y="166" width="80" height="50" rx="8" />
+              <!-- Injury (legs) -->
+              <rect class="sf-zone" data-cat="injury" x="62" y="216" width="33" height="86" rx="14" />
+              <rect class="sf-zone" data-cat="injury" x="105" y="216" width="33" height="86" rx="14" />
+              <rect class="sf-zone" data-cat="injury" x="66" y="302" width="26" height="70" rx="12" />
+              <rect class="sf-zone" data-cat="injury" x="108" y="302" width="26" height="70" rx="12" />
+              <!-- Spine guide line (decorative) -->
+              <line x1="100" y1="98" x2="100" y2="216" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,5" pointer-events="none" />
+            </svg>
+            <div class="sf-legend">
+              <span><span class="sf-legend-dot" style="--c:#3b82f6"></span>Head</span>
+              <span><span class="sf-legend-dot" style="--c:#10b981"></span>Chest</span>
+              <span><span class="sf-legend-dot" style="--c:#f59e0b"></span>Skin</span>
+              <span><span class="sf-legend-dot" style="--c:#8b5cf6"></span>Chronic</span>
+              <span><span class="sf-legend-dot" style="--c:#ef4444"></span>Injury</span>
+            </div>
+          </div>
+
+          <!-- Category cards -->
+          <div class="sf-cards-col">
+            <div class="sf-cards">
+              <button class="sf-card" data-cat="head" type="button">
+                <span class="sf-card-bar" style="--sf-c:#3b82f6"></span>
+                <span class="sf-card-icon">🤒</span>
+                <span class="sf-card-body">
+                  <strong>Head &amp; Throat</strong>
+                  <span>Sinus, strep, ear infections, migraines, pink eye</span>
+                </span>
+                <i class="ph ph-caret-right sf-card-arrow"></i>
+              </button>
+              <button class="sf-card" data-cat="chest" type="button">
+                <span class="sf-card-bar" style="--sf-c:#10b981"></span>
+                <span class="sf-card-icon">🫁</span>
+                <span class="sf-card-body">
+                  <strong>Chest &amp; Respiratory</strong>
+                  <span>Bronchitis, asthma, flu, COVID guidance</span>
+                </span>
+                <i class="ph ph-caret-right sf-card-arrow"></i>
+              </button>
+              <button class="sf-card" data-cat="skin" type="button">
+                <span class="sf-card-bar" style="--sf-c:#f59e0b"></span>
+                <span class="sf-card-icon">🖐️</span>
+                <span class="sf-card-body">
+                  <strong>Skin &amp; Rashes</strong>
+                  <span>Eczema, hives, acne, insect bites, infections</span>
+                </span>
+                <i class="ph ph-caret-right sf-card-arrow"></i>
+              </button>
+              <button class="sf-card" data-cat="chronic" type="button">
+                <span class="sf-card-bar" style="--sf-c:#8b5cf6"></span>
+                <span class="sf-card-icon">💜</span>
+                <span class="sf-card-body">
+                  <strong>Chronic Conditions</strong>
+                  <span>Diabetes, hypertension, thyroid, medication refills</span>
+                </span>
+                <i class="ph ph-caret-right sf-card-arrow"></i>
+              </button>
+              <button class="sf-card" data-cat="injury" type="button">
+                <span class="sf-card-bar" style="--sf-c:#ef4444"></span>
+                <span class="sf-card-icon">🩹</span>
+                <span class="sf-card-body">
+                  <strong>Injuries &amp; Pain</strong>
+                  <span>Sprains, back pain, joint pain, sports eval</span>
+                </span>
+                <i class="ph ph-caret-right sf-card-arrow"></i>
+              </button>
+              <button class="sf-card" data-cat="womens" type="button">
+                <span class="sf-card-bar" style="--sf-c:#ec4899"></span>
+                <span class="sf-card-icon">🌸</span>
+                <span class="sf-card-body">
+                  <strong>Women's Health</strong>
+                  <span>UTIs, hormones, contraception, menstrual cycles</span>
+                </span>
+                <i class="ph ph-caret-right sf-card-arrow"></i>
+              </button>
+            </div>
+          </div>
         </div>
+
+        <!-- Result panel -->
         <div class="symptom-result" id="symptomResult" hidden>
           <div class="symptom-result-inner">
             <div class="symptom-result-head">
@@ -339,7 +410,7 @@
               <button class="symptom-result-close" id="symptomResultClose" type="button">&times;</button>
             </div>
             <ul class="symptom-result-list" id="symptomResultList"></ul>
-            <a href="https://calendly.com/lynaashu/telehealth" target="_blank" rel="noopener noreferrer" class="btn-primary" style="margin-top:16px;">Book a Visit for This &rarr;</a>
+            <a href="https://calendly.com/lynaashu/telehealth" target="_blank" rel="noopener noreferrer" class="btn-primary" style="margin-top:20px;">Book a Visit for This &rarr;</a>
           </div>
         </div>
       </div>
@@ -849,6 +920,64 @@
     </section>
 
     <!-- ==============================
+         PRICING QUICK REFERENCE
+    =============================== -->
+    <section class="pricing-section section-pad" id="pricing">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Transparent Pricing</div>
+          <h2>Simple, flat-rate self-pay</h2>
+          <p class="section-sub">No insurance needed. No billing surprises. You know the price before you book.</p>
+        </div>
+        <div class="pricing-grid">
+          <div class="price-card price-card-featured">
+            <div class="price-badge">Most Popular</div>
+            <div class="price-icon"><i class="ph ph-video-camera"></i></div>
+            <h4>On-Demand Video Visit</h4>
+            <div class="price-amount">$75</div>
+            <p class="price-note">Connect in minutes — same day, no wait.</p>
+            <a href="#book" class="btn-primary">Book Now &rarr;</a>
+          </div>
+          <div class="price-card">
+            <div class="price-icon"><i class="ph ph-truck"></i></div>
+            <h4>DOT Physical Exam</h4>
+            <div class="price-amount">$125</div>
+            <p class="price-note">FMCSA-certified. Certificate issued same day.</p>
+            <a href="#book" class="btn-primary">Schedule &rarr;</a>
+          </div>
+          <div class="price-card">
+            <div class="price-icon"><i class="ph ph-trophy"></i></div>
+            <h4>Sports Physical &amp; Clearance</h4>
+            <div class="price-amount">$40</div>
+            <p class="price-note">School &amp; NCAA clearance forms accepted.</p>
+            <a href="#book" class="btn-primary">Book &rarr;</a>
+          </div>
+          <div class="price-card">
+            <div class="price-icon"><i class="ph ph-heart"></i></div>
+            <h4>Preventive &amp; Ongoing Care</h4>
+            <div class="price-amount">$100</div>
+            <p class="price-note">Wellness visits, chronic condition management.</p>
+            <a href="#book" class="btn-primary">Start Care &rarr;</a>
+          </div>
+          <div class="price-card">
+            <div class="price-icon"><i class="ph ph-scales"></i></div>
+            <h4>Weight Loss Program</h4>
+            <div class="price-amount">$100+</div>
+            <p class="price-note">GLP-1 options, nutrition coaching, check-ins.</p>
+            <a href="#book" class="btn-primary">Start Journey &rarr;</a>
+          </div>
+          <div class="price-card price-card-note">
+            <div class="price-icon"><i class="ph ph-shield-check"></i></div>
+            <h4>Why Self-Pay?</h4>
+            <p class="price-compare-text">Most patients pay <strong>less here</strong> than their insurance copay at a specialist. No prior authorizations. No claim denials. Just care.</p>
+            <a href="#faq" class="btn-outline-dark" style="font-size:.85rem;padding:10px 18px;">Read the FAQ &rarr;</a>
+          </div>
+        </div>
+        <p class="pricing-superbill-note"><i class="ph ph-receipt"></i> Need to submit to your plan? Ask about a <strong>superbill</strong> &mdash; you may qualify for out-of-network reimbursement.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
          EMAIL CAPTURE
     =============================== -->
     <section class="email-capture-section section-pad">
@@ -1151,6 +1280,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <!-- Lottie Player -->
   <script type="module" src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js"></script>
-  <script src="app.js?v=5" defer></script>
+  <script src="app.js?v=6" defer></script>
 </body>
 </html>
