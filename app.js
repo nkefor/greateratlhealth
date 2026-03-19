@@ -406,4 +406,144 @@ const DOXY_ROOM_URL = 'https://doxy.me/lynanp';
     });
   }
 
+  // ---- Service Finder Quiz ----
+  const quizOverlay  = document.getElementById('quizOverlay');
+  const quizClose    = document.getElementById('quizClose');
+  const quizTrigger  = document.getElementById('quizTrigger');
+  const quizProgressBar = document.getElementById('quizProgressBar');
+  const quizRestart  = document.getElementById('quizRestart');
+
+  const quizResults = {
+    ondemand:  { name: 'On-Demand Video Visit', price: '$75 self-pay', desc: 'Connect in minutes for urgent concerns. No appointment needed — join the virtual queue and I\'ll see you as soon as possible.', type: 'ondemand' },
+    notwell:   { name: 'Illness Visit', price: '$75 self-pay', desc: 'For non-emergency illnesses: UTIs, sinus infections, pink eye, allergies, COVID guidance and more.', type: 'notwell' },
+    dot:       { name: 'DOT Physical Exam', price: '$125 self-pay', desc: 'FMCSA-compliant exam with same-day medical certificate for CDL drivers.', type: 'dot' },
+    sports:    { name: 'Sports Physical & Clearance', price: '$40 self-pay', desc: 'School & NCAA clearance forms, cardiac screening, and return-to-play evaluations.', type: 'sports' },
+    preventive:{ name: 'Preventive & Ongoing Care', price: '$100 self-pay', desc: 'Annual wellness visits, chronic condition management, labs, and personalized care plans.', type: 'preventive' },
+    weightloss:{ name: 'Weight Loss Program', price: 'Starting at $100+', desc: 'Medically supervised with GLP-1 options, nutrition coaching, and regular progress check-ins.', type: 'weightloss' },
+  };
+
+  function openQuiz() {
+    quizOverlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+    showQuizStep('quizStep1');
+    if (quizProgressBar) quizProgressBar.style.width = '33%';
+  }
+  function closeQuiz() {
+    quizOverlay.hidden = true;
+    document.body.style.overflow = '';
+  }
+  function showQuizStep(id, progress) {
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    const step = document.getElementById(id);
+    if (step) step.classList.add('active');
+    if (progress && quizProgressBar) quizProgressBar.style.width = progress;
+  }
+  function showQuizResult(resultKey) {
+    const r = quizResults[resultKey];
+    if (!r) return;
+    const el = document.getElementById('quizResult');
+    if (!el) return;
+    el.innerHTML = `
+      <div class="quiz-result-tag">&#10003; Best Match</div>
+      <h4>${r.name}</h4>
+      <div class="quiz-result-price">${r.price}</div>
+      <p>${r.desc}</p>
+      <a href="${BOOKING_URL}" target="_blank" rel="noopener noreferrer" class="btn-primary">Book ${r.name} &rarr;</a>
+    `;
+    showQuizStep('quizStep3', '100%');
+  }
+
+  if (quizTrigger)  quizTrigger.addEventListener('click', openQuiz);
+  if (quizClose)    quizClose.addEventListener('click', closeQuiz);
+  if (quizRestart)  quizRestart.addEventListener('click', () => { openQuiz(); });
+  if (quizOverlay)  quizOverlay.addEventListener('click', e => { if (e.target === quizOverlay) closeQuiz(); });
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && quizOverlay && !quizOverlay.hidden) closeQuiz(); });
+
+  document.querySelectorAll('.quiz-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const next   = btn.dataset.next;
+      const result = btn.dataset.result;
+      if (result) {
+        showQuizResult(result);
+      } else if (next) {
+        const progress = next === '2' || next === '2b' || next === '2c' || next === '2d' ? '66%' : '100%';
+        showQuizStep('quizStep' + next, progress);
+      }
+    });
+  });
+
+  // ---- DOT Physical Readiness Checklist ----
+  const dotOverlay  = document.getElementById('dotChecklistOverlay');
+  const dotClose    = document.getElementById('dotChecklistClose');
+  const dotTrigger  = document.getElementById('dotChecklistTrigger');
+  const dotReadyMsg = document.getElementById('dotReadyMsg');
+
+  function openDotChecklist() {
+    if (dotOverlay) { dotOverlay.hidden = false; document.body.style.overflow = 'hidden'; }
+  }
+  function closeDotChecklist() {
+    if (dotOverlay) { dotOverlay.hidden = true; document.body.style.overflow = ''; }
+  }
+  if (dotTrigger) dotTrigger.addEventListener('click', openDotChecklist);
+  if (dotClose)   dotClose.addEventListener('click', closeDotChecklist);
+  if (dotOverlay) dotOverlay.addEventListener('click', e => { if (e.target === dotOverlay) closeDotChecklist(); });
+
+  document.querySelectorAll('.dot-check-input').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const all = document.querySelectorAll('.dot-check-input');
+      const allChecked = Array.from(all).every(c => c.checked);
+      if (dotReadyMsg) dotReadyMsg.hidden = !allChecked;
+    });
+  });
+
+  // ---- Symptom Finder ----
+  const symptomData = {
+    head:    { title: 'Head & Throat Conditions', items: ['Sinus infections', 'Strep throat', 'Ear infections', 'Pink eye (conjunctivitis)', 'Migraines', 'Allergies', 'Cough & cold', 'Fever'] },
+    chest:   { title: 'Chest & Respiratory', items: ['Bronchitis', 'Asthma flares', 'COVID-19 guidance', 'Shortness of breath (non-emergency)', 'Flu', 'Upper respiratory infections', 'Chest congestion', 'Cough (acute)'] },
+    skin:    { title: 'Skin & Rash Concerns', items: ['Rashes & hives', 'Eczema flares', 'Skin infections', 'Acne', 'Insect bites', 'Contact dermatitis', 'Minor wounds', 'Psoriasis management'] },
+    chronic: { title: 'Chronic Condition Management', items: ['Diabetes (Type 1 & 2)', 'Hypertension', 'High cholesterol', 'Thyroid disease', 'Obesity management', 'Hormonal imbalances', 'Preventive screenings', 'Medication refills'] },
+    injury:  { title: 'Minor Injuries & Pain', items: ['Sprains & strains', 'Back pain (non-emergency)', 'Joint pain', 'Muscle soreness', 'Return-to-play eval', 'Minor lacerations', 'Tendonitis', 'Overuse injuries'] },
+    womens:  { title: "Women's Health", items: ['UTIs', 'Yeast infections', 'Hormonal concerns', 'Contraception discussions', 'Menstrual irregularities', 'Thyroid & weight concerns', 'Preventive labs', 'Referrals & screenings'] },
+  };
+
+  const symptomResult     = document.getElementById('symptomResult');
+  const symptomResultTitle = document.getElementById('symptomResultTitle');
+  const symptomResultList  = document.getElementById('symptomResultList');
+  const symptomResultClose = document.getElementById('symptomResultClose');
+
+  document.querySelectorAll('.symptom-cat').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.cat;
+      const data = symptomData[cat];
+      if (!data || !symptomResult) return;
+      document.querySelectorAll('.symptom-cat').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (symptomResultTitle) symptomResultTitle.textContent = data.title;
+      if (symptomResultList)  symptomResultList.innerHTML = data.items.map(i => `<li>${i}</li>`).join('');
+      symptomResult.hidden = false;
+      symptomResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+  if (symptomResultClose) {
+    symptomResultClose.addEventListener('click', () => {
+      symptomResult.hidden = true;
+      document.querySelectorAll('.symptom-cat').forEach(b => b.classList.remove('active'));
+    });
+  }
+
+  // ---- Credential Tooltips (touch support) ----
+  document.querySelectorAll('.cred-badge.has-tooltip').forEach(badge => {
+    badge.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      const isOpen = badge.classList.contains('tip-open');
+      document.querySelectorAll('.cred-badge.has-tooltip').forEach(b => b.classList.remove('tip-open'));
+      if (!isOpen) badge.classList.add('tip-open');
+    }, { passive: false });
+    // Close tooltip when clicking elsewhere
+    document.addEventListener('click', (e) => {
+      if (!badge.contains(e.target)) badge.classList.remove('tip-open');
+    });
+  });
+
 })();

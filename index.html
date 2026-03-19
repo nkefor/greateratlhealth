@@ -160,6 +160,7 @@
           <div class="hero-actions">
             <a href="#book" class="btn-primary btn-lg">Book Your Visit &rarr;</a>
             <a href="#services" class="btn-outline-dark">See All Services</a>
+            <button class="btn-quiz-trigger" id="quizTrigger" type="button">Not sure? Find your service &rarr;</button>
           </div>
           <div class="provider-mini">
             <span class="avail-dot"></span>
@@ -266,6 +267,55 @@
     </div>
 
     <!-- ==============================
+         SYMPTOM FINDER
+    =============================== -->
+    <section class="symptom-finder section-pad">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Symptom Finder</div>
+          <h2>What are you dealing with?</h2>
+          <p class="section-sub">Click your symptom area — I'll show you exactly what I treat and how to book.</p>
+        </div>
+        <div class="symptom-grid">
+          <button class="symptom-cat" data-cat="head" type="button">
+            <span class="symptom-icon"><i class="ph ph-smiley"></i></span>
+            <span class="symptom-label">Head &amp; Throat</span>
+          </button>
+          <button class="symptom-cat" data-cat="chest" type="button">
+            <span class="symptom-icon"><i class="ph ph-lungs"></i></span>
+            <span class="symptom-label">Chest &amp; Respiratory</span>
+          </button>
+          <button class="symptom-cat" data-cat="skin" type="button">
+            <span class="symptom-icon"><i class="ph ph-hand"></i></span>
+            <span class="symptom-label">Skin &amp; Rashes</span>
+          </button>
+          <button class="symptom-cat" data-cat="chronic" type="button">
+            <span class="symptom-icon"><i class="ph ph-heartbeat"></i></span>
+            <span class="symptom-label">Chronic Conditions</span>
+          </button>
+          <button class="symptom-cat" data-cat="injury" type="button">
+            <span class="symptom-icon"><i class="ph ph-bandaids"></i></span>
+            <span class="symptom-label">Injuries &amp; Pain</span>
+          </button>
+          <button class="symptom-cat" data-cat="womens" type="button">
+            <span class="symptom-icon"><i class="ph ph-gender-female"></i></span>
+            <span class="symptom-label">Women's Health</span>
+          </button>
+        </div>
+        <div class="symptom-result" id="symptomResult" hidden>
+          <div class="symptom-result-inner">
+            <div class="symptom-result-head">
+              <strong id="symptomResultTitle"></strong>
+              <button class="symptom-result-close" id="symptomResultClose" type="button">&times;</button>
+            </div>
+            <ul class="symptom-result-list" id="symptomResultList"></ul>
+            <a href="https://calendly.com/lynaashu/telehealth" target="_blank" rel="noopener noreferrer" class="btn-primary" style="margin-top:16px;">Book a Visit for This &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
          WHY CHOOSE US
     =============================== -->
     <section class="why section-pad">
@@ -341,6 +391,7 @@
               <li><i class="ph ph-check"></i> Medical certificate issued same day</li>
               <li><i class="ph ph-check"></i> Vision &amp; hearing screening</li>
             </ul>
+            <button class="dot-checklist-btn" id="dotChecklistTrigger" type="button"><i class="ph ph-clipboard-text"></i> Am I ready for my DOT physical?</button>
             <a href="#book" class="svc-link" data-visit-type="dot">Schedule DOT Physical &rarr;</a>
           </div>
 
@@ -512,16 +563,65 @@
             deserves. And I'm here to make sure you get it.
           </p>
           <div class="about-creds">
-            <div class="cred-badge"><i class="ph ph-graduation-cap"></i> MSN, Family Nurse Practitioner</div>
-            <div class="cred-badge"><i class="ph ph-graduation-cap"></i> AANP Certified FNP-C</div>
-            <div class="cred-badge"><i class="ph ph-graduation-cap"></i> Licensed APRN — Georgia</div>
-            <div class="cred-badge"><i class="ph ph-graduation-cap"></i> FMCSA Certified Medical Examiner</div>
-            <div class="cred-badge"><i class="ph ph-graduation-cap"></i> Full Prescriptive Authority</div>
+            <div class="cred-badge has-tooltip" tabindex="0" data-tooltip="A master's-level nursing degree with specialized training in diagnosing and treating patients across all ages and life stages."><i class="ph ph-graduation-cap"></i> MSN, Family Nurse Practitioner</div>
+            <div class="cred-badge has-tooltip" tabindex="0" data-tooltip="Board-certified by the American Association of Nurse Practitioners — the highest national credential for Family Nurse Practitioners."><i class="ph ph-graduation-cap"></i> AANP Certified FNP-C</div>
+            <div class="cred-badge has-tooltip" tabindex="0" data-tooltip="Fully licensed by the Georgia Composite Medical Board to practice as an Advanced Practice Registered Nurse."><i class="ph ph-graduation-cap"></i> Licensed APRN — Georgia</div>
+            <div class="cred-badge has-tooltip" tabindex="0" data-tooltip="Federally certified by the FMCSA to conduct DOT physicals and issue official medical certificates for CDL commercial drivers."><i class="ph ph-graduation-cap"></i> FMCSA Certified Medical Examiner</div>
+            <div class="cred-badge has-tooltip" tabindex="0" data-tooltip="This means Lyna can write prescriptions and send them directly to your pharmacy during your visit — just like a physician."><i class="ph ph-graduation-cap"></i> Full Prescriptive Authority</div>
           </div>
         </div>
       </div>
     </section>
 
+
+    <!-- ==============================
+         SERVICE AREA & LABS
+    =============================== -->
+    <section class="service-area section-pad">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Service Area</div>
+          <h2>Serving all of Georgia</h2>
+          <p class="section-sub">Licensed to see patients anywhere in Georgia via telehealth. In-person DOT physicals available in the Greater Atlanta area.</p>
+        </div>
+        <div class="service-area-inner">
+          <div class="service-area-map">
+            <iframe
+              title="Greater Atlanta Area"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d424146.57428607386!2d-84.56103285!3d33.7489954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f5045d6993098d%3A0x66fede2f990b630b!2sAtlanta%2C%20GA!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+              width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <div class="service-area-info">
+            <div class="area-cities">
+              <h4>Areas Served</h4>
+              <div class="city-tags">
+                <span class="city-tag">Atlanta</span>
+                <span class="city-tag">Buckhead</span>
+                <span class="city-tag">Midtown</span>
+                <span class="city-tag">Decatur</span>
+                <span class="city-tag">Marietta</span>
+                <span class="city-tag">Alpharetta</span>
+                <span class="city-tag">Roswell</span>
+                <span class="city-tag">Sandy Springs</span>
+                <span class="city-tag">Smyrna</span>
+                <span class="city-tag">Kennesaw</span>
+                <span class="city-tag">+ All of Georgia</span>
+              </div>
+            </div>
+            <div class="lab-partners">
+              <h4>Preferred Lab Partners</h4>
+              <p class="lab-note">Lab orders sent electronically — get tested near you, results reviewed together.</p>
+              <div class="lab-list">
+                <div class="lab-item"><i class="ph-fill ph-flask"></i><div><strong>LabCorp</strong><span>Multiple Atlanta metro locations</span></div></div>
+                <div class="lab-item"><i class="ph-fill ph-flask"></i><div><strong>Quest Diagnostics</strong><span>Multiple Atlanta metro locations</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- ==============================
          TESTIMONIALS
@@ -825,6 +925,11 @@
               <a href="#" class="join-visit-btn join-appt-link">Join your Doxy.me video visit &rarr;</a>
             </div>
           </div>
+          <div style="text-align:center;margin-top:12px;">
+            <a href="https://doxy.me/test" target="_blank" rel="noopener noreferrer" class="tech-check-link">
+              <i class="ph ph-wifi-high"></i> Test your camera &amp; mic before your visit &rarr;
+            </a>
+          </div>
           <div class="book-phone-alt">
             Prefer to call? <a href="tel:+16785707587"><strong>(678) 570-7587</strong></a>
           </div>
@@ -896,6 +1001,109 @@
       </div>
     </div>
   </footer>
+
+  <!-- Service Finder Quiz Modal -->
+  <div class="quiz-overlay" id="quizOverlay" role="dialog" aria-modal="true" aria-label="Find your service" hidden>
+    <div class="quiz-modal">
+      <button class="quiz-close" id="quizClose" aria-label="Close">&times;</button>
+      <div class="quiz-progress"><div class="quiz-progress-bar" id="quizProgressBar"></div></div>
+
+      <!-- Step 1 -->
+      <div class="quiz-step active" id="quizStep1">
+        <p class="quiz-step-label">Step 1 of 3</p>
+        <h3>What brings you in today?</h3>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-next="2" data-value="sick"><i class="ph ph-thermometer"></i><span>I'm not feeling well</span></button>
+          <button class="quiz-opt" data-next="2b" data-value="physical"><i class="ph ph-clipboard-text"></i><span>I need a physical exam</span></button>
+          <button class="quiz-opt" data-next="2c" data-value="weightloss"><i class="ph ph-scales"></i><span>Weight loss support</span></button>
+          <button class="quiz-opt" data-next="2d" data-value="chronic"><i class="ph ph-heartbeat"></i><span>Managing a chronic condition</span></button>
+        </div>
+      </div>
+
+      <!-- Step 2a: Sick -->
+      <div class="quiz-step" id="quizStep2">
+        <p class="quiz-step-label">Step 2 of 3</p>
+        <h3>How urgent is your situation?</h3>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-next="3" data-result="ondemand" data-value="urgent"><i class="ph ph-lightning"></i><span>I need to be seen today</span></button>
+          <button class="quiz-opt" data-next="3" data-result="notwell" data-value="scheduled"><i class="ph ph-calendar"></i><span>Within the next day or two</span></button>
+        </div>
+      </div>
+
+      <!-- Step 2b: Physical -->
+      <div class="quiz-step" id="quizStep2b">
+        <p class="quiz-step-label">Step 2 of 3</p>
+        <h3>What type of physical?</h3>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-next="3" data-result="dot" data-value="dot"><i class="ph ph-truck"></i><span>DOT / CDL physical</span></button>
+          <button class="quiz-opt" data-next="3" data-result="sports" data-value="sports"><i class="ph ph-trophy"></i><span>Sports or school clearance</span></button>
+          <button class="quiz-opt" data-next="3" data-result="preventive" data-value="wellness"><i class="ph ph-heart"></i><span>Annual wellness checkup</span></button>
+        </div>
+      </div>
+
+      <!-- Step 2c: Weight loss -->
+      <div class="quiz-step" id="quizStep2c">
+        <p class="quiz-step-label">Step 2 of 3</p>
+        <h3>What describes your goal?</h3>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-next="3" data-result="weightloss" data-value="glp1"><i class="ph ph-pill"></i><span>Interested in GLP-1 / medication support</span></button>
+          <button class="quiz-opt" data-next="3" data-result="weightloss" data-value="lifestyle"><i class="ph ph-salad"></i><span>Lifestyle and nutrition coaching</span></button>
+        </div>
+      </div>
+
+      <!-- Step 2d: Chronic -->
+      <div class="quiz-step" id="quizStep2d">
+        <p class="quiz-step-label">Step 2 of 3</p>
+        <h3>Which area?</h3>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-next="3" data-result="preventive" data-value="diabetes"><i class="ph ph-drop"></i><span>Diabetes management</span></button>
+          <button class="quiz-opt" data-next="3" data-result="preventive" data-value="bp"><i class="ph ph-heartbeat"></i><span>Blood pressure / cholesterol</span></button>
+          <button class="quiz-opt" data-next="3" data-result="preventive" data-value="thyroid"><i class="ph ph-activity"></i><span>Thyroid / hormonal</span></button>
+        </div>
+      </div>
+
+      <!-- Step 3: Result -->
+      <div class="quiz-step" id="quizStep3">
+        <p class="quiz-step-label">Your match</p>
+        <div class="quiz-result" id="quizResult">
+          <!-- populated by JS -->
+        </div>
+        <button class="quiz-restart" id="quizRestart" type="button">&larr; Start over</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOT Physical Readiness Checklist Modal -->
+  <div class="quiz-overlay" id="dotChecklistOverlay" role="dialog" aria-modal="true" aria-label="DOT Physical Readiness" hidden>
+    <div class="quiz-modal">
+      <button class="quiz-close" id="dotChecklistClose" aria-label="Close">&times;</button>
+      <h3 style="margin-bottom:6px;">DOT Physical Readiness</h3>
+      <p style="font-size:.88rem;color:var(--text-2);margin-bottom:22px;">Check off each item to confirm you're ready. When all boxes are checked, your booking button will appear.</p>
+      <div class="dot-checklist" id="dotChecklist">
+        <label class="dot-check-item"><input type="checkbox" class="dot-check-input"><span>I have a valid government-issued photo ID (driver's license)</span></label>
+        <label class="dot-check-item"><input type="checkbox" class="dot-check-input"><span>I have a list of my current medications and dosages</span></label>
+        <label class="dot-check-item"><input type="checkbox" class="dot-check-input"><span>I have my glasses or contacts (if I wear them)</span></label>
+        <label class="dot-check-item"><input type="checkbox" class="dot-check-input"><span>I have any prior FMCSA medical certificates (if applicable)</span></label>
+        <label class="dot-check-item"><input type="checkbox" class="dot-check-input"><span>I have records of any treated medical conditions (e.g., sleep apnea, diabetes)</span></label>
+      </div>
+      <div class="dot-ready-msg" id="dotReadyMsg" hidden>
+        <div class="dot-ready-inner">
+          <span style="font-size:1.5rem;">&#10003;</span>
+          <div>
+            <strong>You're ready!</strong>
+            <p>All items confirmed. Click below to secure your same-day slot.</p>
+          </div>
+        </div>
+        <a href="https://calendly.com/lynaashu/telehealth" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width:100%;justify-content:center;margin-top:14px;">Book My DOT Physical &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SMS Floating Bubble -->
+  <a href="sms:+16785707587?body=Hi%2C%20I%20have%20a%20question%20about%20Greater%20ATL%20Health." class="sms-bubble" aria-label="Text us a question" title="Text us">
+    <i class="ph-fill ph-chat-circle-dots"></i>
+    <span class="sms-bubble-label">Text Us</span>
+  </a>
 
   <!-- Sticky mobile Book Now bar (mobile only) -->
   <div class="mobile-cta-bar" id="mobileCta">
