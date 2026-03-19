@@ -282,7 +282,7 @@ ul   { list-style: none; }
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(14,140,119,.1), var(--shadow);
 }
-.svc-icon { font-size: 2rem; margin-bottom: 10px; color: var(--accent); }
+.svc-icon { font-size: 2.4rem; margin-bottom: 10px; line-height: 1; }
 .svc-icon i { font-size: inherit; color: var(--accent); }
 .svc-badge {
   position: absolute; top: 18px; right: 18px;
